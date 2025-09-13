@@ -61,14 +61,14 @@
                         <Font name="System Bold" size="18.0" />
                     </font></PasswordField>
                 <ComboBox fx:id="comboBox" layoutX="301.0" layoutY="60.0" onAction="#options" prefHeight="40.0" prefWidth="260.0" />
-                <Button fx:id="register" layoutX="246.0" layoutY="535.0" mnemonicParsing="false" onAction="#register" text="REGISTER">
+                <Button fx:id="register" layoutX="384.0" layoutY="482.0" mnemonicParsing="false" onAction="#register" text="REGISTER">
                     <effect>
                         <ColorAdjust contrast="1.0" />
                     </effect>
                     <font>
                         <Font name="System Bold" size="18.0" />
                     </font></Button>
-                <Button fx:id="login" layoutX="259.0" layoutY="388.0" mnemonicParsing="false" onAction="#login" text="LOG IN" textAlignment="CENTER">
+                <Button fx:id="login" layoutX="292.0" layoutY="384.0" mnemonicParsing="false" onAction="#login" text="LOG IN" textAlignment="CENTER">
                     <effect>
                         <ColorAdjust contrast="1.0" />
                     </effect>
@@ -83,7 +83,7 @@
                         <ColorAdjust brightness="-1.0" contrast="-1.0" saturation="1.0" />
                     </effect>
                 </Label>
-            <Label fx:id="registerPage" layoutX="202.0" layoutY="485.0" text="New To Our Service?" textAlignment="CENTER">
+            <Label fx:id="registerPage" layoutX="149.0" layoutY="487.0" text="New To Our Service?" textAlignment="CENTER">
                <effect>
                   <ColorAdjust brightness="-1.0" contrast="-1.0" saturation="1.0" />
                </effect>

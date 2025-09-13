@@ -97,29 +97,34 @@ public class registerController implements Initializable{
     public void register(ActionEvent e) {
         if (comboBox.getValue()==null) {
             status.setText("Please Choose a Category First");
-            status.setLayoutX(160);
-            status.setLayoutY(284);
-        } else {
+            status.setLayoutX(200);
+            status.setLayoutY(350);
+        } else if (userName.getText()==null || emailAddress.getText()==null || password.getText()==null) {
+            status.setText("Please fill all the fields");
+            status.setLayoutX(200);
+            status.setLayoutY(400);
+        }
+        else {
             if (comboBox.getValue().equals("Student")) {
                 if (userName.getText().isEmpty() || emailAddress.getText().isEmpty() || password.getText().isEmpty() || studentID.getText().isEmpty()) {
                     status.setText("Please fill all the fields");
                     status.setLayoutX(160);
-                    status.setLayoutY(284);
+                    status.setLayoutY(350);
                 } else if ((!(emailAddress.getText().contains("@"))) || (!(emailAddress.getText().contains(".")))) {
                     status.setText("Please enter a valid email address");
                     status.setLayoutX(120);
-                    status.setLayoutY(284);
+                    status.setLayoutY(350);
                 } else if (password.getText().length() < 8) {
                     status.setLayoutX(40);
-                    status.setLayoutY(284);
+                    status.setLayoutY(350);
                     status.setText("Password length should be at least 8 characters");
                 } else {
                     Student s = new Student(userName.getText(), emailAddress.getText(), password.getText(), studentID.getText());
                     if (studentHashSet.contains(s)) {
                         status.setText("Account already exists");
-                        status.setLayoutY(284);
-                        status.setLayoutX(170);
 
+                        status.setLayoutX(170);
+                        status.setLayoutY(350);
                     } else {
                         studentHashSet.add(s);
                         DatabaseFile db = new DatabaseFile("temp");
@@ -127,7 +132,7 @@ public class registerController implements Initializable{
                         db.updateInFile(new File("src/main/java/org/example/aoopproject/files/student.txt"), studentHashSet);
                         System.out.println("Account Added");
                         status.setText("Account Registered successfully");
-                        status.setLayoutY(284);
+                        status.setLayoutY(350);
                         status.setLayoutX(120);
                     }
                 }
@@ -135,23 +140,23 @@ public class registerController implements Initializable{
                 if (userName.getText().isEmpty() || emailAddress.getText().isEmpty() || password.getText().isEmpty() || NID.getText().isEmpty()) {
                     status.setText("Please fill all the fields");
                     status.setLayoutX(160);
-                    status.setLayoutY(284);
+                    status.setLayoutY(400);
                 } else if ((!(emailAddress.getText().contains("@"))) || (!(emailAddress.getText().contains(".")))) {
                     status.setText("Please enter a valid email address");
                     status.setLayoutX(120);
-                    status.setLayoutY(284);
+                    status.setLayoutY(400);
                 } else if (password.getText().length() < 8) {
                     status.setLayoutX(40);
-                    status.setLayoutY(284);
+                    status.setLayoutY(400);
                     status.setText("Password length should be at least 8 characters");
                 } else {
 
                     General g = new General(userName.getText(), emailAddress.getText(), password.getText(), NID.getText());
                     if (generalHashSet.contains(g)) {
                         status.setText("Account already exists");
-                        status.setLayoutY(284);
-                        status.setLayoutX(170);
 
+                        status.setLayoutX(170);
+                        status.setLayoutY(400);
                     } else {
                         generalHashSet.add(g);
                         DatabaseFile db = new DatabaseFile("temp");
@@ -159,7 +164,7 @@ public class registerController implements Initializable{
                         db.updateInFile(new File("src/main/java/org/example/aoopproject/files/general.txt"), generalHashSet);
                         System.out.println("Account Added");
                         status.setText("Account Registered successfully");
-                        status.setLayoutY(284);
+                        status.setLayoutY(400);
                         status.setLayoutX(120);
                     }
                 }
@@ -167,20 +172,20 @@ public class registerController implements Initializable{
                 if (userName.getText().isEmpty() || emailAddress.getText().isEmpty() || password.getText().isEmpty() || CompanyName.getText().isEmpty() || DrivingLicense.getText().isEmpty() || BusNumber.getText().isEmpty()) {
                     status.setText("Please fill all the fields");
                     status.setLayoutX(160);
-                    status.setLayoutY(364);
+                    status.setLayoutY(490);
                 } else if ((!(emailAddress.getText().contains("@"))) || (!(emailAddress.getText().contains(".")))) {
                     status.setText("Please enter a valid email address");
                     status.setLayoutX(120);
-                    status.setLayoutY(364);
+                    status.setLayoutY(490);
                 } else if (password.getText().length() < 8) {
                     status.setLayoutX(40);
-                    status.setLayoutY(364);
+                    status.setLayoutY(490);
                     status.setText("Password length should be at least 8 characters");
                 } else {
                     Authority a = new Authority(userName.getText(), emailAddress.getText(), password.getText(), CompanyName.getText(), DrivingLicense.getText(), BusNumber.getText());
                     if (authorityHashSet.contains(a)) {
                         status.setText("Account already exists");
-                        status.setLayoutY(364);
+                        status.setLayoutY(490);
                         status.setLayoutX(170);
                     } else {
                         authorityHashSet.add(a);
@@ -189,7 +194,7 @@ public class registerController implements Initializable{
                         db.updateInFile(new File("src/main/java/org/example/aoopproject/files/authority.txt"), authorityHashSet);
                         System.out.println("Account Added");
                         status.setText("Account Registered successfully");
-                        status.setLayoutY(364);
+                        status.setLayoutY(490);
                         status.setLayoutX(120);
                     }
                 }
@@ -213,8 +218,8 @@ public class registerController implements Initializable{
                 CompanyName.setVisible(false);
                 DrivingLicense.setVisible(false);
                 BusNumber.setVisible(false);
-                status.setLayoutY(284);
-                register.setLayoutY(318);
+                status.setLayoutY(390);
+                register.setLayoutY(450);
             } else if ((comboBox.getValue()).equals("Student")) {
                 status.setText(null);
                 emailAddress.setText(null);
@@ -230,8 +235,8 @@ public class registerController implements Initializable{
                 CompanyName.setVisible(false);
                 DrivingLicense.setVisible(false);
                 BusNumber.setVisible(false);
-                status.setLayoutY(284);
-                register.setLayoutY(318);
+                status.setLayoutY(390);
+                register.setLayoutY(450);
             } else if ((comboBox.getValue()).equals("Authority")) {
                 status.setText(null);
                 emailAddress.setText(null);
@@ -247,8 +252,8 @@ public class registerController implements Initializable{
                 NID.setVisible(false);
                 studentID.setVisible(false);
                 studentIDLabel.setVisible(false);
-                status.setLayoutY(364);
-                register.setLayoutY(394);
+                status.setLayoutY(490);
+                register.setLayoutY(520);
             }
         }
 }

@@ -13,145 +13,152 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="registerView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.aoopproject.registerController">
+<AnchorPane fx:id="registerView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.aoopproject.registerController">
     <children>
         <Pane fx:id="registerPane" layoutX="260.0" prefHeight="600.0" prefWidth="540.0" styleClass="translucent-pane" stylesheets="@style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
-                <Label layoutX="15.0" layoutY="64.0" text="Choose Your Catagory" wrapText="true">
+                <Button layoutX="448.0" layoutY="594.0" mnemonicParsing="false" onAction="#login" text="LOG IN">
+               <effect>
+                  <ColorAdjust contrast="1.0" />
+               </effect>
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font></Button>
+                <Button fx:id="register" layoutX="325.0" layoutY="390.0" mnemonicParsing="false" onAction="#register" text="REGISTER" textAlignment="CENTER">
+               <effect>
+                  <ColorAdjust contrast="1.0" />
+               </effect>
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font></Button>
+            <Label fx:id="status" layoutX="120.0" layoutY="350.0">
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <effect>
+                  <ColorAdjust brightness="-1.0" contrast="-1.0" saturation="1.0" />
+               </effect>
+            </Label>
+            <Label fx:id="NIDlabel" layoutX="216.0" layoutY="327.0" text="NID : " visible="false">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+               <effect>
+                  <ColorAdjust brightness="-1.0" contrast="-1.0" saturation="1.0" />
+               </effect></Label>
+            <TextField fx:id="NID" layoutX="304.0" layoutY="322.0" prefHeight="40.0" prefWidth="260.0" visible="false">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font></TextField>
+            <TextField fx:id="studentID" layoutX="303.0" layoutY="319.0" prefHeight="40.0" prefWidth="260.0" visible="false">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font></TextField>
+            <Label fx:id="studentIDLabel" layoutX="46.0" layoutY="324.0" text="Enter Your Student ID : " visible="false">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+               <effect>
+                  <ColorAdjust brightness="-1.0" contrast="-1.0" saturation="1.0" />
+               </effect></Label>
+            <Label fx:id="company" layoutX="104.0" layoutY="321.0" text="Company Name :" textAlignment="CENTER" visible="false">
+               <effect>
+                  <ColorAdjust brightness="-1.0" contrast="-1.0" saturation="1.0" />
+               </effect>
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="driving" layoutX="114.0" layoutY="380.0" text="Driving License :" textAlignment="CENTER" visible="false">
+               <effect>
+                  <ColorAdjust brightness="-1.0" contrast="-1.0" saturation="1.0" />
+               </effect>
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="bus" layoutX="137.0" layoutY="444.0" text="Bus Number :" textAlignment="CENTER" visible="false">
+               <effect>
+                  <ColorAdjust brightness="-1.0" contrast="-1.0" saturation="1.0" />
+               </effect>
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <TextField fx:id="CompanyName" layoutX="304.0" layoutY="316.0" prefHeight="40.0" prefWidth="260.0" visible="false">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="DrivingLicense" layoutX="304.0" layoutY="380.0" prefHeight="40.0" prefWidth="260.0" visible="false">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="BusNumber" layoutX="304.0" layoutY="439.0" prefHeight="40.0" prefWidth="260.0" visible="false">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </TextField>
+            <Label fx:id="loginPage" layoutX="144.0" layoutY="599.0" text="Already Have An Account?" textAlignment="CENTER">
+               <effect>
+                  <ColorAdjust brightness="-1.0" contrast="-1.0" saturation="1.0" />
+               </effect>
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="catagory" layoutX="53.0" layoutY="51.0" text="Choose Your Catagory" wrapText="true">
                <effect>
                   <ColorAdjust brightness="-1.0" contrast="1.0" saturation="1.0" />
                </effect>
                <font>
-                  <Font name="System Bold" size="14.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
                <opaqueInsets>
                   <Insets />
-               </opaqueInsets></Label>
-                <Label layoutX="71.0" layoutY="117.0" text="User Name :">
-               <effect>
-                  <ColorAdjust brightness="-1.0" contrast="-1.0" saturation="1.0" />
-               </effect>
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font></Label>
-                <Label layoutX="80.0" layoutY="204.0" text="Password :" textAlignment="CENTER">
-               <effect>
-                  <ColorAdjust brightness="-1.0" contrast="-1.0" saturation="1.0" />
-               </effect>
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font></Label>
-                <Label layoutX="50.0" layoutY="159.0" text="Email Address :">
-               <effect>
-                  <ColorAdjust brightness="-1.0" contrast="-1.0" saturation="1.0" />
-               </effect>
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font></Label>
-                <TextField fx:id="userName" layoutX="174.0" layoutY="113.0">
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font></TextField>
-                <TextField fx:id="emailAddress" layoutX="174.0" layoutY="155.0">
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font></TextField>
-                <PasswordField fx:id="password" layoutX="174.0" layoutY="200.0">
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font></PasswordField>
-                <ComboBox fx:id="comboBox" layoutX="173.0" layoutY="64.0" onAction="#options" prefHeight="27.0" prefWidth="173.0" />
-                <Button layoutX="309.0" layoutY="435.0" mnemonicParsing="false" onAction="#login" text="LOG IN">
-               <effect>
-                  <ColorAdjust contrast="1.0" />
-               </effect>
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font></Button>
-                <Button fx:id="register" layoutX="225.0" layoutY="343.0" mnemonicParsing="false" onAction="#register" text="REGISTER" textAlignment="CENTER">
-               <effect>
-                  <ColorAdjust contrast="1.0" />
-               </effect>
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font></Button>
-            <Label fx:id="status" layoutX="120.0" layoutY="300.0">
-               <font>
-                  <Font name="System Bold" size="15.0" />
-               </font>
-               <effect>
-                  <ColorAdjust brightness="-1.0" contrast="-1.0" saturation="1.0" />
-               </effect>
+               </opaqueInsets>
             </Label>
-            <Label fx:id="NIDlabel" layoutX="115.0" layoutY="248.0" text="NID : " visible="false">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-               <effect>
-                  <ColorAdjust brightness="-1.0" contrast="-1.0" saturation="1.0" />
-               </effect></Label>
-            <TextField fx:id="NID" layoutX="174.0" layoutY="243.0" visible="false">
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font></TextField>
-            <TextField fx:id="studentID" layoutX="174.0" layoutY="243.0" visible="false">
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font></TextField>
-            <Label fx:id="studentIDLabel" layoutX="15.0" layoutY="247.0" text="Enter Your Student ID : " visible="false">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-               <effect>
-                  <ColorAdjust brightness="-1.0" contrast="-1.0" saturation="1.0" />
-               </effect></Label>
-            <Label fx:id="company" layoutX="36.0" layoutY="249.0" text="Company Name :" textAlignment="CENTER" visible="false">
+            <Label fx:id="user" layoutX="148.0" layoutY="120.0" prefHeight="30.0" prefWidth="149.0" text="User Name :">
                <effect>
                   <ColorAdjust brightness="-1.0" contrast="-1.0" saturation="1.0" />
                </effect>
                <font>
-                  <Font name="System Bold" size="14.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
             </Label>
-            <Label fx:id="driving" layoutX="39.0" layoutY="290.0" text="Driving License :" textAlignment="CENTER" visible="false">
+            <Label fx:id="pass" layoutX="166.0" layoutY="255.0" text="Password :" textAlignment="CENTER">
                <effect>
                   <ColorAdjust brightness="-1.0" contrast="-1.0" saturation="1.0" />
                </effect>
                <font>
-                  <Font name="System Bold" size="14.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
             </Label>
-            <Label fx:id="bus" layoutX="55.0" layoutY="332.0" text="Bus Number :" textAlignment="CENTER" visible="false">
+            <Label fx:id="email" layoutX="120.0" layoutY="185.0" text="Email Address :">
                <effect>
                   <ColorAdjust brightness="-1.0" contrast="-1.0" saturation="1.0" />
                </effect>
                <font>
-                  <Font name="System Bold" size="14.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
             </Label>
-            <TextField fx:id="CompanyName" layoutX="173.0" layoutY="245.0" visible="false">
+            <TextField fx:id="userName" layoutX="305.0" layoutY="115.0" prefHeight="40.0" prefWidth="260.0">
                <font>
-                  <Font name="System Bold" size="13.0" />
+                  <Font name="System Bold" size="18.0" />
                </font>
             </TextField>
-            <TextField fx:id="DrivingLicense" layoutX="174.0" layoutY="287.0" visible="false">
+            <TextField fx:id="emailAddress" layoutX="304.0" layoutY="180.0" prefHeight="40.0" prefWidth="260.0">
                <font>
-                  <Font name="System Bold" size="13.0" />
+                  <Font name="System Bold" size="18.0" />
                </font>
             </TextField>
-            <TextField fx:id="BusNumber" layoutX="174.0" layoutY="329.0" visible="false">
+            <PasswordField fx:id="password" layoutX="304.0" layoutY="250.0" prefHeight="40.0" prefWidth="260.0">
                <font>
-                  <Font name="System Bold" size="13.0" />
+                  <Font name="System Bold" size="18.0" />
                </font>
-            </TextField>
-            <Label fx:id="loginPage" layoutX="120.0" layoutY="439.0" text="Already Have An Account?" textAlignment="CENTER">
-               <effect>
-                  <ColorAdjust brightness="-1.0" contrast="-1.0" saturation="1.0" />
-               </effect>
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Label>
+            </PasswordField>
+            <ComboBox fx:id="comboBox" layoutX="306.0" layoutY="46.0" onAction="#options" prefHeight="40.0" prefWidth="260.0" />
             </children>
          <effect>
             <Glow level="1.0" />

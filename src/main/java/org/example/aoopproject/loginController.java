@@ -38,7 +38,6 @@ public class loginController implements Initializable{
     private HashSet<Student> studentHashSet;
     private HashSet<Authority> authorityHashSet;
 
-    private Timeline timer;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -90,31 +89,31 @@ public class loginController implements Initializable{
     public void login(ActionEvent e) throws IOException {
         if (comboBox.getValue()==null) {
             status.setText("Please Choose a Category First");
-            status.setLayoutX(160);
+            status.setLayoutX(210);
             status.setLayoutY(340);
         } else if (userName.getText()==null || emailAddress.getText()==null || password.getText()==null) {
             status.setText("Please fill all the fields");
-            status.setLayoutX(160);
+            status.setLayoutX(210);
             status.setLayoutY(340);
         } else {
             if (comboBox.getValue().equals("Student")) {
                 if (userName.getText()==null || emailAddress.getText()==null || password.getText()==null) {
                     status.setText("Please fill all the fields");
-                    status.setLayoutX(160);
+                    status.setLayoutX(210);
                     status.setLayoutY(340);
                 } else if ((!(emailAddress.getText().contains("@"))) || (!(emailAddress.getText().contains(".")))) {
                     status.setText("Please enter a valid email address");
-                    status.setLayoutX(120);
+                    status.setLayoutX(210);
                     status.setLayoutY(340);
                 } else if (password.getText().length() < 8) {
-                    status.setLayoutX(40);
+                    status.setLayoutX(100);
                     status.setLayoutY(340);
                     status.setText("Password length should be at least 8 characters");
                 } else {
                     Student s = new Student(userName.getText(), emailAddress.getText(), password.getText());
                     if (studentHashSet.contains(s)) {
                         status.setText("Login Successful");
-                        status.setLayoutX(170);
+                        status.setLayoutX(210);
                         status.setLayoutY(340);
 
                         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("homepage.fxml"));
@@ -127,26 +126,29 @@ public class loginController implements Initializable{
                             if (s1.getEmail().equals(emailAddress.getText())) {
                                 if (!s1.getPassword().equals(password.getText())) {
                                     status.setText("Wrong Password");
+                                    status.setLayoutX(250);
+                                    status.setLayoutY(340);
                                 }else{
+                                    status.setLayoutX(100);
+                                    status.setLayoutY(340);
                                     status.setText("Account Not Registered Please Register First");
                                 }
                             }
                         }
-                        status.setLayoutX(120);
-                        status.setLayoutY(340);
+
                     }
                 }
             } else if (comboBox.getValue().equals("General")) {
                 if (userName.getText()==null || emailAddress.getText()==null || password.getText()==null) {
                     status.setText("Please fill all the fields");
-                    status.setLayoutX(160);
+                    status.setLayoutX(210);
                     status.setLayoutY(340);
                 } else if ((!(emailAddress.getText().contains("@"))) || (!(emailAddress.getText().contains(".")))) {
                     status.setText("Please enter a valid email address");
-                    status.setLayoutX(120);
+                    status.setLayoutX(210);
                     status.setLayoutY(340);
                 } else if (password.getText().length() < 8) {
-                    status.setLayoutX(40);
+                    status.setLayoutX(100);
                     status.setLayoutY(340);
                     status.setText("Password length should be at least 8 characters");
                 } else {
@@ -154,54 +156,70 @@ public class loginController implements Initializable{
                     General g = new General(userName.getText(), emailAddress.getText(), password.getText());
                     if (generalHashSet.contains(g)) {
                         status.setText("Account login successful");
-                        status.setLayoutX(170);
+                        status.setLayoutX(210);
                         status.setLayoutY(340);
+
+                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("homepage.fxml"));
+                        stage =(Stage) ((Node)e.getSource()).getScene().getWindow();
+                        scene = new Scene(fxmlLoader.load());
+                        stage.setScene(scene);
 
                     } else {
                         for (General g1 : generalHashSet) {
                             if (g1.getEmail().equals(emailAddress.getText())) {
                                 if (!g1.getPassword().equals(password.getText())) {
                                     status.setText("Wrong Password");
+                                    status.setLayoutX(250);
+                                    status.setLayoutY(340);
                                 }else{
+                                    status.setLayoutX(100);
+                                    status.setLayoutY(340);
                                     status.setText("Account Not Registered Please Register First");
                                 }
                             }
                         }
-                        status.setLayoutX(120);
-                        status.setLayoutY(340);
+
                     }
                 }
             } else if (comboBox.getValue().equals("Authority")) {
                 if (userName.getText()==null || emailAddress.getText()==null || password.getText()==null) {
                     status.setText("Please fill all the fields");
-                    status.setLayoutX(160);
+                    status.setLayoutX(210);
                     status.setLayoutY(340);
                 } else if ((!(emailAddress.getText().contains("@"))) || (!(emailAddress.getText().contains(".")))) {
                     status.setText("Please enter a valid email address");
-                    status.setLayoutX(120);
+                    status.setLayoutX(210);
                     status.setLayoutY(340);
                 } else if (password.getText().length() < 8) {
-                    status.setLayoutX(40);
+                    status.setLayoutX(100);
                     status.setLayoutY(340);
                     status.setText("Password length should be at least 8 characters");
                 } else {
                     Authority a = new Authority(userName.getText(), emailAddress.getText(), password.getText());
                     if (authorityHashSet.contains(a)) {
                         status.setText("Account login successful");
-                        status.setLayoutX(170);
+                        status.setLayoutX(210);
                         status.setLayoutY(340);
+
+                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("homepage.fxml"));
+                        stage =(Stage) ((Node)e.getSource()).getScene().getWindow();
+                        scene = new Scene(fxmlLoader.load());
+                        stage.setScene(scene);
+
                     } else {
                         for (Authority a1 : authorityHashSet) {
                             if (a1.getEmail().equals(emailAddress.getText())) {
                                 if (!a1.getPassword().equals(password.getText())) {
                                     status.setText("Wrong Password");
+                                    status.setLayoutX(250);
+                                    status.setLayoutY(340);
                                 }else{
+                                    status.setLayoutX(100);
+                                    status.setLayoutY(340);
                                     status.setText("Account Not Registered Please Register First");
                                 }
                             }
                         }
-                        status.setLayoutX(120);
-                        status.setLayoutY(340);
                     }
                 }
             }
