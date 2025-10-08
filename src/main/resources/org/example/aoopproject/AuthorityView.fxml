@@ -8,7 +8,10 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #245678;" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.aoopproject.AdminController">
    <children>
-      <Pane layoutX="6.0" layoutY="8.0" prefHeight="700.0" prefWidth="220.0" style="-fx-background-color: #123457;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <Pane layoutX="6.0" layoutY="8.0" prefHeight="700.0" prefWidth="220.0" style="-fx-background-color: #123457;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Button layoutX="2.0" layoutY="227.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="220.0" text="list of the bus company" />
+         </children></Pane>
       <Pane layoutX="237.0" layoutY="9.0" prefHeight="645.0" prefWidth="200.0" style="-fx-background-color: #234567;">
          <children>
             <Label layoutX="72.0" layoutY="21.0" text="Bus Companys" textFill="#d7ec18" />
