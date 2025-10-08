@@ -1,0 +1,22 @@
+.translucent-orange {
+    /* Background white → orange gradient */
+    -fx-background-color: rgba(255,255,255,0.1);
+    -fx-background-radius: 12;        /* rounded corners */
+    -fx-background-insets: 0;
+
+    /* Neon-like orange/red border */
+    -fx-border-color: linear-gradient(
+            to right,
+            rgba(241, 141, 52, 0.85) 0%,
+            rgba(237, 139, 64, 0.89) 100%
+    );
+    -fx-border-width: 3;
+    -fx-border-radius: 12;
+
+    -fx-text-fill: white;
+
+
+}
+.hui{
+    -fx-text-fill: white;
+}
