@@ -8,17 +8,17 @@ import java.util.Objects;
 public class BusList implements Serializable {
     private String busName;
     private HashMap<Integer,String> busStopages;
-    private HashMap<Integer,Integer> fareList;
+    private HashMap<Integer,String> fareList;
     private HashSet<BusInformation> busInfo;
 
-    public BusList(String busName, HashMap<Integer, String> busStopages, HashMap<Integer, Integer> fareList, HashSet<BusInformation> busInfo) {
+    public BusList(String busName, HashMap<Integer, String> busStopages, HashMap<Integer, String> fareList, HashSet<BusInformation> busInfo) {
         this.busName = busName;
         this.busStopages = busStopages;
         this.fareList = fareList;
         this.busInfo = busInfo;
     }
 
-    public BusList(String busName, HashMap<Integer, String> busStopages, HashMap<Integer, Integer> fareList) {
+    public BusList(String busName, HashMap<Integer, String> busStopages, HashMap<Integer, String> fareList) {
         this.busName = busName;
         this.busStopages = busStopages;
         this.fareList = fareList;
@@ -50,11 +50,11 @@ public class BusList implements Serializable {
         this.busStopages = busStopages;
     }
 
-    public HashMap<Integer, Integer> getFareList() {
+    public HashMap<Integer, String> getFareList() {
         return fareList;
     }
 
-    public void setFareList(HashMap<Integer, Integer> fareList) {
+    public void setFareList(HashMap<Integer, String> fareList) {
         this.fareList = fareList;
     }
 

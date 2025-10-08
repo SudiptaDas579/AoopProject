@@ -33,12 +33,12 @@
          <children>
             <Label layoutX="154.0" layoutY="25.0" text="On Add New Service" textFill="#d0e41f" />
             <TextField fx:id="EnterCompanyName" layoutX="154.0" layoutY="79.0" />
-            <TextField fx:id="busStopages" layoutX="154.0" layoutY="131.0" promptText="Jamuna,NotunBazar" />
-            <TextField fx:id="EnterFairLists" layoutX="154.0" layoutY="187.0" />
+            <TextField fx:id="BusStopages" layoutX="154.0" layoutY="131.0" promptText="Jamuna,NotunBazar" />
+            <TextField fx:id="EnterFareLists" layoutX="154.0" layoutY="187.0" />
             <Label layoutX="31.0" layoutY="83.0" text="Enter company Name:" textFill="#c7d923" />
             <Label layoutX="62.0" layoutY="135.0" text="Bus Stopeges :" textFill="#d9ef0f" />
             <Label layoutX="45.0" layoutY="191.0" text="Enter the Fairlist:" textFill="#d6ec12" />
-            <Button layoutX="178.0" layoutY="259.0" mnemonicParsing="false" text="Add The Company" />
+            <Button layoutX="178.0" layoutY="259.0" mnemonicParsing="false" onAction="#addTheCompany" text="Add The Company" />
          </children>
       </Pane>
       <Pane layoutX="516.0" layoutY="229.0" prefHeight="438.0" prefWidth="341.0" style="-fx-background-color: #124563;" visible="false">

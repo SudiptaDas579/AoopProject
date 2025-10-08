@@ -3,7 +3,7 @@ package org.example.aoopproject;
 import java.io.*;
 import java.util.HashSet;
 
-public class BusFileHandler {
+public class BusFileHandler extends Thread {
 
     private static final String FILE_NAME = "files/buses.txt";
 
