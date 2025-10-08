@@ -8,7 +8,10 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #245678;" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.aoopproject.AdminController">
    <children>
-      <Pane layoutX="6.0" layoutY="8.0" prefHeight="700.0" prefWidth="220.0" style="-fx-background-color: #123457;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <Pane layoutX="6.0" layoutY="8.0" prefHeight="700.0" prefWidth="220.0" style="-fx-background-color: #123457;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Button layoutX="2.0" layoutY="227.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="220.0" text="list of the bus company" />
+         </children></Pane>
       <Pane layoutX="237.0" layoutY="9.0" prefHeight="645.0" prefWidth="200.0" style="-fx-background-color: #234567;">
          <children>
             <Label layoutX="72.0" layoutY="21.0" text="Bus Companys" textFill="#d7ec18" />
@@ -33,12 +36,12 @@
          <children>
             <Label layoutX="154.0" layoutY="25.0" text="On Add New Service" textFill="#d0e41f" />
             <TextField fx:id="EnterCompanyName" layoutX="154.0" layoutY="79.0" />
-            <TextField fx:id="busStopages" layoutX="154.0" layoutY="131.0" promptText="Jamuna,NotunBazar" />
-            <TextField fx:id="EnterFairLists" layoutX="154.0" layoutY="187.0" />
+            <TextField fx:id="BusStopages" layoutX="154.0" layoutY="131.0" promptText="Jamuna,NotunBazar" />
+            <TextField fx:id="EnterFareLists" layoutX="154.0" layoutY="187.0" />
             <Label layoutX="31.0" layoutY="83.0" text="Enter company Name:" textFill="#c7d923" />
             <Label layoutX="62.0" layoutY="135.0" text="Bus Stopeges :" textFill="#d9ef0f" />
             <Label layoutX="45.0" layoutY="191.0" text="Enter the Fairlist:" textFill="#d6ec12" />
-            <Button layoutX="178.0" layoutY="259.0" mnemonicParsing="false" text="Add The Company" />
+            <Button layoutX="178.0" layoutY="259.0" mnemonicParsing="false" onAction="#addTheCompany" text="Add The Company" />
          </children>
       </Pane>
       <Pane layoutX="516.0" layoutY="229.0" prefHeight="438.0" prefWidth="341.0" style="-fx-background-color: #124563;" visible="false">

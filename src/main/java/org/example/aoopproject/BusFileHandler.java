@@ -21,7 +21,7 @@ public class BusFileHandler extends Thread {
     @Override
     public void run() {
 
-        File file = new File("org/example/aoopproject/files/CompanyList.txt");
+        File file = new File("src/main/java/org/example/aoopproject/files/CompanyList.txt");
 
     }
 

@@ -36,7 +36,9 @@ public class AdminController implements Initializable {
         }
 
         BusList NewBuslist = new BusList(EnterCompanyName.getText(),stopage,fare,null);
-        File file = new File("org/example/aoopproject/files/CompanyList.txt");
+
+        File file = new File("src/main/java/org/example/aoopproject/files/CompanyList.txt");
+
 
         BusFileHandler busFileHandler = new BusFileHandler();
         busFileHandler.start();
@@ -55,7 +57,8 @@ public class AdminController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        File file = new File("org/example/aoopproject/files/CompanyList.txt");
+        File file = new File("src/main/java/org/example/aoopproject/files/CompanyList.txt");
+
         BusFileHandler busFileHandler = new BusFileHandler();
         busFileHandler.start();
 
