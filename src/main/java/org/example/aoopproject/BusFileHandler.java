@@ -23,9 +23,6 @@ public class BusFileHandler extends Thread {
 
         File file = new File("org/example/aoopproject/files/CompanyList.txt");
 
-
-
-
     }
 
     public HashSet<BusList> getBusLists(File file)  {
