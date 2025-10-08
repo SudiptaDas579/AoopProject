@@ -3,6 +3,7 @@ package org.example.aoopproject;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 import java.io.File;
@@ -17,6 +18,8 @@ public class AdminController implements Initializable {
     public TextField EnterCompanyName;
     public TextField BusStopages;
     public TextField EnterFareLists;
+    public TextArea goooo;
+
 
     public HashSet<BusList> busLists=new HashSet<BusList>();
     @FXML
@@ -52,6 +55,13 @@ public class AdminController implements Initializable {
 
 
         busFileHandler.updateInFile(file,busLists);
+        StringBuilder stringBuilder=new StringBuilder();
+        for (BusList busList : busLists) {
+            stringBuilder.append(busList.toString());
+            stringBuilder.append("\n");
+
+        }
+        goooo.setText(stringBuilder.toString());
     }
 
     @Override
