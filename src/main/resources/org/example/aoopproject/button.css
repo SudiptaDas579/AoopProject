@@ -1,43 +1,43 @@
-/* Frosted Gold Glass Button */
+/* Frosted Gold Glass Button on Pane */
 .frosted-button {
     -fx-background-color:
             linear-gradient(
                     to bottom right,
-                    rgba(255, 240, 180, 0.4),  /* soft warm gold */
-                    rgba(255, 200, 120, 0.25)  /* slightly darker gold */
+                    rgba(255, 245, 200, 0.6),  /* slightly brighter than pane */
+                    rgba(255, 210, 130, 0.5)
             );
-    -fx-background-radius: 12;
-    -fx-border-radius: 12;
+    -fx-background-radius: 14;
+    -fx-border-radius: 14;
 
-    /* Elegant semi-transparent gold border */
-    -fx-border-color: rgba(255, 215, 130, 0.5);
-    -fx-border-width: 1.5;
+    /* Slightly stronger border for visibility */
+    -fx-border-color: rgba(255, 220, 140, 0.7);
+    -fx-border-width: 2;
     -fx-border-style: solid;
 
-    -fx-text-fill: #4a2f00; /* dark brown for contrast */
+    -fx-text-fill: #3e1f00; /* darker brown for strong contrast */
     -fx-font-size: 14px;
     -fx-font-weight: bold;
-    -fx-padding: 8 20 8 20;
+    -fx-padding: 10 22 10 22;
 
-    /* Inner shine + subtle outer glow */
+    /* Inner shine + outer glow for depth */
     -fx-effect:
-            innershadow(gaussian, rgba(255, 245, 200, 0.2), 8, 0.5, 0, 0),
-            dropshadow(gaussian, rgba(255, 215, 120, 0.25), 10, 0.5, 0, 2);
+            innershadow(gaussian, rgba(255, 250, 210, 0.25), 10, 0.5, 0, 0),
+            dropshadow(gaussian, rgba(255, 220, 130, 0.35), 12, 0.5, 0, 2);
 
     -fx-cursor: hand;
     -fx-transition: all 0.3s ease-in-out;
 }
 
-/* Hover effect: brighter glow */
+/* Hover: brighter and more visible */
 .frosted-button:hover {
     -fx-background-color:
             linear-gradient(
                     to bottom right,
-                    rgba(255, 250, 210, 0.5),
-                    rgba(255, 220, 140, 0.35)
+                    rgba(255, 255, 220, 0.75),  /* brighter highlight */
+                    rgba(255, 230, 150, 0.6)
             );
     -fx-effect:
-            innershadow(gaussian, rgba(255, 250, 210, 0.25), 10, 0.6, 0, 0),
-            dropshadow(gaussian, rgba(255, 220, 130, 0.4), 12, 0.6, 0, 3);
-    -fx-border-color: rgba(255, 230, 150, 0.6);
+            innershadow(gaussian, rgba(255, 255, 230, 0.3), 12, 0.6, 0, 0),
+            dropshadow(gaussian, rgba(255, 230, 150, 0.45), 14, 0.6, 0, 3);
+    -fx-border-color: rgba(255, 240, 170, 0.8);
 }
