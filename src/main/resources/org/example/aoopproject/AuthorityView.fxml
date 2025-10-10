@@ -18,10 +18,10 @@
             <Image url="@../../../pictures/Company.png" />
          </image>
       </ImageView>
-      <Pane layoutX="6.0" layoutY="8.0" prefHeight="700.0" prefWidth="220.0" style="-fx-background-color: #123457;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Pane layoutX="6.0" layoutY="8.0" prefHeight="700.0" prefWidth="240.0" styleClass="translucent-pane" stylesheets="@Admin.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Button layoutX="2.0" layoutY="227.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="220.0" text="list of the bus company" />
-            <TextArea fx:id="goooo" layoutX="3.0" layoutY="290.0" prefHeight="407.0" prefWidth="220.0" />
+            <TextArea fx:id="goooo" layoutX="39.0" layoutY="414.0" prefHeight="81.0" prefWidth="73.0" />
          </children></Pane>
       <Pane fx:id="busInfo" layoutX="544.0" layoutY="2.0" prefHeight="214.0" prefWidth="315.0" style="-fx-background-color: #123642;">
          <children>
@@ -63,7 +63,7 @@
             <Button layoutX="130.0" layoutY="276.0" mnemonicParsing="false" text="Add The New Bus" />
          </children>
       </Pane>
-      <Pane layoutX="229.0" prefHeight="683.0" prefWidth="242.0" style="-fx-background-color: #123452;">
+      <Pane layoutX="314.0" layoutY="8.0" prefHeight="683.0" prefWidth="242.0" style="-fx-background-color: #123452;">
          <children>
             <Button layoutX="112.0" layoutY="630.0" mnemonicParsing="false" onAction="#CompanyButton" text="Add New Service" />
             <Label layoutX="61.0" layoutY="36.0" text="Bus Companys" textFill="#d7ec18">
@@ -71,7 +71,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <VBox fx:id="companylistPane" layoutX="47.0" layoutY="76.0" prefHeight="534.0" prefWidth="159.0" />
+            <VBox fx:id="companylistPane" layoutX="61.0" layoutY="75.0" prefHeight="534.0" prefWidth="159.0" />
          </children>
       </Pane>
    </children>
