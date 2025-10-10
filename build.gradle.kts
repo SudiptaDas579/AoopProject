@@ -55,6 +55,7 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
     implementation(group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version = "2.2.0")
+    implementation("org.json:json:20240303")
 }
 
 tasks.withType<Test> {

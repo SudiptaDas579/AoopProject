@@ -11,6 +11,7 @@ module org.example.aoopproject {
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
     requires javafx.graphics;
+    requires org.json;
 
 
     opens org.example.aoopproject to javafx.fxml;
