@@ -1,4 +1,5 @@
 package org.example.aoopproject;
+
 import javafx.concurrent.Task;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -12,44 +13,40 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Thread task to fetch Google Place Autocomplete suggestions (Bangladesh only).
+ * Thread task to fetch Google Place Autocomplete suggestions.
+ * Prioritizes Dhaka first, then falls back to the rest of Bangladesh.
+ * Handles multi-stop text (e.g. "Mirpur-Gul" → query only "Gul").
  */
 public class PlaceSuggestionTask extends Task<List<String>> {
 
-    private static final long DEBOUNCE_DELAY_MS = 300; // optional small delay
+    private static final long DEBOUNCE_DELAY_MS = 300;
     private final String input;
     private final String apiKey;
 
     public PlaceSuggestionTask(String input, String apiKey) {
-        this.input = input;
+        // 🧩 Extract only the last segment after '-'
+        if (input != null && input.contains("-")) {
+            String[] parts = input.split("-");
+            this.input = parts[parts.length - 1].trim();  // only use last segment
+        } else {
+            this.input = input != null ? input.trim() : "";
+        }
         this.apiKey = apiKey;
     }
 
     @Override
     protected List<String> call() throws Exception {
-        // Small delay to prevent sending too many requests while typing
         Thread.sleep(DEBOUNCE_DELAY_MS);
 
         List<String> results = new ArrayList<>();
-        if (input == null || input.trim().isEmpty()) return results;
+        if (input == null || input.isEmpty()) return results;
 
         try {
-            // Build API URL for Autocomplete
-            String encodedInput = URLEncoder.encode(input, "UTF-8");
-            String apiUrl = "https://maps.googleapis.com/maps/api/place/autocomplete/json?input="
-                    + encodedInput
-                    + "&components=country:bd"
-                    + "&types=geocode"
-                    + "&key=" + apiKey;
-
-            // Fetch and parse JSON
-            JSONObject json = readJsonFromUrl(apiUrl);
-            JSONArray predictions = json.getJSONArray("predictions");
-
-            for (int i = 0; i < predictions.length(); i++) {
-                JSONObject prediction = predictions.getJSONObject(i);
-                String description = prediction.getString("description");
-                results.add(description);
+            // Try places in Dhaka first
+            results = fetchSuggestions(input, "bd", "Dhaka");
+            // If Dhaka returns empty, fallback to entire Bangladesh
+            if (results.isEmpty()) {
+                results = fetchSuggestions(input, "bd", null);
             }
 
         } catch (Exception e) {
@@ -59,7 +56,32 @@ public class PlaceSuggestionTask extends Task<List<String>> {
         return results;
     }
 
-    // Helper method to fetch JSON data from a URL
+    private List<String> fetchSuggestions(String query, String countryCode, String cityFilter) throws Exception {
+        List<String> suggestions = new ArrayList<>();
+
+        String encodedInput = URLEncoder.encode(query, "UTF-8");
+        String apiUrl = "https://maps.googleapis.com/maps/api/place/autocomplete/json?input="
+                + encodedInput
+                + "&components=country:" + countryCode
+                + "&types=geocode"
+                + "&key=" + apiKey;
+
+        JSONObject json = readJsonFromUrl(apiUrl);
+        JSONArray predictions = json.optJSONArray("predictions");
+        if (predictions == null) return suggestions;
+
+        for (int i = 0; i < predictions.length(); i++) {
+            JSONObject prediction = predictions.getJSONObject(i);
+            String description = prediction.getString("description");
+
+            if (cityFilter == null || description.toLowerCase().contains(cityFilter.toLowerCase())) {
+                suggestions.add(description);
+            }
+        }
+
+        return suggestions;
+    }
+
     private JSONObject readJsonFromUrl(String urlString) throws Exception {
         URL url = new URL(urlString);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();

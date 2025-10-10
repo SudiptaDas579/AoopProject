@@ -1,0 +1,46 @@
+# Gradle
+.gradle/
+build/
+
+# Gradle wrapper jar
+gradle/wrapper/gradle-wrapper.jar
+
+# IDEA / IntelliJ
+*.iml
+*.iws
+.idea/
+out/
+*.ipr
+
+# Eclipse
+*.classpath
+*.project
+*.settings/
+
+# VS Code
+.vscode/
+
+# MacOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Log files
+*.log
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
+*.bak
+
+# Java
+*.class
+
+# Others
+*.jar
+*.war
+*.ear
