@@ -5,7 +5,7 @@ import java.util.HashSet;
 
 public class BusFileHandler extends Thread {
 
-    public HashSet<CompanyList>busLists = new HashSet <CompanyList>();
+    public HashSet<CompanyList>companyLists= new HashSet <CompanyList>();
 
     static class AppendableObjectOutputStream extends ObjectOutputStream {
         public AppendableObjectOutputStream(OutputStream out) throws IOException {
@@ -22,10 +22,10 @@ public class BusFileHandler extends Thread {
     public void run() {
 
         File file = new File("src/main/java/org/example/aoopproject/files/CompanyList.txt");
-
+        companyLists=getCompanyLists(file);
     }
 
-    public HashSet<CompanyList> getBusLists(File file)  {
+    public HashSet<CompanyList> getCompanyLists(File file)  {
 
 
         try{
@@ -33,15 +33,24 @@ public class BusFileHandler extends Thread {
             FileInputStream fileInputStream=new FileInputStream(file);
             ObjectInputStream objectInputStream=new ObjectInputStream(fileInputStream);
 
-            while (objectInputStream.available()>0) {
-
-                busLists.add((CompanyList) objectInputStream.readObject());
+            while (true) {
+                try {
+                    CompanyList company = (CompanyList) objectInputStream.readObject();
+                    companyLists.add(company);
+                } catch (EOFException e) {
+                    break; // end of file reached
+                }
             }
         }
-        catch(Exception e){
-            System.out.println("error in BusFileHandler");
+        catch (FileNotFoundException e) {
+            System.out.println("File not found: " + file.getName());
         }
-        return busLists;
+        catch (IOException | ClassNotFoundException e) {
+            System.out.println("Error reading file: " + e.getMessage());
+        }
+
+
+        return companyLists;
     }
 
     public synchronized void updateInFile(File file,HashSet <CompanyList>hashSet){
@@ -57,7 +66,7 @@ public class BusFileHandler extends Thread {
                 outputStream.flush();
             }
 
-            fileOutputStream.close();
+
             outputStream.close();
 
 

@@ -27,7 +27,7 @@ public class CompanyList implements Serializable {
     @Override
     public String toString() {
         return "BusList{" +
-                "busName='" + companyName + '\'' +
+                "CompanyName=" + companyName + '\'' +
                 ", busStopages=" + busStopages +
                 ", fareList=" + fareList +
                 ", busInfo=" + busInfo +

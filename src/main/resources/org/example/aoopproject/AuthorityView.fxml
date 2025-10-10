@@ -6,6 +6,8 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #245678;" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.aoopproject.AdminController">
    <children>
@@ -14,16 +16,6 @@
             <Button layoutX="2.0" layoutY="227.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="220.0" text="list of the bus company" />
             <TextArea fx:id="goooo" layoutX="3.0" layoutY="290.0" prefHeight="407.0" prefWidth="220.0" />
          </children></Pane>
-      <Pane fx:id="companylistPane" layoutX="237.0" layoutY="9.0" prefHeight="645.0" prefWidth="200.0" style="-fx-background-color: #234567;">
-         <children>
-            <Label layoutX="72.0" layoutY="21.0" text="Bus Companys" textFill="#d7ec18" />
-            <Button layoutX="74.0" layoutY="70.0" mnemonicParsing="false" text="COMPANY1" />
-            <Button layoutX="74.0" layoutY="139.0" mnemonicParsing="false" text="COMPANY2" />
-            <Button layoutX="72.0" layoutY="208.0" mnemonicParsing="false" text="COMPANY3" />
-            <Button layoutX="72.0" layoutY="272.0" mnemonicParsing="false" text="COMPANY4" />
-            <Button layoutX="74.0" layoutY="599.0" mnemonicParsing="false" text="Add New Service" />
-         </children>
-      </Pane>
       <Pane fx:id="busInfo" layoutX="544.0" layoutY="2.0" prefHeight="214.0" prefWidth="315.0" style="-fx-background-color: #123642;">
          <children>
             <Label layoutX="104.0" layoutY="39.0" text="Bus Informations:" textFill="#b1c910" />
@@ -34,7 +26,7 @@
             <Button layoutX="213.0" layoutY="178.0" mnemonicParsing="false" onAction="#addNewBus" text="Add New Bus" />
          </children>
       </Pane>
-      <Pane fx:id="addTheCompany" layoutX="497.0" layoutY="232.0" prefHeight="398.0" prefWidth="384.0" style="-fx-background-color: #124563;" visible="false">
+      <Pane fx:id="addTheCompany" layoutX="488.0" layoutY="249.0" prefHeight="398.0" prefWidth="384.0" style="-fx-background-color: #124563;">
          <children>
             <Label layoutX="154.0" layoutY="25.0" text="On Add New Service" textFill="#d0e41f" />
             <TextField fx:id="EnterCompanyName" layoutX="154.0" layoutY="79.0" />
@@ -43,10 +35,11 @@
             <Label layoutX="31.0" layoutY="83.0" text="Enter company Name:" textFill="#c7d923" />
             <Label layoutX="62.0" layoutY="135.0" text="Bus Stopeges :" textFill="#d9ef0f" />
             <Label layoutX="45.0" layoutY="191.0" text="Enter the Fairlist:" textFill="#d6ec12" />
-            <Button layoutX="178.0" layoutY="259.0" mnemonicParsing="false" onAction="#addTheCompany" text="Add The Company" />
+            <Button layoutX="245.0" layoutY="346.0" mnemonicParsing="false" onAction="#addTheCompany" text="Add The Company" />
+            <Label fx:id="companyInfoShow" layoutX="183.0" layoutY="268.0" textFill="#dcd62b" />
          </children>
       </Pane>
-      <Pane fx:id="addNewBus" layoutX="516.0" layoutY="229.0" prefHeight="438.0" prefWidth="341.0" style="-fx-background-color: #124563;">
+      <Pane fx:id="addNewBus" layoutX="516.0" layoutY="229.0" prefHeight="438.0" prefWidth="341.0" style="-fx-background-color: #124563;" visible="false">
          <children>
             <Label layoutX="109.0" layoutY="34.0" text="Add New Bus Information" textFill="#dbef23" />
             <Label layoutX="48.0" layoutY="79.0" text="Bus Plate  Number ;" textFill="#bed417" />
@@ -61,6 +54,17 @@
             <TextField fx:id="phoneNumber" layoutX="162.0" layoutY="166.0" />
             <TextField fx:id="seatCapacity" layoutX="162.0" layoutY="198.0" promptText="0/45" />
             <Button layoutX="130.0" layoutY="276.0" mnemonicParsing="false" text="Add The New Bus" />
+         </children>
+      </Pane>
+      <Pane layoutX="229.0" prefHeight="683.0" prefWidth="242.0" style="-fx-background-color: #123452;">
+         <children>
+            <Button layoutX="112.0" layoutY="630.0" mnemonicParsing="false" onAction="#CompanyButton" text="Add New Service" />
+            <Label layoutX="61.0" layoutY="36.0" text="Bus Companys" textFill="#d7ec18">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <VBox fx:id="companylistPane" layoutX="47.0" layoutY="76.0" prefHeight="534.0" prefWidth="159.0" />
          </children>
       </Pane>
    </children>

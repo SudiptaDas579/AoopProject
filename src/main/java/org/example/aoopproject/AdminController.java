@@ -3,9 +3,11 @@ package org.example.aoopproject;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 
 import java.io.File;
 import java.net.URL;
@@ -24,7 +26,7 @@ public class AdminController implements Initializable {
     public Pane addNewBus;
     public Pane busInfo;
     public Pane addTheCompany;
-    public Pane companylistPane;
+    public VBox companylistPane;
 
 
     @FXML
@@ -34,7 +36,7 @@ public class AdminController implements Initializable {
     public TextField phoneNumber;
     public TextField seatCapacity;
 
-
+    public Label companyInfoShow;
 
     public HashSet<CompanyList> companyLists=new HashSet<CompanyList>();
 
@@ -54,69 +56,87 @@ public class AdminController implements Initializable {
             throw new RuntimeException(e);
         }
 
-        companyLists = busFileHandler.getBusLists(file);
+        companyLists = busFileHandler.getCompanyLists(file);
 
         CompanyButton();
     }
 
 
+
         @FXML
-    public void addTheCompany(){
+    public void addTheCompany() {
 
-        String[] stopages = BusStopages.getText().split("-");
-        String[] fareList = EnterFareLists.getText().split("-");
+            if (EnterCompanyName.getText().isEmpty() || BusStopages.getText().isEmpty() || EnterFareLists.getText().isEmpty()) {
 
-        HashMap<Integer,String> stopage = new HashMap<>();
-        HashMap<Integer,String> fare = new HashMap<>();
+                companyInfoShow.setText("Please fill all the fields");
+            }
+            else {
 
-        for(int i=0;i<stopages.length;i++){
-            stopage.put(i,stopages[i]);
+                String[] stopages = BusStopages.getText().split("-");
+
+                String[] fareList = EnterFareLists.getText().split("-");
+
+                HashMap<Integer, String> stopage = new HashMap<>();
+                HashMap<Integer, String> fare = new HashMap<>();
+
+                for (int i = 0; i < stopages.length; i++) {
+                    stopage.put(i, stopages[i]);
+                }
+                for (int i = 0; i < fareList.length; i++) {
+                    fare.put(i, fareList[i]);
+                }
+
+                CompanyList NewBuslist = new CompanyList(EnterCompanyName.getText(), stopage, fare, null);
+
+                File file = new File("src/main/java/org/example/aoopproject/files/CompanyList.txt");
+
+
+                BusFileHandler busFileHandler = new BusFileHandler();
+                busFileHandler.start();
+                try {
+                    busFileHandler.join();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+
+                companyLists.add(NewBuslist);
+                companyInfoShow.setText("Company Information Added successfully!");
+
+                HashSet<CompanyList> newOne = new HashSet<>();
+                newOne.add(NewBuslist);
+                busFileHandler.updateInFile(file, newOne);
+
+
+                System.out.println(companyLists);
+
+
+                StringBuilder stringBuilder = new StringBuilder();
+                for (CompanyList busList : companyLists) {
+                    stringBuilder.append(busList.toString());
+                    stringBuilder.append("\n");
+
+                }
+                goooo.setText(stringBuilder.toString());
+            }
+
         }
-        for(int i=0;i<fareList.length;i++){
-            fare.put(i,fareList[i]);
-        }
-
-        CompanyList NewBuslist = new CompanyList(EnterCompanyName.getText(),stopage,fare,null);
-
-        File file = new File("src/main/java/org/example/aoopproject/files/CompanyList.txt");
-
-
-        BusFileHandler busFileHandler = new BusFileHandler();
-        busFileHandler.start();
-        try {
-            busFileHandler.join();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
-        companyLists.add(NewBuslist);
-
-
-        busFileHandler.updateInFile(file,companyLists);
-        StringBuilder stringBuilder=new StringBuilder();
-        for (CompanyList busList : companyLists) {
-            stringBuilder.append(busList.toString());
-            stringBuilder.append("\n");
-
-        }
-        goooo.setText(stringBuilder.toString());
-    }
-
-
 
     @FXML
     public void addNewBus(){
 
         BusInformation busInformation=new BusInformation(busPlateNumber.getText(),driverName.getText(),driverLicense.getText(),Integer.parseInt(phoneNumber.getText()),seatCapacity.getText());
-
-
     }
+
+
+
     public void CompanyButton(){
 
         for (CompanyList companyList : companyLists) {
 
             String CompanyName= companyList.getCompanyName();
             Button button=new Button(CompanyName);
+            button.setPrefWidth(150);
+            button.setPrefHeight(150);
             companylistPane.getChildren().add(button);
 
         }
