@@ -1,20 +1,43 @@
-/* JavaFX button style: lighter vibrant orange, subtle gloss */
-.button {
-    -fx-background-color: rgba(230, 133, 52, 0.7); /* Lighter semi-transparent orange */
+/* Frosted Gold Glass Button */
+.frosted-button {
+    -fx-background-color:
+            linear-gradient(
+                    to bottom right,
+                    rgba(255, 240, 180, 0.4),  /* soft warm gold */
+                    rgba(255, 200, 120, 0.25)  /* slightly darker gold */
+            );
     -fx-background-radius: 12;
-    -fx-border-radius: 6; /* Shorter border radius */
-    -fx-border-color: rgba(239, 162, 79, 0.7); /* Slightly lighter border */
-    -fx-border-width: 1;
-    -fx-text-fill: white;
-    -fx-font-weight: bold;
+    -fx-border-radius: 12;
+
+    /* Elegant semi-transparent gold border */
+    -fx-border-color: rgba(255, 215, 130, 0.5);
+    -fx-border-width: 1.5;
+    -fx-border-style: solid;
+
+    -fx-text-fill: #4a2f00; /* dark brown for contrast */
     -fx-font-size: 14px;
-    -fx-padding: 10 20 10 20;
+    -fx-font-weight: bold;
+    -fx-padding: 8 20 8 20;
+
+    /* Inner shine + subtle outer glow */
+    -fx-effect:
+            innershadow(gaussian, rgba(255, 245, 200, 0.2), 8, 0.5, 0, 0),
+            dropshadow(gaussian, rgba(255, 215, 120, 0.25), 10, 0.5, 0, 2);
+
     -fx-cursor: hand;
-    -fx-effect: dropshadow(gaussian, rgba(237, 147, 72, 0.4), 8, 0.4, 0, 2); /* Less glossy shadow */
     -fx-transition: all 0.3s ease-in-out;
 }
 
-.button:hover {
-    -fx-background-color: rgba(255,180,90,0.8); /* Slightly brighter on hover */
-    -fx-effect: dropshadow(gaussian, rgba(255,180,90,0.5), 10, 0.5, 0, 3);
+/* Hover effect: brighter glow */
+.frosted-button:hover {
+    -fx-background-color:
+            linear-gradient(
+                    to bottom right,
+                    rgba(255, 250, 210, 0.5),
+                    rgba(255, 220, 140, 0.35)
+            );
+    -fx-effect:
+            innershadow(gaussian, rgba(255, 250, 210, 0.25), 10, 0.6, 0, 0),
+            dropshadow(gaussian, rgba(255, 220, 130, 0.4), 12, 0.6, 0, 3);
+    -fx-border-color: rgba(255, 230, 150, 0.6);
 }
