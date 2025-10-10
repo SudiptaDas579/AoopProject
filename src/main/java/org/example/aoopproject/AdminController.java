@@ -1,5 +1,6 @@
 package org.example.aoopproject;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -13,6 +14,7 @@ import java.io.File;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class AdminController implements Initializable {
@@ -43,7 +45,7 @@ public class AdminController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        final String apiKey = "AIzaSyCqbKdjkod9FVs371m7I4Vv3B7opV2xfWI";
         File file = new File("src/main/java/org/example/aoopproject/files/CompanyList.txt");
 
         BusFileHandler busFileHandler = new BusFileHandler();
@@ -59,6 +61,16 @@ public class AdminController implements Initializable {
         companyLists = busFileHandler.getCompanyLists(file);
 
         CompanyButton();
+
+        PlaceSuggestionTask task = new PlaceSuggestionTask(BusStopages.getText(), apiKey);
+
+        task.setOnSucceeded(e -> {
+            List<String> suggestions = task.getValue();
+            suggestions.forEach(System.out::println);
+        });
+
+        new Thread(task).start();
+
     }
 
 
