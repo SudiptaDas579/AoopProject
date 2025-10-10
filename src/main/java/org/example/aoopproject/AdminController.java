@@ -5,6 +5,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 
 import java.io.File;
 import java.net.URL;
@@ -19,6 +20,18 @@ public class AdminController implements Initializable {
     public TextField BusStopages;
     public TextField EnterFareLists;
     public TextArea goooo;
+    @FXML
+    public Pane addNewBus;
+    public Pane busInfo;
+    public Pane addTheCompany;
+
+    @FXML
+    public TextField busPlateNumber;
+    public TextField driverName;
+    public TextField driverLicense;
+    public TextField phoneNumber;
+    public TextField seatCapacity;
+
 
 
     public HashSet<BusList> busLists=new HashSet<BusList>();
@@ -83,4 +96,12 @@ public class AdminController implements Initializable {
         busLists=busFileHandler.getBusLists(file);
 
     }
+    @FXML
+    public void addNewBus(){
+
+        BusInformation busInformation=new BusInformation(busPlateNumber.getText(),driverName.getText(),driverLicense.getText(),Integer.parseInt(phoneNumber.getText()),seatCapacity.getText());
+
+
+    }
+
 }

@@ -24,17 +24,17 @@
             <Button layoutX="74.0" layoutY="599.0" mnemonicParsing="false" text="Add New Service" />
          </children>
       </Pane>
-      <Pane layoutX="544.0" layoutY="2.0" prefHeight="214.0" prefWidth="315.0" style="-fx-background-color: #123642;">
+      <Pane fx:id="busInfo" layoutX="544.0" layoutY="2.0" prefHeight="214.0" prefWidth="315.0" style="-fx-background-color: #123642;">
          <children>
             <Label layoutX="104.0" layoutY="39.0" text="Bus Informations:" textFill="#b1c910" />
             <Label layoutX="63.0" layoutY="83.0" text="Bus number:1(name plate)" textFill="#d3e412" />
             <Label layoutX="63.0" layoutY="112.0" text="Label" />
             <Label layoutX="63.0" layoutY="112.0" text="Driver Name:  A" textFill="#cdd71c" />
             <Label layoutX="63.0" layoutY="144.0" text="PhoneNumber : 123456" textFill="#eefa18" />
-            <Button layoutX="213.0" layoutY="178.0" mnemonicParsing="false" text="Add New Bus" />
+            <Button layoutX="213.0" layoutY="178.0" mnemonicParsing="false" onAction="#addNewBus" text="Add New Bus" />
          </children>
       </Pane>
-      <Pane layoutX="497.0" layoutY="232.0" prefHeight="398.0" prefWidth="384.0" style="-fx-background-color: #124563;">
+      <Pane fx:id="addTheCompany" layoutX="497.0" layoutY="232.0" prefHeight="398.0" prefWidth="384.0" style="-fx-background-color: #124563;" visible="false">
          <children>
             <Label layoutX="154.0" layoutY="25.0" text="On Add New Service" textFill="#d0e41f" />
             <TextField fx:id="EnterCompanyName" layoutX="154.0" layoutY="79.0" />
@@ -46,7 +46,7 @@
             <Button layoutX="178.0" layoutY="259.0" mnemonicParsing="false" onAction="#addTheCompany" text="Add The Company" />
          </children>
       </Pane>
-      <Pane layoutX="516.0" layoutY="229.0" prefHeight="438.0" prefWidth="341.0" style="-fx-background-color: #124563;" visible="false">
+      <Pane fx:id="addNewBus" layoutX="516.0" layoutY="229.0" prefHeight="438.0" prefWidth="341.0" style="-fx-background-color: #124563;">
          <children>
             <Label layoutX="109.0" layoutY="34.0" text="Add New Bus Information" textFill="#dbef23" />
             <Label layoutX="48.0" layoutY="79.0" text="Bus Plate  Number ;" textFill="#bed417" />
@@ -57,7 +57,7 @@
             <Label layoutX="55.0" layoutY="210.0" text="Seat capacity :" textFill="#ddef17" />
             <TextField fx:id="busPlateNumber" layoutX="162.0" layoutY="75.0" />
             <TextField fx:id="driverName" layoutX="162.0" layoutY="104.0" />
-            <TextField fx:id="driverLinces" layoutX="162.0" layoutY="138.0" />
+            <TextField fx:id="driverLicense" layoutX="162.0" layoutY="138.0" />
             <TextField fx:id="phoneNumber" layoutX="162.0" layoutY="166.0" />
             <TextField fx:id="seatCapacity" layoutX="162.0" layoutY="198.0" promptText="0/45" />
             <Button layoutX="130.0" layoutY="276.0" mnemonicParsing="false" text="Add The New Bus" />
