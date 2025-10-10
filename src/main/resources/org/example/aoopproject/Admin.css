@@ -1,27 +1,48 @@
-/* Golden Flow Pane - soft light and transparent */
+/* Frosted Gold Glass Pane with Soft Glowing Border */
 .translucent-pane {
     -fx-background-color:
             linear-gradient(
                     to bottom right,
-                    rgba(255, 240, 200, 0.35),  /* warm light gold */
-                    rgba(255, 200, 120, 0.25)   /* soft transparent orange */
+                    rgba(255, 245, 210, 0.35),
+                    rgba(255, 200, 120, 0.25)
+            ),
+            linear-gradient(
+                    to top left,
+                    rgba(255, 255, 255, 0.15),
+                    rgba(255, 255, 255, 0)
             );
-    -fx-background-radius: 15;
-    -fx-border-radius: 15;
-    -fx-border-color: rgba(255, 220, 160, 0.4); /* subtle gold border */
-    -fx-border-width: 1;
+    -fx-background-radius: 18;
+    -fx-border-radius: 18;
+    -fx-border-color: rgba(255, 215, 130, 0.5);
+    -fx-border-width: 2;
+    -fx-border-style: solid;
     -fx-padding: 20;
-    -fx-effect: dropshadow(gaussian, rgba(255, 200, 100, 0.3), 12, 0.5, 0, 4);
+
+    /* Inner shine + outer glow + subtle border glow */
+    -fx-effect:
+            innershadow(gaussian, rgba(255, 245, 200, 0.2), 15, 0.5, 0, 0),
+            dropshadow(gaussian, rgba(255, 215, 120, 0.35), 18, 0.6, 0, 5),
+            dropshadow(gaussian, rgba(255, 230, 150, 0.25), 10, 0.4, 0, 0); /* subtle border glow */
+
     -fx-transition: all 0.3s ease-in-out;
 }
 
-/* Hover effect: slightly brighter and more defined glow */
+/* Hover: brighter glow + border */
 .translucent-pane:hover {
     -fx-background-color:
             linear-gradient(
                     to bottom right,
-                    rgba(255, 245, 210, 0.45),
-                    rgba(255, 210, 140, 0.35)
+                    rgba(255, 250, 220, 0.45),
+                    rgba(255, 220, 140, 0.35)
+            ),
+            linear-gradient(
+                    to top left,
+                    rgba(255, 255, 255, 0.2),
+                    rgba(255, 255, 255, 0)
             );
-    -fx-effect: dropshadow(gaussian, rgba(255, 220, 120, 0.5), 14, 0.6, 0, 5);
+    -fx-effect:
+            innershadow(gaussian, rgba(255, 250, 210, 0.25), 18, 0.6, 0, 0),
+            dropshadow(gaussian, rgba(255, 220, 130, 0.5), 20, 0.6, 0, 6),
+            dropshadow(gaussian, rgba(255, 240, 160, 0.35), 12, 0.5, 0, 0); /* brighter border glow */
+    -fx-border-color: rgba(255, 230, 150, 0.6);
 }

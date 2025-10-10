@@ -45,7 +45,9 @@ public class AdminController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         final String apiKey = "AIzaSyCqbKdjkod9FVs371m7I4Vv3B7opV2xfWI";
+
         File file = new File("src/main/java/org/example/aoopproject/files/CompanyList.txt");
 
         BusFileHandler busFileHandler = new BusFileHandler();
@@ -69,7 +71,14 @@ public class AdminController implements Initializable {
             suggestions.forEach(System.out::println);
         });
 
-        new Thread(task).start();
+        Thread thread = new Thread(task);
+        thread.start();
+        try {
+            thread.join();
+
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
