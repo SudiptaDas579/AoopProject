@@ -5,21 +5,21 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Objects;
 
-public class BusList implements Serializable {
-    private String busName;
+public class CompanyList implements Serializable {
+    private String companyName;
     private HashMap<Integer,String> busStopages;
     private HashMap<Integer,String> fareList;
     private HashSet<BusInformation> busInfo;
 
-    public BusList(String busName, HashMap<Integer, String> busStopages, HashMap<Integer, String> fareList, HashSet<BusInformation> busInfo) {
-        this.busName = busName;
+    public CompanyList(String busName, HashMap<Integer, String> busStopages, HashMap<Integer, String> fareList, HashSet<BusInformation> busInfo) {
+        this.companyName = busName;
         this.busStopages = busStopages;
         this.fareList = fareList;
         this.busInfo = busInfo;
     }
 
-    public BusList(String busName, HashMap<Integer, String> busStopages, HashMap<Integer, String> fareList) {
-        this.busName = busName;
+    public CompanyList(String busName, HashMap<Integer, String> busStopages, HashMap<Integer, String> fareList) {
+        this.companyName = busName;
         this.busStopages = busStopages;
         this.fareList = fareList;
     }
@@ -27,19 +27,19 @@ public class BusList implements Serializable {
     @Override
     public String toString() {
         return "BusList{" +
-                "busName='" + busName + '\'' +
+                "busName='" + companyName + '\'' +
                 ", busStopages=" + busStopages +
                 ", fareList=" + fareList +
                 ", busInfo=" + busInfo +
                 '}';
     }
 
-    public String getBusName() {
-        return busName;
+    public String getCompanyName() {
+        return companyName;
     }
 
-    public void setBusName(String busName) {
-        this.busName = busName;
+    public void setCompanyName(String busName) {
+        this.companyName = busName;
     }
 
     public HashMap<Integer, String> getBusStopages() {
@@ -69,12 +69,12 @@ public class BusList implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        BusList busList = (BusList) o;
-        return Objects.equals(busName, busList.busName) && Objects.equals(busStopages, busList.busStopages);
+        CompanyList busList = (CompanyList) o;
+        return Objects.equals(companyName, busList.companyName) && Objects.equals(busStopages, busList.busStopages);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(busName, busStopages);
+        return Objects.hash(companyName, busStopages);
     }
 }

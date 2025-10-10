@@ -2,7 +2,7 @@ package org.example.aoopproject;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
@@ -24,6 +24,8 @@ public class AdminController implements Initializable {
     public Pane addNewBus;
     public Pane busInfo;
     public Pane addTheCompany;
+    public Pane companylistPane;
+
 
     @FXML
     public TextField busPlateNumber;
@@ -34,8 +36,31 @@ public class AdminController implements Initializable {
 
 
 
-    public HashSet<BusList> busLists=new HashSet<BusList>();
-    @FXML
+    public HashSet<CompanyList> companyLists=new HashSet<CompanyList>();
+
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        File file = new File("src/main/java/org/example/aoopproject/files/CompanyList.txt");
+
+        BusFileHandler busFileHandler = new BusFileHandler();
+        busFileHandler.start();
+
+        try {
+            busFileHandler.join();
+        } catch (InterruptedException e) {
+
+            throw new RuntimeException(e);
+        }
+
+        companyLists = busFileHandler.getBusLists(file);
+
+        CompanyButton();
+    }
+
+
+        @FXML
     public void addTheCompany(){
 
         String[] stopages = BusStopages.getText().split("-");
@@ -51,7 +76,7 @@ public class AdminController implements Initializable {
             fare.put(i,fareList[i]);
         }
 
-        BusList NewBuslist = new BusList(EnterCompanyName.getText(),stopage,fare,null);
+        CompanyList NewBuslist = new CompanyList(EnterCompanyName.getText(),stopage,fare,null);
 
         File file = new File("src/main/java/org/example/aoopproject/files/CompanyList.txt");
 
@@ -64,12 +89,12 @@ public class AdminController implements Initializable {
             throw new RuntimeException(e);
         }
 
-        busLists.add(NewBuslist);
+        companyLists.add(NewBuslist);
 
 
-        busFileHandler.updateInFile(file,busLists);
+        busFileHandler.updateInFile(file,companyLists);
         StringBuilder stringBuilder=new StringBuilder();
-        for (BusList busList : busLists) {
+        for (CompanyList busList : companyLists) {
             stringBuilder.append(busList.toString());
             stringBuilder.append("\n");
 
@@ -77,30 +102,24 @@ public class AdminController implements Initializable {
         goooo.setText(stringBuilder.toString());
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        File file = new File("src/main/java/org/example/aoopproject/files/CompanyList.txt");
 
-        BusFileHandler busFileHandler = new BusFileHandler();
-        busFileHandler.start();
-
-        try {
-            busFileHandler.join();
-        }
-        catch (InterruptedException e) {
-
-            throw new RuntimeException(e);
-        }
-
-        busLists=busFileHandler.getBusLists(file);
-
-    }
     @FXML
     public void addNewBus(){
 
         BusInformation busInformation=new BusInformation(busPlateNumber.getText(),driverName.getText(),driverLicense.getText(),Integer.parseInt(phoneNumber.getText()),seatCapacity.getText());
 
+
+    }
+    public void CompanyButton(){
+
+        for (CompanyList companyList : companyLists) {
+
+            String CompanyName= companyList.getCompanyName();
+            Button button=new Button(CompanyName);
+            companylistPane.getChildren().add(button);
+
+        }
 
     }
 

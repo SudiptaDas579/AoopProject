@@ -5,7 +5,7 @@ import java.util.HashSet;
 
 public class BusFileHandler extends Thread {
 
-    public HashSet<BusList>busLists = new HashSet <BusList>();
+    public HashSet<CompanyList>busLists = new HashSet <CompanyList>();
 
     static class AppendableObjectOutputStream extends ObjectOutputStream {
         public AppendableObjectOutputStream(OutputStream out) throws IOException {
@@ -25,7 +25,7 @@ public class BusFileHandler extends Thread {
 
     }
 
-    public HashSet<BusList> getBusLists(File file)  {
+    public HashSet<CompanyList> getBusLists(File file)  {
 
 
         try{
@@ -33,9 +33,9 @@ public class BusFileHandler extends Thread {
             FileInputStream fileInputStream=new FileInputStream(file);
             ObjectInputStream objectInputStream=new ObjectInputStream(fileInputStream);
 
-            while (true) {
+            while (objectInputStream.available()>0) {
 
-                busLists.add((BusList) objectInputStream.readObject());
+                busLists.add((CompanyList) objectInputStream.readObject());
             }
         }
         catch(Exception e){
@@ -44,14 +44,14 @@ public class BusFileHandler extends Thread {
         return busLists;
     }
 
-    public synchronized void updateInFile(File file,HashSet <BusList>hashSet){
+    public synchronized void updateInFile(File file,HashSet <CompanyList>hashSet){
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(file, true);
             ObjectOutputStream outputStream = file.length() == 0
                     ? new ObjectOutputStream(fileOutputStream)
                     : new BusFileHandler.AppendableObjectOutputStream(fileOutputStream);
 
-            for (BusList A : hashSet) {
+            for (CompanyList A : hashSet) {
                 outputStream.writeObject(A);
                 System.out.println("Company lists written in file");
                 outputStream.flush();
