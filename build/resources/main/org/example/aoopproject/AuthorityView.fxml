@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.aoopproject.AuthorityController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.aoopproject.AdminController">
    <children>
       <ImageView fitHeight="700.0" fitWidth="900.0" layoutX="402.0" layoutY="-21.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
@@ -21,7 +21,7 @@
       <Pane layoutX="6.0" layoutY="8.0" prefHeight="700.0" prefWidth="240.0" styleClass="translucent-pane" stylesheets="@Admin.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Button layoutX="2.0" layoutY="227.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="220.0" styleClass="translucent-pane" stylesheets="@button.css" text="list of the bus company" />
-            <TextArea fx:id="goooo" layoutX="39.0" layoutY="414.0" prefHeight="81.0" prefWidth="73.0" />
+            <TextArea fx:id="goooo" layoutX="21.0" layoutY="319.0" prefHeight="273.0" prefWidth="167.0" />
          </children></Pane>
       <Pane fx:id="busInfo" layoutX="543.0" layoutY="31.0" prefHeight="214.0" prefWidth="315.0" styleClass="translucent-pane" stylesheets="@Admin.css">
          <children>

@@ -3,10 +3,8 @@ package org.example.aoopproject;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
@@ -16,6 +14,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class AdminController implements Initializable {
 
@@ -29,6 +29,7 @@ public class AdminController implements Initializable {
     public Pane busInfo;
     public Pane addTheCompany;
     public VBox companylistPane;
+    public Pane companyPane;
 
 
     @FXML
@@ -40,7 +41,14 @@ public class AdminController implements Initializable {
 
     public Label companyInfoShow;
 
+
+
     public HashSet<CompanyList> companyLists=new HashSet<CompanyList>();
+
+    private final ExecutorService executor = Executors.newSingleThreadExecutor();
+
+    private ListView<String> suggestionListView;
+
 
 
     @Override
@@ -64,21 +72,64 @@ public class AdminController implements Initializable {
 
         CompanyButton();
 
-        PlaceSuggestionTask task = new PlaceSuggestionTask(BusStopages.getText(), apiKey);
+        suggestionListView = new ListView<>();
+        suggestionListView.setVisible(false);
+        suggestionListView.setPrefHeight(100);
+        suggestionListView.setPrefWidth(BusStopages.getPrefWidth());
+        ((Pane) BusStopages.getParent()).getChildren().add(suggestionListView);
 
-        task.setOnSucceeded(e -> {
-            List<String> suggestions = task.getValue();
-            suggestions.forEach(System.out::println);
+
+        BusStopages.addEventHandler(KeyEvent.KEY_RELEASED, event -> {
+            String input = BusStopages.getText().trim();
+            if (input.length() < 2) {
+                suggestionListView.setVisible(false);
+                return;
+            }
+
+            PlaceSuggestionTask task = new PlaceSuggestionTask(input, apiKey);
+
+            task.setOnSucceeded(e -> {
+                List<String> suggestions = task.getValue();
+                Platform.runLater(() -> {
+                    suggestionListView.getItems().setAll(suggestions);
+                    suggestionListView.setVisible(!suggestions.isEmpty());
+                });
+            });
+
+            executor.submit(task);
         });
 
-        Thread thread = new Thread(task);
-        thread.start();
-        try {
-            thread.join();
+        suggestionListView.setFocusTraversable(false);
 
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        suggestionListView.setOnMouseClicked(e -> {
+            String selected = suggestionListView.getSelectionModel().getSelectedItem();
+            if (selected == null) return;
+
+            String currentText = BusStopages.getText();
+            if (currentText == null) currentText = "";
+
+            int lastDash = currentText.lastIndexOf('-');
+            String newText;
+            if (lastDash == -1) {
+                newText = selected + "-";
+            } else {
+                String prefix = currentText.substring(0, lastDash + 1);
+                newText = prefix + selected + "-";
+            }
+
+            BusStopages.setText(newText);
+
+
+            suggestionListView.setVisible(false);
+            suggestionListView.getSelectionModel().clearSelection();
+
+            Platform.runLater(() -> {
+                BusStopages.requestFocus();
+                BusStopages.end();
+            });
+        });
+
+
 
     }
 
@@ -149,7 +200,6 @@ public class AdminController implements Initializable {
     }
 
 
-
     public void CompanyButton(){
 
         for (CompanyList companyList : companyLists) {
@@ -163,5 +213,14 @@ public class AdminController implements Initializable {
         }
 
     }
+
+    @FXML
+    public void addNewService(){
+
+        companyPane.setPrefWidth( 300);
+
+    }
+
+
 
 }

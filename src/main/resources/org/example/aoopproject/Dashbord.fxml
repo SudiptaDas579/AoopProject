@@ -12,7 +12,7 @@
          <children>
             <ImageView fitHeight="700.0" fitWidth="900.0" pickOnBounds="true">
                <image>
-                  <Image url="@../../../pictures/Company.png" />
+                  <Image url="@../../../../../../../../../Pictures/aoop%20photo/ChatGPT%20Image%20Oct%206,%202025,%2001_16_30%20PM.png" />
                </image>
             </ImageView>
             <Pane prefHeight="700.0" prefWidth="240.0">
