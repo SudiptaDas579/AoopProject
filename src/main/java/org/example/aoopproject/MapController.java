@@ -47,11 +47,12 @@ public class MapController implements Initializable {
 
         // Load WebView map
         webEngine = mapView.getEngine();
-        URL mapUrl = getClass().getResource("/org/example/aoopproject/map.html");
+        webEngine.setJavaScriptEnabled(true);
+        URL mapUrl = getClass().getResource("/org/example/aoopproject/Map.html");
         if(mapUrl != null){
             webEngine.load(mapUrl.toExternalForm());
         } else {
-            System.err.println("map.html not found in resources!");
+            System.out.println("map.html not found in resources!");
         }
 
         webEngine.getLoadWorker().stateProperty().addListener((obs, oldState, newState) -> {
