@@ -13,6 +13,7 @@ module org.example.aoopproject {
     requires javafx.graphics;
     requires org.json;
     requires jdk.jsobject;
+    requires com.google.gson;
 
 
     opens org.example.aoopproject to javafx.fxml;
