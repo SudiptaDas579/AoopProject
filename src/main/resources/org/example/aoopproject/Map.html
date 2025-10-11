@@ -1,71 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <title>Test Map</title>
     <meta charset="utf-8">
-    <title>JavaFX Google Map</title>
-    <style>
-        html, body { height: 100%; margin: 0; padding: 0; }
-        #map { height: 100%; width: 100%; }
-    </style>
 </head>
 <body>
-<div id="map"></div>
-
+<div id="map" style="height:100vh;width:100vw;"></div>
 <script>
-    let map;
-    let markers = [];
-    let routePolyline;
-
     function initMap() {
-        map = new google.maps.Map(document.getElementById("map"), {
+        new google.maps.Map(document.getElementById("map"), {
             center: { lat: 23.8103, lng: 90.4125 },
-            zoom: 13
+            zoom: 14
         });
     }
-
-    function addMarker(loc) {
-        if(!loc) return;
-        const marker = new google.maps.Marker({
-            position: { lat: loc.lat, lng: loc.lng },
-            map: map,
-            title: loc.title
-        });
-        markers.push(marker);
-    }
-
-    function clearMarkers() {
-        for(let m of markers) m.setMap(null);
-        markers = [];
-        if(routePolyline) routePolyline.setMap(null);
-        routePolyline = null;
-    }
-
-    function drawRoute(locations) {
-        if(!locations || locations.length === 0) return;
-        const path = locations.map(l => ({ lat: l.lat, lng: l.lng }));
-        if(routePolyline) routePolyline.setMap(null);
-        routePolyline = new google.maps.Polyline({
-            path: path,
-            geodesic: true,
-            strokeColor: '#FF0000',
-            strokeOpacity: 0.8,
-            strokeWeight: 4
-        });
-        routePolyline.setMap(map);
-        const bounds = new google.maps.LatLngBounds();
-        path.forEach(p => bounds.extend(p));
-        map.fitBounds(bounds);
-    }
-
-    window.receiveFromJava = function(action, data) {
-        switch(action) {
-            case "addMarker": addMarker(data); break;
-            case "clearMarkers": clearMarkers(); break;
-            case "drawRoute": drawRoute(data); break;
-        }
-    };
 </script>
-
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCqbKdjkod9FVs371m7I4Vv3B7opV2xfWI&callback=initMap&libraries=places,directions" async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCqbKdjkod9FVs371m7I4Vv3B7opV2xfWI&callback=initMap" async defer></script>
 </body>
 </html>
