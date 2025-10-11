@@ -1,17 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.web.WebView?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="org.example.aoopproject.MapController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.aoopproject.MapController">
     <children>
-        <WebView fx:id="mapView" layoutX="0" layoutY="0" prefWidth="800" prefHeight="600" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0"/>
-        <TextField fx:id="fromField" promptText="From" layoutX="20" layoutY="10" prefWidth="150"/>
-        <TextField fx:id="toField" promptText="To" layoutX="180" layoutY="10" prefWidth="150"/>
-        <Button text="Find Route" layoutX="340" layoutY="10" onAction="#onFindRoute"/>
-        <VBox fx:id="infoPane" layoutX="500" layoutY="10" prefWidth="280" prefHeight="200" visible="false">
-            <Label text="Route Information:"/>
-            <ListView fx:id="infoList" prefHeight="180"/>
-        </VBox>
+        <WebView fx:id="mapWebView" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
     </children>
 </AnchorPane>

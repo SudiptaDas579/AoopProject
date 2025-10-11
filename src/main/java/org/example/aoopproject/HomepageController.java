@@ -2,7 +2,9 @@ package org.example.aoopproject;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -25,6 +27,8 @@ public class HomepageController {
     //@FXML private Label descLabel;
     //@FXML private Label extraLabel;
     @FXML private ImageView weatherImg;
+    @FXML public Pane sceneView;
+
 
 
     private YearMonth currentMonth;
@@ -37,6 +41,10 @@ public class HomepageController {
         drawCalendar();
         loadWeather("Dhaka");
         //updateBackgroundBasedOnTime();
+    }
+
+    @FXML private void newsBtn(ActionEvent event) {
+        FXMLLoader loader = new FXMLLoader();
     }
 
     private void loadWeather(String city) {

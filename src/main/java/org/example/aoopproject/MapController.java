@@ -1,204 +1,114 @@
 package org.example.aoopproject;
 
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Side;
-import javafx.scene.control.*;
-import javafx.scene.layout.VBox;
-import javafx.scene.web.WebEngine;
+import javafx.scene.control.ListView;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.web.WebView;
-import netscape.javascript.JSObject;
-
+import javafx.scene.web.WebEngine;
+import javafx.concurrent.Worker.State;
 import java.net.URL;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.List;
+import java.util.ResourceBundle;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class MapController implements Initializable {
 
-    @FXML private WebView mapView;
-    @FXML private TextField fromField;
-    @FXML private TextField toField;
-    @FXML private VBox infoPane;
-    @FXML private ListView<String> infoList;
-
+    @FXML
+    private WebView mapWebView;
     private WebEngine webEngine;
-    private JSObject jsWindow;
 
-    private HashSet<CompanyList> companySet = new HashSet<>();
-    private Map<String, double[]> busStopCoordinates = new HashMap<>();
+    private final ExecutorService executor = Executors.newSingleThreadExecutor();
 
-    // Single ContextMenu per TextField
-    private final Map<TextField, ContextMenu> fieldMenus = new HashMap<>();
+    private ListView<String> suggestionListView;
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    public void initialize(URL location, ResourceBundle resources) {
+        suggestionListView = new ListView<>();
+        suggestionListView.setVisible(false);
+        suggestionListView.setPrefHeight(100);
+        suggestionListView.setPrefWidth(BusStopages.getPrefWidth());
+        ((Pane) BusStopages.getParent()).getChildren().add(suggestionListView);
 
-        // Load companies from BusFileHandler thread
-        BusFileHandler fileHandler = new BusFileHandler();
-        fileHandler.start();
-        try {
-            fileHandler.join(); // wait for thread to finish
-            companySet = fileHandler.companyLists;
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
-        // Load WebView map
-        webEngine = mapView.getEngine();
-        webEngine.setJavaScriptEnabled(true);
-        URL mapUrl = getClass().getResource("/org/example/aoopproject/Map.html");
-        if(mapUrl != null){
-            webEngine.load(mapUrl.toExternalForm());
-        } else {
-            System.out.println("map.html not found in resources!");
-        }
-
-        webEngine.getLoadWorker().stateProperty().addListener((obs, oldState, newState) -> {
-            if(newState == javafx.concurrent.Worker.State.SUCCEEDED){
-                jsWindow = (JSObject) webEngine.executeScript("window");
-                jsWindow.setMember("javaConnector", new JavaConnector());
+        BusStopages.addEventHandler(KeyEvent.KEY_RELEASED, event -> {
+            String input = BusStopages.getText().trim();
+            if (input.length() < 2) {
+                suggestionListView.setVisible(false);
+                return;
             }
-        });
 
-        if(companySet != null && !companySet.isEmpty()) {
-            loadBusStopCoordinates();
-        }
+            PlaceSuggestionTask task = new PlaceSuggestionTask(input, apiKey);
 
-        loadUserLocation();
-        setupAutocomplete();
-    }
-
-    private void loadBusStopCoordinates(){
-        for(CompanyList company : companySet){
-            if(company.getBusStopages() == null) continue;
-            for(Map.Entry<Integer, String> entry : company.getBusStopages().entrySet()){
-                if(!busStopCoordinates.containsKey(entry.getValue())){
-                    double lat = 23.8103 + entry.getKey() * 0.001;
-                    double lng = 90.4125 + entry.getKey() * 0.001;
-                    busStopCoordinates.put(entry.getValue(), new double[]{lat, lng});
-                }
-            }
-        }
-    }
-
-    private void loadUserLocation() {
-        fromField.setText("Dhaka, Bangladesh");
-    }
-
-    private void setupAutocomplete() {
-        List<String> stopNames = new ArrayList<>(busStopCoordinates.keySet());
-        fromField.textProperty().addListener((obs, oldText, newText) -> suggestStops(fromField, stopNames));
-        toField.textProperty().addListener((obs, oldText, newText) -> suggestStops(toField, stopNames));
-    }
-
-    private void suggestStops(TextField field, List<String> stops) {
-        String query = field.getText();
-        if(query.isEmpty()) {
-            if(fieldMenus.containsKey(field)) fieldMenus.get(field).hide();
-            return;
-        }
-
-        List<String> suggestions = stops.stream()
-                .filter(name -> name.toLowerCase().contains(query.toLowerCase()))
-                .collect(Collectors.toList());
-        if(suggestions.isEmpty()){
-            if(fieldMenus.containsKey(field)) fieldMenus.get(field).hide();
-            return;
-        }
-
-        ContextMenu menu = fieldMenus.computeIfAbsent(field, k -> new ContextMenu());
-        menu.getItems().clear();
-
-        for(String s : suggestions){
-            MenuItem item = new MenuItem(s);
-            item.setOnAction(e -> {
-                field.setText(s);
-                menu.hide();
+            task.setOnSucceeded(e -> {
+                List<String> suggestions = task.getValue();
+                Platform.runLater(() -> {
+                    suggestionListView.getItems().setAll(suggestions);
+                    suggestionListView.setVisible(!suggestions.isEmpty());
+                });
             });
-            menu.getItems().add(item);
-        }
 
-        if(!menu.isShowing()) {
-            menu.show(field, Side.BOTTOM, 0, 0);
-        }
-    }
-
-    @FXML
-    private void onFindRoute() {
-        String fromText = fromField.getText();
-        String toText = toField.getText();
-        if(fromText.isEmpty() || toText.isEmpty()) return;
-        if(!busStopCoordinates.containsKey(fromText) || !busStopCoordinates.containsKey(toText)) return;
-
-        List<CompanyList> servingCompanies = companySet.stream()
-                .filter(c -> c.getBusStopages() != null
-                        && c.getBusStopages().containsValue(fromText)
-                        && c.getBusStopages().containsValue(toText))
-                .collect(Collectors.toList());
-
-        Platform.runLater(() -> {
-            List<String> displayInfo = new ArrayList<>();
-            for(CompanyList company : servingCompanies){
-                StringBuilder sb = new StringBuilder();
-                sb.append(company.getCompanyName()).append("\n");
-                sb.append("Fare: ").append(getFare(company, fromText, toText)).append("\n");
-                sb.append("Buses: ");
-                if(company.getBusInfo() != null && !company.getBusInfo().isEmpty()){
-                    sb.append(company.getBusInfo().stream()
-                            .map(BusInformation::getBusNo)
-                            .collect(Collectors.joining(", ")));
-                }
-                displayInfo.add(sb.toString());
-            }
-            infoList.setItems(FXCollections.observableArrayList(displayInfo));
-            infoPane.setVisible(true);
+            executor.submit(task);
         });
 
-        // Clear previous markers
-        jsWindow.call("receiveFromJava", "clearMarkers", null);
+        suggestionListView.setFocusTraversable(false);
 
-        List<Map<String, Object>> routeLocations = new ArrayList<>();
-        for(String stop : busStopCoordinates.keySet()){
-            if(isRelevantStop(fromText, toText, stop)){
-                double[] coords = busStopCoordinates.get(stop);
-                Map<String, Object> loc = Map.of(
-                        "lat", coords[0],
-                        "lng", coords[1],
-                        "title", stop
-                );
-                routeLocations.add(loc);
-                jsWindow.call("receiveFromJava", "addMarker", loc);
+        suggestionListView.setOnMouseClicked(e -> {
+            String selected = suggestionListView.getSelectionModel().getSelectedItem();
+            if (selected == null) return;
+
+            String currentText = BusStopages.getText();
+            if (currentText == null) currentText = "";
+
+            int lastDash = currentText.lastIndexOf('-');
+            String newText;
+            if (lastDash == -1) {
+                newText = selected + "-";
+            } else {
+                String prefix = currentText.substring(0, lastDash + 1);
+                newText = prefix + selected + "-";
             }
+
+            BusStopages.setText(newText);
+
+
+            suggestionListView.setVisible(false);
+            suggestionListView.getSelectionModel().clearSelection();
+
+            Platform.runLater(() -> {
+                BusStopages.requestFocus();
+                BusStopages.end();
+            });
+        });
+
+        webEngine = mapWebView.getEngine();
+
+        // 1. Load the HTML file from your resources folder
+        URL htmlUrl = getClass().getResource("org/example/aoopproject/Map.html");
+        if (htmlUrl != null) {
+            webEngine.load(htmlUrl.toExternalForm());
+        } else {
+            // Handle error: HTML file not found
+            System.err.println("Error: google_map.html not found in resources!");
         }
 
-        routeLocations.sort(Comparator.comparingDouble(loc -> Math.abs((double)loc.get("lat") - busStopCoordinates.get(fromText)[0])));
-        jsWindow.call("receiveFromJava", "drawRoute", routeLocations);
+        // 2. Wait for the map to load before executing JavaScript
+        webEngine.getLoadWorker().stateProperty().addListener((obs, oldState, newState) -> {
+            if (newState == State.SUCCEEDED) {
+                // Now you can call JavaScript functions safely
+                // Example: Move the map to New York
+                updateMapLocation(40.7128, -74.0060);
+            }
+        });
     }
 
-    private boolean isRelevantStop(String from, String to, String current){
-        return current.equals(from) || current.equals(to) || true;
-    }
-
-    private String getFare(CompanyList company, String from, String to){
-        if(company.getBusStopages() == null || company.getFareList() == null) return "N/A";
-        Integer fromKey = company.getBusStopages().entrySet().stream()
-                .filter(e -> e.getValue().equalsIgnoreCase(from))
-                .map(Map.Entry::getKey).findFirst().orElse(null);
-        Integer toKey = company.getBusStopages().entrySet().stream()
-                .filter(e -> e.getValue().equalsIgnoreCase(to))
-                .map(Map.Entry::getKey).findFirst().orElse(null);
-        if(fromKey != null && toKey != null){
-            return company.getFareList().getOrDefault(fromKey, "N/A") + " - " +
-                    company.getFareList().getOrDefault(toKey, "N/A");
-        }
-        return "N/A";
-    }
-
-    public class JavaConnector {
-        public void onRouteCalculated(String orderJson){
-            System.out.println("Optimized order from JS: " + orderJson);
-        }
+    // 3. Method to update the map from Java
+    public void updateMapLocation(double latitude, double longitude) {
+        // Call the JavaScript function 'updateMarker' defined in your HTML
+        String script = String.format("updateMarker(%f, %f);", latitude, longitude);
+        webEngine.executeScript(script);
     }
 }
