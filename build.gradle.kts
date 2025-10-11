@@ -11,6 +11,10 @@ version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
+    // ✅ Add Sonatype repo for ControlsFX newer versions
+    maven {
+        url = uri("https://oss.sonatype.org/content/repositories/snapshots/")
+    }
 }
 
 val junitVersion = "5.12.1"
@@ -28,6 +32,11 @@ tasks.withType<JavaCompile> {
 application {
     mainModule.set("org.example.aoopproject")
     mainClass.set("org.example.aoopproject.HelloApplication")
+
+    // ✅ Fix ControlsFX access to internal JavaFX event classes
+    applicationDefaultJvmArgs = listOf(
+        "--add-exports=javafx.base/com.sun.javafx.event=org.controlsfx.controls"
+    )
 }
 
 javafx {
@@ -36,7 +45,9 @@ javafx {
 }
 
 dependencies {
+    // ✅ Use latest available ControlsFX (still 11.2.1 in Maven Central)
     implementation("org.controlsfx:controlsfx:11.2.1")
+
     implementation("com.dlsc.formsfx:formsfx-core:11.6.0") {
         exclude(group = "org.openjfx")
     }
@@ -52,10 +63,11 @@ dependencies {
         exclude(group = "org.openjfx")
         exclude(group = "org.jetbrains.kotlin")
     }
-    testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
-    implementation(group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version = "2.2.0")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:2.2.0")
     implementation("org.json:json:20240303")
+
+    testImplementation("org.junit.jupiter:junit-jupiter-api:$junitVersion")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junitVersion")
 }
 
 tasks.withType<Test> {

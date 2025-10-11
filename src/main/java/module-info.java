@@ -12,6 +12,7 @@ module org.example.aoopproject {
     requires com.almasb.fxgl.all;
     requires javafx.graphics;
     requires org.json;
+    requires jdk.jsobject;
 
 
     opens org.example.aoopproject to javafx.fxml;

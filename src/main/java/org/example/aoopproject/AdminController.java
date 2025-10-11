@@ -3,6 +3,7 @@ package org.example.aoopproject;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
@@ -40,6 +41,8 @@ public class AdminController implements Initializable {
     public TextField seatCapacity;
 
     public Label companyInfoShow;
+    public Label BusCompanies;
+    public Button AddService;
 
 
 
@@ -158,7 +161,7 @@ public class AdminController implements Initializable {
                     fare.put(i, fareList[i]);
                 }
 
-                CompanyList NewBuslist = new CompanyList(EnterCompanyName.getText(), stopage, fare, null);
+                CompanyList NewCompanyList = new CompanyList(EnterCompanyName.getText(), stopage, fare, null);
 
                 File file = new File("src/main/java/org/example/aoopproject/files/CompanyList.txt");
 
@@ -171,11 +174,11 @@ public class AdminController implements Initializable {
                     throw new RuntimeException(e);
                 }
 
-                companyLists.add(NewBuslist);
+                companyLists.add(NewCompanyList);
                 companyInfoShow.setText("Company Information Added successfully!");
 
                 HashSet<CompanyList> newOne = new HashSet<>();
-                newOne.add(NewBuslist);
+                newOne.add(NewCompanyList);
                 busFileHandler.updateInFile(file, newOne);
 
 
@@ -183,8 +186,8 @@ public class AdminController implements Initializable {
 
 
                 StringBuilder stringBuilder = new StringBuilder();
-                for (CompanyList busList : companyLists) {
-                    stringBuilder.append(busList.toString());
+                for (CompanyList CompanyList : companyLists) {
+                    stringBuilder.append(CompanyList.toString());
                     stringBuilder.append("\n");
 
                 }
@@ -195,7 +198,8 @@ public class AdminController implements Initializable {
 
     @FXML
     public void addNewBus(){
-
+        addTheCompany.setVisible(false);
+        addNewBus.setVisible(true);
         BusInformation busInformation=new BusInformation(busPlateNumber.getText(),driverName.getText(),driverLicense.getText(),Integer.parseInt(phoneNumber.getText()),seatCapacity.getText());
     }
 
@@ -217,8 +221,21 @@ public class AdminController implements Initializable {
     @FXML
     public void addNewService(){
 
-        companyPane.setPrefWidth( 300);
+        companyPane.setPrefWidth( 270);
 
+        BusCompanies.setLayoutX(75);
+        BusCompanies.setLayoutY(35);
+
+        AddService.setLayoutX(144);
+        AddService.setLayoutY(644);
+
+        companylistPane.setLayoutX(43);
+        companylistPane.setLayoutY(77);
+
+        addTheCompany.setVisible(true);
+        busInfo.setVisible(true);
+
+        addNewBus.setVisible(false);
     }
 
 

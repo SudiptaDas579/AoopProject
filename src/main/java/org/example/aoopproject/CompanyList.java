@@ -11,22 +11,22 @@ public class CompanyList implements Serializable {
     private HashMap<Integer,String> fareList;
     private HashSet<BusInformation> busInfo;
 
-    public CompanyList(String busName, HashMap<Integer, String> busStopages, HashMap<Integer, String> fareList, HashSet<BusInformation> busInfo) {
-        this.companyName = busName;
+    public CompanyList(String CompanyName, HashMap<Integer, String> busStopages, HashMap<Integer, String> fareList, HashSet<BusInformation> busInfo) {
+        this.companyName = CompanyName;
         this.busStopages = busStopages;
         this.fareList = fareList;
         this.busInfo = busInfo;
     }
 
-    public CompanyList(String busName, HashMap<Integer, String> busStopages, HashMap<Integer, String> fareList) {
-        this.companyName = busName;
+    public CompanyList(String CompanyName, HashMap<Integer, String> busStopages, HashMap<Integer, String> fareList) {
+        this.companyName = CompanyName;
         this.busStopages = busStopages;
         this.fareList = fareList;
     }
 
     @Override
     public String toString() {
-        return "BusList{" +
+        return "CompanyList{" +
                 "CompanyName=" + companyName + '\'' +
                 ", busStopages=" + busStopages +
                 ", fareList=" + fareList +
@@ -38,8 +38,8 @@ public class CompanyList implements Serializable {
         return companyName;
     }
 
-    public void setCompanyName(String busName) {
-        this.companyName = busName;
+    public void setCompanyName(String CompanyName) {
+        this.companyName = CompanyName;
     }
 
     public HashMap<Integer, String> getBusStopages() {
@@ -69,8 +69,8 @@ public class CompanyList implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        CompanyList busList = (CompanyList) o;
-        return Objects.equals(companyName, busList.companyName) && Objects.equals(busStopages, busList.busStopages);
+        CompanyList CompanyList = (CompanyList) o;
+        return Objects.equals(companyName, CompanyList.companyName) && Objects.equals(busStopages, CompanyList.busStopages);
     }
 
     @Override
