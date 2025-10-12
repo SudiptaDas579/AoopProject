@@ -18,59 +18,95 @@
             <Image url="@../../../pictures/Company.png" />
          </image>
       </ImageView>
-      <Pane layoutX="6.0" layoutY="8.0" prefHeight="700.0" prefWidth="240.0" styleClass="translucent-pane" stylesheets="@Admin.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Pane layoutX="6.0" layoutY="7.2" prefHeight="684.0" prefWidth="240.0" styleClass="translucent-pane" stylesheets="@Admin.css" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="7.0">
          <children>
-            <Button layoutX="2.0" layoutY="227.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="220.0" styleClass="translucent-pane" stylesheets="@button.css" text="list of the bus company" />
-            <TextArea fx:id="goooo" layoutX="21.0" layoutY="319.0" prefHeight="273.0" prefWidth="167.0" />
+            <Button layoutX="10.0" layoutY="231.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="220.0" styleClass="translucent-pane" stylesheets="@button.css" text="list of the bus company" />
          </children></Pane>
-      <Pane fx:id="busInfo" layoutX="543.0" layoutY="31.0" prefHeight="214.0" prefWidth="315.0" styleClass="translucent-pane" stylesheets="@Admin.css" visible="false">
+      <Pane fx:id="busInfo" layoutX="572.0" layoutY="11.0" prefHeight="254.0" prefWidth="315.0" styleClass="translucent-pane" stylesheets="@Admin.css" visible="false">
          <children>
-            <Label layoutX="78.0" layoutY="22.0" styleClass="button" stylesheets="@button.css" text="Bus Informations:" textFill="#b1c910" />
+            <Label layoutX="120.0" layoutY="14.0" styleClass="button" stylesheets="@button.css" text="Bus Informations:" textFill="#b1c910" />
             <Label layoutX="63.0" layoutY="83.0" text="Bus number:1(name plate)" textFill="#d3e412" />
             <Label layoutX="63.0" layoutY="112.0" text="Driver Name:  A" textFill="#cdd71c" />
             <Label layoutX="63.0" layoutY="144.0" text="PhoneNumber : 123456" textFill="#eefa18" />
-            <Button layoutX="213.0" layoutY="178.0" mnemonicParsing="false" onAction="#addNewBus" text="Add New Bus" />
+            <Button layoutX="213.0" layoutY="215.0" mnemonicParsing="false" onAction="#addNewBus" text="Add New Bus" />
+            <TextArea fx:id="goooo" layoutX="27.0" layoutY="59.0" prefHeight="148.0" prefWidth="262.0" />
          </children>
       </Pane>
-      <Pane fx:id="addTheCompany" layoutX="513.0" layoutY="268.0" prefHeight="398.0" prefWidth="374.0" styleClass="translucent-pane" stylesheets="@Admin.css" visible="false">
+      <Pane fx:id="addTheCompany" layoutX="572.0" layoutY="281.0" prefHeight="409.0" prefWidth="315.0" styleClass="translucent-pane" stylesheets="@Admin.css" visible="false">
          <children>
-            <Label layoutX="107.0" layoutY="23.0" styleClass="button" stylesheets="@button.css" text="On Add New Service" textFill="#d0e41f" />
-            <TextField fx:id="EnterCompanyName" layoutX="154.0" layoutY="79.0" />
-            <TextField fx:id="BusStopages" alignment="CENTER" layoutX="154.0" layoutY="131.0" promptText="Jamuna,NotunBazar" />
-            <TextField fx:id="EnterFareLists" layoutX="154.0" layoutY="187.0" />
-            <Label layoutX="31.0" layoutY="83.0" text="Enter company Name:" textFill="#c7d923" />
-            <Label layoutX="62.0" layoutY="135.0" text="Bus Stopeges :" textFill="#d9ef0f" />
-            <Label layoutX="45.0" layoutY="191.0" text="Enter the Fairlist:" textFill="#d6ec12" />
-            <Button layoutX="245.0" layoutY="346.0" mnemonicParsing="false" onAction="#addTheCompany" text="Add The Company" />
-            <Label fx:id="companyInfoShow" layoutX="90.0" layoutY="268.0" prefHeight="17.0" prefWidth="0.0" textFill="#dcd62b" />
+            <Label layoutX="95.0" layoutY="21.0" styleClass="button" stylesheets="@button.css" text="On Add New Service" textFill="#d0e41f" />
+            <TextField fx:id="EnterCompanyName" layoutX="145.0" layoutY="78.0" />
+            <TextField fx:id="BusStopages" alignment="CENTER" layoutX="145.0" layoutY="130.0" promptText="Jamuna,NotunBazar" />
+            <TextField fx:id="EnterFareLists" layoutX="145.0" layoutY="186.0" />
+            <Label layoutX="22.0" layoutY="82.0" text="Enter company Name:" textFill="#c7d923" />
+            <Label layoutX="53.0" layoutY="134.0" text="Bus Stopeges :" textFill="#d9ef0f" />
+            <Label layoutX="36.0" layoutY="190.0" text="Enter the Fairlist:" textFill="#d6ec12" />
+            <Button layoutX="186.0" layoutY="345.0" mnemonicParsing="false" onAction="#addTheCompany" text="Add The Company" />
+            <Label fx:id="companyInfoShow" layoutX="81.0" layoutY="267.0" prefHeight="17.0" prefWidth="0.0" textFill="#dcd62b" />
          </children>
       </Pane>
-      <AnchorPane fx:id="companyPane" layoutX="286.0" layoutY="40.8" prefHeight="636.0" prefWidth="432.0" styleClass="translucent-pane" stylesheets="@Admin.css" AnchorPane.topAnchor="13.0">
+      <Pane fx:id="companyPane" layoutX="264.0" layoutY="8.0" prefHeight="684.0" prefWidth="614.0" styleClass="translucent-pane" stylesheets="@Admin.css" AnchorPane.bottomAnchor="8.0" AnchorPane.topAnchor="8.0">
          <children>
-            <Button layoutX="291.0" layoutY="625.0" mnemonicParsing="false" onAction="#addNewService" prefHeight="35.0" prefWidth="126.0" text="Add New Service" AnchorPane.rightAnchor="14.600000000000023" />
-            <Label layoutX="198.0" layoutY="51.0" text="Bus Companys" textFill="#eb1a29" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="30.0">
+            <Button fx:id="AddService" layoutX="474.0" layoutY="635.0" mnemonicParsing="false" onAction="#addNewService" prefHeight="35.0" prefWidth="126.0" text="Add New Service" AnchorPane.rightAnchor="14.399999999999977" />
+            <Label fx:id="BusCompanies" layoutX="226.0" layoutY="27.0" text="Bus Companies" textFill="#eb1a29" AnchorPane.rightAnchor="226.25937499999998" AnchorPane.topAnchor="27.0">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <VBox fx:id="companylistPane" layoutX="153.0" layoutY="99.0" prefHeight="538.0" prefWidth="207.0" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="100.0" />
+            <VBox fx:id="companylistPane" layoutX="226.0" layoutY="79.0" prefHeight="492.0" prefWidth="207.0" AnchorPane.rightAnchor="181.39999999999998" AnchorPane.topAnchor="79.0" />
          </children>
-      </AnchorPane>
-      <Pane fx:id="addNewBus" layoutX="530.0" layoutY="268.0" prefHeight="370.0" prefWidth="341.0" styleClass="translucent-pane" stylesheets="@Admin.css" visible="false">
+      </Pane>
+      <Pane fx:id="addNewBus" layoutX="572.0" layoutY="281.0" prefHeight="410.0" prefWidth="315.0" styleClass="translucent-pane" stylesheets="@Admin.css" visible="false">
          <children>
-            <Label layoutX="109.0" layoutY="34.0" text="Add New Bus Information" textFill="#dbef23" />
-            <Label layoutX="48.0" layoutY="79.0" text="Bus Plate  Number ;" textFill="#bed417" />
-            <Label layoutX="55.0" layoutY="108.0" text="Driver Name :" textFill="#ddef17" />
-            <Label layoutX="55.0" layoutY="142.0" text="Driver licence :" textFill="#ddef17" />
-            <Label layoutX="48.0" layoutY="170.0" text="Phone Number :" textFill="#ddef17" />
-            <Label layoutX="55.0" layoutY="210.0" text="Seat capacity :" textFill="#ddef17" />
-            <TextField fx:id="busPlateNumber" layoutX="162.0" layoutY="75.0" />
-            <TextField fx:id="driverName" layoutX="162.0" layoutY="104.0" />
-            <TextField fx:id="driverLicense" layoutX="162.0" layoutY="138.0" />
-            <TextField fx:id="phoneNumber" layoutX="162.0" layoutY="166.0" />
-            <TextField fx:id="seatCapacity" layoutX="162.0" layoutY="198.0" promptText="0/45" />
-            <Button layoutX="210.0" layoutY="316.0" mnemonicParsing="false" text="Add The New Bus" />
-            <Label fx:id="busInfoShow" layoutX="100.0" layoutY="280.0" />
+            <Label layoutX="78.0" layoutY="46.0" text="Add New Bus Information" textFill="#dbef23">
+               <font>
+                  <Font size="14.0" />
+               </font></Label>
+            <Label layoutX="14.0" layoutY="102.0" prefHeight="20.0" prefWidth="125.0" text="Bus Plate  Number ;" textFill="#bed417">
+               <font>
+                  <Font size="13.0" />
+               </font></Label>
+            <Label layoutX="21.0" layoutY="131.0" text="Driver Name :" textFill="#ddef17">
+               <font>
+                  <Font size="13.0" />
+               </font></Label>
+            <Label layoutX="21.0" layoutY="165.0" text="Driver licence :" textFill="#ddef17">
+               <font>
+                  <Font size="13.0" />
+               </font></Label>
+            <Label layoutX="16.0" layoutY="196.0" text="Phone Number :" textFill="#ddef17">
+               <font>
+                  <Font size="13.0" />
+               </font></Label>
+            <Label layoutX="21.0" layoutY="233.0" text="Seat capacity :" textFill="#ddef17">
+               <font>
+                  <Font size="13.0" />
+               </font></Label>
+            <TextField fx:id="busPlateNumber" layoutX="128.0" layoutY="98.0">
+               <font>
+                  <Font size="13.0" />
+               </font></TextField>
+            <TextField fx:id="driverName" layoutX="128.0" layoutY="127.0">
+               <font>
+                  <Font size="13.0" />
+               </font></TextField>
+            <TextField fx:id="driverLicense" layoutX="127.0" layoutY="161.0">
+               <font>
+                  <Font size="13.0" />
+               </font></TextField>
+            <TextField fx:id="phoneNumber" layoutX="127.0" layoutY="192.0">
+               <font>
+                  <Font size="13.0" />
+               </font></TextField>
+            <TextField fx:id="seatCapacity" layoutX="128.0" layoutY="229.0" promptText="0/45">
+               <font>
+                  <Font size="13.0" />
+               </font></TextField>
+            <Button layoutX="179.0" layoutY="361.0" mnemonicParsing="false" text="Add The New Bus" />
+            <Label fx:id="busInfoShow" layoutX="88.0" layoutY="305.0">
+               <font>
+                  <Font size="13.0" />
+               </font></Label>
          </children>
       </Pane>
    </children>

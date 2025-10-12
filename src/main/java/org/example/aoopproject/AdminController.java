@@ -221,16 +221,16 @@ public class AdminController implements Initializable {
     @FXML
     public void addNewService(){
 
-        companyPane.setPrefWidth( 270);
+        companyPane.setPrefWidth( 285);
 
-        BusCompanies.setLayoutX(75);
-        BusCompanies.setLayoutY(35);
+        BusCompanies.setLayoutX(61);
+        BusCompanies.setLayoutY(25);
 
-        AddService.setLayoutX(144);
-        AddService.setLayoutY(644);
+        AddService.setLayoutX(143);
+        AddService.setLayoutY(629);
 
-        companylistPane.setLayoutX(43);
-        companylistPane.setLayoutY(77);
+        companylistPane.setLayoutX(60);
+        companylistPane.setLayoutY(84);
 
         addTheCompany.setVisible(true);
         busInfo.setVisible(true);
