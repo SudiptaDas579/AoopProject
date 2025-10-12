@@ -8,14 +8,10 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
+import java.io.*;
+import java.net.*;
+import java.util.*;
+import java.util.concurrent.*;
 import java.util.function.Consumer;
 
 public class ChatServer extends Application {
@@ -85,7 +81,7 @@ public class ChatServer extends Application {
 
     private void openChatWindow(ClientHandler handler) {
         Stage chatStage = new Stage();
-        chatStage.setTitle("Chat - " + handler.getClientIP());
+        chatStage.setTitle("User");
         chatStage.setX(200 + connectedClients.size() * 30);
         chatStage.setY(150 + connectedClients.size() * 30);
 

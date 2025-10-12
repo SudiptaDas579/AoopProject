@@ -14,10 +14,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -157,10 +154,10 @@ public class HomepageController {
 
 
 
+
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    private static final String IP = "10.15.62.49";
+    private static final String IP = "localhost";
     private static final int PORT = 5000;
-//        private static boolean serverRunning = false;
 
     @FXML
     public void handleEmergency() {
@@ -227,13 +224,7 @@ public class HomepageController {
     }
 
     private void startChat() {
-//            if (!serverRunning) {
-//                new Thread(new ChatServer(PORT)).start();
-//                serverRunning = true;
-//            }
-
-        int position = 580;
-        openChat("User", position);
+        openChat("User", 580);
     }
 
     private void openAreYouSureWindow() {
@@ -304,29 +295,9 @@ public class HomepageController {
                 socket.close();
             } catch (IOException e) {
                 javafx.application.Platform.runLater(() ->
-                        chatArea.appendText("Unable to connect to Admin Server.\n"));
+                        chatArea.appendText("Unable to connect Server.\n"));
             }
         }).start();
     }
 
-
-
-//    public class ChatServer implements Runnable {
-//        private final int port;
-//        private final Set<Socket> clients = Collections.synchronizedSet(new HashSet<>());
-//
-//        public ChatServer(int port) {
-//            this.port = port;
-//        }
-//
-//        @Override
-//        public void run() {
-//            System.out.println("Chat client running; waiting for admin server...");
-//        }
-//    }
-
-
-
-
 }
-
