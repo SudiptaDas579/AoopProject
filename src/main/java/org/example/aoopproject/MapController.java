@@ -18,7 +18,7 @@ public class MapController implements Initializable {
         WebEngine webEngine = webView.getEngine();
         webEngine.setJavaScriptEnabled(true);
 
-        String mapUrl = getClass().getResource("/org/example/aoopproject/map.html").toExternalForm();
+        String mapUrl = getClass().getResource("/org/example/aoopproject/Map.html").toExternalForm();
         webEngine.load(mapUrl);
         System.out.println("Map loaded with directions + autocomplete features.");
     }
