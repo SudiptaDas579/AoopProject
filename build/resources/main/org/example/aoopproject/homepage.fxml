@@ -20,7 +20,8 @@
             <Image url="@../../../pictures/HomePageOrange.png" />
          </image>
       </ImageView>
-        <VBox fx:id="weatherVBox" alignment="CENTER" layoutX="746.0" layoutY="102.0" prefHeight="129.0" prefWidth="100.0" styleClass="translucent-pane" stylesheets="@Admin.css">
+      <Pane fx:id="sceneView" layoutX="263.0" prefHeight="700.0" prefWidth="637.0" />
+        <VBox fx:id="weatherVBox" alignment="CENTER" layoutX="775.0" layoutY="131.0" prefHeight="129.0" prefWidth="100.0" styleClass="translucent-pane" stylesheets="@Admin.css">
             <children>
                 <Label fx:id="cityLabel" text="City" />
                 <Label fx:id="tempLabel" text="29°C" />
@@ -28,7 +29,7 @@
                 <Label fx:id="typeLabel" text="Cloudy" />
             </children>
         </VBox>
-      <Pane layoutX="246.0" layoutY="306.0" prefHeight="298.0" prefWidth="600.0" styleClass="translucent-pane" stylesheets="@Admin.css">
+      <Pane layoutX="286.0" layoutY="320.0" prefHeight="298.0" prefWidth="600.0" styleClass="translucent-pane" stylesheets="@Admin.css">
          <children>
               <VBox layoutX="18.0" layoutY="38.0" prefHeight="246.0" prefWidth="563.0">
                   <children>
@@ -65,6 +66,12 @@
                       </GridPane>
                   </children>
               </VBox>
+         </children>
+      </Pane>
+      <Pane prefHeight="700.0" prefWidth="263.0" styleClass="translucent-pane" stylesheets="@Admin.css">
+         <children>
+            <Button layoutY="204.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="263.0" styleClass="frosted-button" stylesheets="@button.css" text="Home Page" />
+            <Button layoutY="264.0" mnemonicParsing="false" onAction="#newsBtn" prefHeight="48.0" prefWidth="263.0" styleClass="frosted-button" stylesheets="@button.css" text="News Portal" />
          </children>
       </Pane>
     </children>
