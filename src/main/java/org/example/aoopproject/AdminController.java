@@ -3,7 +3,6 @@ package org.example.aoopproject;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
@@ -192,8 +191,10 @@ public class AdminController implements Initializable {
 
                 }
                 goooo.setText(stringBuilder.toString());
+
             }
 
+            CompanyButton();
         }
 
     @FXML
@@ -206,12 +207,15 @@ public class AdminController implements Initializable {
 
     public void CompanyButton(){
 
+
+        companylistPane.getChildren().clear();
+
         for (CompanyList companyList : companyLists) {
 
             String CompanyName= companyList.getCompanyName();
             Button button=new Button(CompanyName);
             button.setPrefWidth(150);
-            button.setPrefHeight(150);
+            button.setPrefHeight(60);
             companylistPane.getChildren().add(button);
 
         }

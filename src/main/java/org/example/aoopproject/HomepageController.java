@@ -7,6 +7,7 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -42,6 +43,8 @@ public class HomepageController {
     @FXML private ImageView weatherImg;
     @FXML public Pane sceneView;
 
+    public Stage stage;
+    public Scene scene;
 
 
     private YearMonth currentMonth;
@@ -298,6 +301,48 @@ public class HomepageController {
                         chatArea.appendText("Unable to connect Server.\n"));
             }
         }).start();
+
+
+    }
+
+    @FXML
+    public void homePageSwitch(ActionEvent event) throws IOException {
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("homepage.fxml"));
+        stage =(Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(fxmlLoader.load());
+        stage.setScene(scene);
+
+    }
+
+
+    @FXML
+    public void newsPortalSwitch(ActionEvent event) throws IOException {
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("homepage.fxml"));
+        stage =(Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(fxmlLoader.load());
+        stage.setScene(scene);
+
+    }
+
+    @FXML
+    public void mapSwitch(ActionEvent event) throws IOException {
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MapView.fxml"));
+        stage =(Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(fxmlLoader.load());
+        stage.setScene(scene);
+
+    }
+    @FXML
+    public void eventHolidaySwitch(ActionEvent event) throws IOException {
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("homepage.fxml"));
+        stage =(Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(fxmlLoader.load());
+        stage.setScene(scene);
+
     }
 
 }
