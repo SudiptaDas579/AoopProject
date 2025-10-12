@@ -20,7 +20,10 @@
             <Image url="@../../../pictures/HomePageOrange.png" />
          </image>
       </ImageView>
-      <Pane fx:id="sceneView" layoutX="263.0" prefHeight="700.0" prefWidth="637.0" />
+      <Pane fx:id="sceneView" layoutX="263.0" prefHeight="700.0" prefWidth="637.0">
+         <children>
+            <Button layoutX="552.0" layoutY="641.0" mnemonicParsing="false" onAction="#handleEmergency" text="Emergency" />
+         </children></Pane>
         <VBox fx:id="weatherVBox" alignment="CENTER" layoutX="775.0" layoutY="131.0" prefHeight="129.0" prefWidth="100.0" styleClass="translucent-pane" stylesheets="@Admin.css">
             <children>
                 <Label fx:id="cityLabel" text="City" />
@@ -70,8 +73,12 @@
       </Pane>
       <Pane prefHeight="700.0" prefWidth="263.0" styleClass="translucent-pane" stylesheets="@Admin.css">
          <children>
-            <Button layoutY="204.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="263.0" styleClass="frosted-button" stylesheets="@button.css" text="Home Page" />
+            <Button layoutY="204.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="263.0" styleClass="frosted-button" stylesheets="@button.css" text="Home page" />
             <Button layoutY="264.0" mnemonicParsing="false" onAction="#newsBtn" prefHeight="48.0" prefWidth="263.0" styleClass="frosted-button" stylesheets="@button.css" text="News Portal" />
+            <Button layoutY="326.0" mnemonicParsing="false" onAction="#newsBtn" prefHeight="48.0" prefWidth="263.0" styleClass="frosted-button" stylesheets="@button.css" text="Map" />
+            <Button layoutY="392.0" mnemonicParsing="false" onAction="#newsBtn" prefHeight="48.0" prefWidth="263.0" styleClass="frosted-button" stylesheets="@button.css" text="News Portal" />
+            <Button layoutY="456.0" mnemonicParsing="false" onAction="#newsBtn" prefHeight="48.0" prefWidth="263.0" styleClass="frosted-button" stylesheets="@button.css" text="Event &amp; Holidays" />
+            <Button layoutY="522.0" mnemonicParsing="false" onAction="#newsBtn" prefHeight="48.0" prefWidth="263.0" styleClass="frosted-button" stylesheets="@button.css" text="News Portal" />
          </children>
       </Pane>
     </children>

@@ -1,43 +1,36 @@
-/* Frosted Gold Glass Button on Pane */
-.frosted-button {
-    -fx-background-color:
-            linear-gradient(
-                    to bottom right,
-                    rgba(255, 245, 200, 0.6),  /* slightly brighter than pane */
-                    rgba(255, 210, 130, 0.5)
-            );
-    -fx-background-radius: 14;
-    -fx-border-radius: 14;
-
-    /* Slightly stronger border for visibility */
-    -fx-border-color: rgba(255, 220, 140, 0.7);
-    -fx-border-width: 2;
-    -fx-border-style: solid;
-
-    -fx-text-fill: #3e1f00; /* darker brown for strong contrast */
+.button {
+    -fx-background-color: linear-gradient(
+            to bottom right,
+            rgba(255, 255, 255, 0.56),   /* soft bright white top */ rgba(248, 172, 57, 0.79) /* your specified semi-transparent orange */
+    );
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-border-color: rgba(237, 179, 95, 0.82); /* warm golden border */
+    -fx-border-width: 1.5;
+    -fx-text-fill: rgba(255, 255, 255, 0.49);
     -fx-font-size: 14px;
     -fx-font-weight: bold;
-    -fx-padding: 10 22 10 22;
-
-    /* Inner shine + outer glow for depth */
-    -fx-effect:
-            innershadow(gaussian, rgba(255, 250, 210, 0.25), 10, 0.5, 0, 0),
-            dropshadow(gaussian, rgba(255, 220, 130, 0.35), 12, 0.5, 0, 2);
-
+    -fx-padding: 10 20 10 20;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.25), 5, 0, 0, 3);
     -fx-cursor: hand;
     -fx-transition: all 0.3s ease-in-out;
 }
 
-/* Hover: brighter and more visible */
-.frosted-button:hover {
-    -fx-background-color:
-            linear-gradient(
-                    to bottom right,
-                    rgba(255, 255, 220, 0.75),  /* brighter highlight */
-                    rgba(255, 230, 150, 0.6)
-            );
-    -fx-effect:
-            innershadow(gaussian, rgba(255, 255, 230, 0.3), 12, 0.6, 0, 0),
-            dropshadow(gaussian, rgba(255, 230, 150, 0.45), 14, 0.6, 0, 3);
-    -fx-border-color: rgba(255, 240, 170, 0.8);
+.button:hover {
+    -fx-background-color: linear-gradient(
+            to bottom right,
+            rgba(255, 255, 255, 0.52),
+            rgba(255, 190, 90, 0.71) /* slightly brighter version of your shade */
+    );
+    -fx-border-color: rgba(255, 210, 140, 0.85);
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.35), 10, 0, 0, 4);
+}
+
+.button:pressed {
+    -fx-background-color: linear-gradient(
+            to bottom right,
+            rgba(255, 225, 170, 0.92),   /* pale golden top */ rgba(255, 170, 70, 0.84) /* deeper tone of your shade */
+    );
+    -fx-border-color: rgba(255, 180, 90, 0.82);
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.4), 6, 0, 0, 2);
 }
