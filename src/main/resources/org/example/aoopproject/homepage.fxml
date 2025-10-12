@@ -20,7 +20,14 @@
             <Image url="@../../../pictures/HomePageOrange.png" />
          </image>
       </ImageView>
-      <Pane fx:id="sceneView" layoutX="263.0" prefHeight="700.0" prefWidth="637.0" />
+      <Pane fx:id="sceneView" layoutX="263.0" prefHeight="700.0" prefWidth="637.0">
+         <children>
+            <Button layoutX="509.0" layoutY="647.0" mnemonicParsing="false" onAction="#handleEmergency" prefHeight="39.0" prefWidth="85.0" text="Jani Na">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+         </children></Pane>
         <VBox fx:id="weatherVBox" alignment="CENTER" layoutX="775.0" layoutY="131.0" prefHeight="129.0" prefWidth="100.0" styleClass="translucent-pane" stylesheets="@Admin.css">
             <children>
                 <Label fx:id="cityLabel" text="City" />
