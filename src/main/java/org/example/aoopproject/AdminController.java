@@ -28,7 +28,7 @@ public class AdminController implements Initializable {
     @FXML
     public Pane addNewBus;
     public Pane busInfo;
-    public Pane addTheCompany;
+    public Pane addingTheCompany;
     public VBox companylistPane;
     public Pane companyPane;
 
@@ -44,11 +44,12 @@ public class AdminController implements Initializable {
     public Label BusCompanies;
     public Label busInfoShow;
     public Button AddService;
+    public Button addNewInformation;
 
 
 
     public HashSet<CompanyList> companyLists=new HashSet<CompanyList>();
-
+    public HashSet<BusInformation> busInformations=new HashSet<BusInformation>();
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
 
     private ListView<String> suggestionListView;
@@ -163,7 +164,7 @@ public class AdminController implements Initializable {
                 fare.put(i, fareList[i]);
             }
 
-            CompanyList NewCompanyList = new CompanyList(EnterCompanyName.getText(), stopage, fare, null);
+            CompanyList NewCompanyList = new CompanyList(EnterCompanyName.getText(), stopage, fare,busInformations );
 
             File file = new File("src/main/java/org/example/aoopproject/files/CompanyList.txt");
 
@@ -184,17 +185,6 @@ public class AdminController implements Initializable {
             busFileHandler.updateInFile(file, newOne);
 
 
-            System.out.println(companyLists);
-
-
-            StringBuilder stringBuilder = new StringBuilder();
-            for (CompanyList CompanyList : companyLists) {
-                stringBuilder.append(CompanyList.toString());
-                stringBuilder.append("\n");
-
-            }
-            goooo.setText(stringBuilder.toString());
-
         }
 
         CompanyButton();
@@ -202,27 +192,14 @@ public class AdminController implements Initializable {
 
     @FXML
     public void addNewBus(){
-        addTheCompany.setVisible(false);
+        addingTheCompany.setVisible(false);
         addNewBus.setVisible(true);
 
-        if (busPlateNumber.getText().isEmpty() || BusStopages.getText().isEmpty() || EnterFareLists.getText().isEmpty()) {
-
-            busInfoShow.setText("Please fill all the fields");
-
-        }
-        else{
-
-            BusInformation busInformation=new BusInformation(busPlateNumber.getText(),driverName.getText(),driverLicense.getText(),Integer.parseInt(phoneNumber.getText()),seatCapacity.getText());
-            for (CompanyList CompanyList : companyLists) {
-                if (CompanyList.equals(SelectedCompany))
-                {
-                    CompanyList.getBusInfo().add(busInformation);
-                    goooo.setText(goooo.getText()+busInformation.toString());
+        busInfo.setPrefHeight(254);
+        addNewInformation.setLayoutY(215);
+        goooo.setPrefHeight(148);
 
 
-                }
-            }
-        }
     }
 
 
@@ -259,8 +236,11 @@ public class AdminController implements Initializable {
         companylistPane.setLayoutX(60);
         companylistPane.setLayoutY(84);
 
-        addTheCompany.setVisible(true);
+        addingTheCompany.setVisible(true);
         busInfo.setVisible(true);
+        busInfo.setPrefHeight(254);
+        addNewInformation.setLayoutY(215);
+        goooo.setPrefHeight(148);
 
         addNewBus.setVisible(false);
     }
@@ -278,10 +258,14 @@ public class AdminController implements Initializable {
         companylistPane.setLayoutX(60);
         companylistPane.setLayoutY(84);
 
-        addTheCompany.setVisible(false);
+        addingTheCompany.setVisible(false);
         busInfo.setVisible(true);
 
-        addNewBus.setVisible(true);
+        addNewBus.setVisible(false);
+
+        busInfo.setPrefHeight(684);
+        addNewInformation.setLayoutY(645);
+        goooo.setPrefHeight(572);
 
         Button companyButton =((Button) e.getSource());
 
@@ -291,13 +275,76 @@ public class AdminController implements Initializable {
 
 
             if(companyButton.getText().equals(CompanyName)){
-                goooo.setText(String.valueOf(companyList.getBusInfo()));
                 SelectedCompany=companyList;
+                goooo.setText(SelectedCompany.getCompanyName()+"\n"+companyList.toString());
 
             }
         }
 
     }
+    public void addTheNewBus(){
+
+        companyPane.setPrefWidth( 285);
+
+        BusCompanies.setLayoutX(61);
+        BusCompanies.setLayoutY(25);
+
+        AddService.setLayoutX(143);
+        AddService.setLayoutY(629);
+
+        companylistPane.setLayoutX(60);
+        companylistPane.setLayoutY(84);
+
+        addingTheCompany.setVisible(false);
+        busInfo.setVisible(true);
+        busInfo.setPrefHeight(254);
+        addNewInformation.setLayoutY(215);
+        goooo.setPrefHeight(148);
+
+        addNewBus.setVisible(true);
+
+        if (busPlateNumber.getText().isEmpty() ||driverName.getText().isEmpty() || driverLicense.getText().isEmpty()|| phoneNumber.getText().isEmpty()|| seatCapacity.getText().isEmpty()) {
+
+            busInfoShow.setText("Please fill all the fields");
+
+        }
+        else{
+
+            BusInformation busInformation=new BusInformation(busPlateNumber.getText(),driverName.getText(),driverLicense.getText(),Integer.parseInt(phoneNumber.getText()),seatCapacity.getText());
+            for (CompanyList CompanyList : companyLists) {
+                if (CompanyList.equals(SelectedCompany))
+
+                {
+                    System.out.println("fuuuuuu");
+
+                    CompanyList.getBusInfo().add(busInformation);
+                    goooo.setText(CompanyList.toString());
+                    busInfoShow.setText("Bus Information Added successfully!");
+
+                    //SelectedCompany=CompanyList;
+
+
+                }
+            }
+            File file = new File("src/main/java/org/example/aoopproject/files/CompanyList.txt");
+
+
+            BusFileHandler busFileHandler = new BusFileHandler();
+            busFileHandler.start();
+            try {
+                busFileHandler.join();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+
+
+
+            busFileHandler.updateInFile(file,companyLists);
+
+        }
+
+    }
+
 
 
 }

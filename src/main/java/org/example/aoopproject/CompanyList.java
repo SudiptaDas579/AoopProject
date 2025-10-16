@@ -15,23 +15,35 @@ public class CompanyList implements Serializable {
         this.companyName = CompanyName;
         this.busStopages = busStopages;
         this.fareList = fareList;
-        this.busInfo = busInfo;
+        this.busInfo = (busInfo != null) ? busInfo : new HashSet<>();
     }
 
-    public CompanyList(String CompanyName, HashMap<Integer, String> busStopages, HashMap<Integer, String> fareList) {
-        this.companyName = CompanyName;
-        this.busStopages = busStopages;
-        this.fareList = fareList;
+    public String busStoppageName(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("\n");
+        for (String Stppage : busStopages.values()) {
+            sb.append( Stppage +" - ");
+        }
+        sb.delete(sb.length()-3, sb.length());
+        return sb.toString();
+    }
+
+    public String fareListName(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("\n");
+        for (String fare: fareList.values()) {
+            sb.append(fare +" - ");
+        }
+        sb.delete(sb.length()-3, sb.length());
+        return sb.toString();
     }
 
     @Override
     public String toString() {
-        return "CompanyList{" +
-                "CompanyName=" + companyName + '\'' +
-                ", busStopages=" + busStopages +
-                ", fareList=" + fareList +
-                ", busInfo=" + busInfo +
-                '}';
+        return "\n Company Name: " +  companyName+"\n"+
+                "\n Bus Stoppages :" + busStoppageName() +"\n"+
+                "\n FareList :" + fareListName() +"\n"+
+                "\n BusInfo :" + busInfo +"\n";
     }
 
     public String getCompanyName() {

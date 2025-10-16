@@ -72,5 +72,15 @@ public class BusInformation implements Serializable {
     public int hashCode() {
         return Objects.hash(busNo);
     }
+
+    @Override
+    public String toString() {
+        return "BusInformation" +
+                "\n Bus Number : " + busNo  +
+                "\n Driver Name : " + driverName  +
+                "\n Driver License : " + driverLicense  +
+                "\n Driver's Phone Number : " + phoneNumber +
+                "\n Seat Capacity : " + capacity ;
+    }
 }
 
