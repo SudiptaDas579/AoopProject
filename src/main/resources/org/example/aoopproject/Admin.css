@@ -1,61 +1,64 @@
 .translucent-pane {
     -fx-background-color:
+        /* Softer transparency, warm glow */
             linear-gradient(
                     to bottom right,
-                    rgba(255, 245, 210, 0.35),
-                    rgba(255, 200, 120, 0.25)
+                    rgba(255, 245, 210, 0.26),
+                    rgba(255, 180, 80, 0.20)
             ),
+                /* Highlight reflection */
             linear-gradient(
                     to top left,
-                    rgba(255, 255, 255, 0.15),
+                    rgba(255, 255, 255, 0.10),
                     rgba(255, 255, 255, 0)
             );
     -fx-background-radius: 18;
     -fx-border-radius: 18;
 
-    /* Gradient border: soft golden top-left, warm amber bottom-right */
+    /* Deeper, shinier border — rich gold with bright inner light */
     -fx-border-color:
             linear-gradient(
                     to bottom right,
-                    rgba(255, 240, 180, 0.8),
-                    rgba(255, 190, 90, 0.6)
+                    rgba(255, 220, 100, 0.95),
+                    rgba(255, 160, 40, 0.85)
             );
-    -fx-border-width: 2.5;
+    -fx-border-width: 2.8;
     -fx-border-style: solid;
     -fx-padding: 20;
 
-    /* Inner shine + outer golden glow */
+    /* Inner light and outer glow for dimensional shine */
     -fx-effect:
-            innershadow(gaussian, rgba(255, 245, 200, 0.25), 15, 0.5, 0, 0),
-            dropshadow(gaussian, rgba(255, 210, 100, 0.35), 18, 0.6, 0, 5),
-            dropshadow(gaussian, rgba(255, 235, 160, 0.25), 10, 0.4, 0, 0);
+            innershadow(gaussian, rgba(255, 250, 220, 0.2), 14, 0.45, 0, 0),
+            dropshadow(gaussian, rgba(255, 190, 60, 0.55), 22, 0.7, 0, 6),
+            dropshadow(gaussian, rgba(255, 225, 120, 0.3), 10, 0.5, 0, 0);
 
     -fx-transition: all 0.3s ease-in-out;
 }
 
-/* Hover: stronger glow + brighter border tones */
+/* Hover — brighter reflection and glowing gold edge */
 .translucent-pane:hover {
     -fx-background-color:
             linear-gradient(
                     to bottom right,
-                    rgba(255, 250, 225, 0.45),
-                    rgba(255, 220, 140, 0.35)
+                    rgba(255, 250, 225, 0.35),
+                    rgba(255, 170, 60, 0.28)
             ),
             linear-gradient(
                     to top left,
-                    rgba(255, 255, 255, 0.2),
+                    rgba(255, 255, 255, 0.12),
                     rgba(255, 255, 255, 0)
             );
+
+    /* Enhanced border reflection: radiant golden shine */
     -fx-border-color:
             linear-gradient(
                     to bottom right,
-                    rgba(255, 255, 200, 0.9),
-                    rgba(255, 200, 100, 0.7)
+                    rgba(255, 240, 140, 1.0),
+                    rgba(255, 160, 30, 0.9)
             );
 
     -fx-effect:
-            innershadow(gaussian, rgba(255, 250, 210, 0.25), 18, 0.6, 0, 0),
-            dropshadow(gaussian, rgba(255, 220, 130, 0.5), 20, 0.6, 0, 6),
-            dropshadow(gaussian, rgba(255, 240, 160, 0.35), 12, 0.5, 0, 0);
-
+            innershadow(gaussian, rgba(255, 250, 220, 0.25), 18, 0.6, 0, 0),
+            dropshadow(gaussian, rgba(255, 180, 40, 0.65), 25, 0.75, 0, 7),
+            dropshadow(gaussian, rgba(255, 220, 120, 0.4), 12, 0.55, 0, 0);
 }

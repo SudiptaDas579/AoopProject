@@ -1,6 +1,7 @@
 package org.example.aoopproject;
 
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -41,6 +42,7 @@ public class AdminController implements Initializable {
 
     public Label companyInfoShow;
     public Label BusCompanies;
+    public Label busInfoShow;
     public Button AddService;
 
 
@@ -51,10 +53,11 @@ public class AdminController implements Initializable {
 
     private ListView<String> suggestionListView;
 
-
+    public CompanyList SelectedCompany;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
 
         final String apiKey = "AIzaSyCqbKdjkod9FVs371m7I4Vv3B7opV2xfWI";
 
@@ -137,72 +140,91 @@ public class AdminController implements Initializable {
 
 
 
-        @FXML
+    @FXML
     public void addTheCompany() {
 
-            if (EnterCompanyName.getText().isEmpty() || BusStopages.getText().isEmpty() || EnterFareLists.getText().isEmpty()) {
+        if (EnterCompanyName.getText().isEmpty() || BusStopages.getText().isEmpty() || EnterFareLists.getText().isEmpty()) {
 
-                companyInfoShow.setText("Please fill all the fields");
-            }
-            else {
-
-                String[] stopages = BusStopages.getText().split("-");
-
-                String[] fareList = EnterFareLists.getText().split("-");
-
-                HashMap<Integer, String> stopage = new HashMap<>();
-                HashMap<Integer, String> fare = new HashMap<>();
-
-                for (int i = 0; i < stopages.length; i++) {
-                    stopage.put(i, stopages[i]);
-                }
-                for (int i = 0; i < fareList.length; i++) {
-                    fare.put(i, fareList[i]);
-                }
-
-                CompanyList NewCompanyList = new CompanyList(EnterCompanyName.getText(), stopage, fare, null);
-
-                File file = new File("src/main/java/org/example/aoopproject/files/CompanyList.txt");
-
-
-                BusFileHandler busFileHandler = new BusFileHandler();
-                busFileHandler.start();
-                try {
-                    busFileHandler.join();
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-
-                companyLists.add(NewCompanyList);
-                companyInfoShow.setText("Company Information Added successfully!");
-
-                HashSet<CompanyList> newOne = new HashSet<>();
-                newOne.add(NewCompanyList);
-                busFileHandler.updateInFile(file, newOne);
-
-
-                System.out.println(companyLists);
-
-
-                StringBuilder stringBuilder = new StringBuilder();
-                for (CompanyList CompanyList : companyLists) {
-                    stringBuilder.append(CompanyList.toString());
-                    stringBuilder.append("\n");
-
-                }
-                goooo.setText(stringBuilder.toString());
-
-            }
-
-            CompanyButton();
+            companyInfoShow.setText("Please fill all the fields");
         }
+        else {
+
+            String[] stopages = BusStopages.getText().split("-");
+
+            String[] fareList = EnterFareLists.getText().split("-");
+
+            HashMap<Integer, String> stopage = new HashMap<>();
+            HashMap<Integer, String> fare = new HashMap<>();
+
+            for (int i = 0; i < stopages.length; i++) {
+                stopage.put(i, stopages[i]);
+            }
+            for (int i = 0; i < fareList.length; i++) {
+                fare.put(i, fareList[i]);
+            }
+
+            CompanyList NewCompanyList = new CompanyList(EnterCompanyName.getText(), stopage, fare, null);
+
+            File file = new File("src/main/java/org/example/aoopproject/files/CompanyList.txt");
+
+
+            BusFileHandler busFileHandler = new BusFileHandler();
+            busFileHandler.start();
+            try {
+                busFileHandler.join();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+
+            companyLists.add(NewCompanyList);
+            companyInfoShow.setText("Company Information Added successfully!");
+
+            HashSet<CompanyList> newOne = new HashSet<>();
+            newOne.add(NewCompanyList);
+            busFileHandler.updateInFile(file, newOne);
+
+
+            System.out.println(companyLists);
+
+
+            StringBuilder stringBuilder = new StringBuilder();
+            for (CompanyList CompanyList : companyLists) {
+                stringBuilder.append(CompanyList.toString());
+                stringBuilder.append("\n");
+
+            }
+            goooo.setText(stringBuilder.toString());
+
+        }
+
+        CompanyButton();
+    }
 
     @FXML
     public void addNewBus(){
         addTheCompany.setVisible(false);
         addNewBus.setVisible(true);
-        BusInformation busInformation=new BusInformation(busPlateNumber.getText(),driverName.getText(),driverLicense.getText(),Integer.parseInt(phoneNumber.getText()),seatCapacity.getText());
+
+        if (busPlateNumber.getText().isEmpty() || BusStopages.getText().isEmpty() || EnterFareLists.getText().isEmpty()) {
+
+            busInfoShow.setText("Please fill all the fields");
+
+        }
+        else{
+
+            BusInformation busInformation=new BusInformation(busPlateNumber.getText(),driverName.getText(),driverLicense.getText(),Integer.parseInt(phoneNumber.getText()),seatCapacity.getText());
+            for (CompanyList CompanyList : companyLists) {
+                if (CompanyList.equals(SelectedCompany))
+                {
+                    CompanyList.getBusInfo().add(busInformation);
+                    goooo.setText(goooo.getText()+busInformation.toString());
+
+
+                }
+            }
+        }
     }
+
 
 
     public void CompanyButton(){
@@ -216,6 +238,7 @@ public class AdminController implements Initializable {
             Button button=new Button(CompanyName);
             button.setPrefWidth(150);
             button.setPrefHeight(60);
+            button.setOnAction(actionEvent -> selectedCompanyButton(actionEvent));
             companylistPane.getChildren().add(button);
 
         }
@@ -242,6 +265,39 @@ public class AdminController implements Initializable {
         addNewBus.setVisible(false);
     }
 
+    public void selectedCompanyButton(ActionEvent e) {
+
+        companyPane.setPrefWidth( 285);
+
+        BusCompanies.setLayoutX(61);
+        BusCompanies.setLayoutY(25);
+
+        AddService.setLayoutX(143);
+        AddService.setLayoutY(629);
+
+        companylistPane.setLayoutX(60);
+        companylistPane.setLayoutY(84);
+
+        addTheCompany.setVisible(false);
+        busInfo.setVisible(true);
+
+        addNewBus.setVisible(true);
+
+        Button companyButton =((Button) e.getSource());
+
+        for (CompanyList companyList : companyLists) {
+
+            String CompanyName= companyList.getCompanyName();
+
+
+            if(companyButton.getText().equals(CompanyName)){
+                goooo.setText(String.valueOf(companyList.getBusInfo()));
+                SelectedCompany=companyList;
+
+            }
+        }
+
+    }
 
 
 }

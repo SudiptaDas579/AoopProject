@@ -102,7 +102,7 @@
                <font>
                   <Font size="13.0" />
                </font></TextField>
-            <Button layoutX="179.0" layoutY="361.0" mnemonicParsing="false" text="Add The New Bus" />
+            <Button layoutX="179.0" layoutY="361.0" mnemonicParsing="false" onAction="#addNewBus" text="Add The New Bus" />
             <Label fx:id="busInfoShow" layoutX="88.0" layoutY="305.0">
                <font>
                   <Font size="13.0" />
