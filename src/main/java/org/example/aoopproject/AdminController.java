@@ -48,8 +48,8 @@ public class AdminController implements Initializable {
 
 
 
-    public HashSet<CompanyList> companyLists=new HashSet<CompanyList>();
-    public HashSet<BusInformation> busInformations=new HashSet<BusInformation>();
+    public HashSet<CompanyList> companyLists=new HashSet<>();
+    public HashSet<BusInformation> busInformations=new HashSet<>();
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
 
     private ListView<String> suggestionListView;
@@ -165,10 +165,11 @@ public class AdminController implements Initializable {
             }
 
             CompanyList NewCompanyList = new CompanyList(EnterCompanyName.getText(), stopage, fare,busInformations );
+            companyLists.add(NewCompanyList);
+
+            companyInfoShow.setText("Company Information Added successfully!");
 
             File file = new File("src/main/java/org/example/aoopproject/files/CompanyList.txt");
-
-
             BusFileHandler busFileHandler = new BusFileHandler();
             busFileHandler.start();
             try {
@@ -177,17 +178,12 @@ public class AdminController implements Initializable {
                 throw new RuntimeException(e);
             }
 
-            companyLists.add(NewCompanyList);
-            companyInfoShow.setText("Company Information Added successfully!");
+            busFileHandler.updateInFile(file, companyLists);
 
-            HashSet<CompanyList> newOne = new HashSet<>();
-            newOne.add(NewCompanyList);
-            busFileHandler.updateInFile(file, newOne);
+            CompanyButton();
 
 
         }
-
-        CompanyButton();
     }
 
     @FXML
@@ -215,7 +211,7 @@ public class AdminController implements Initializable {
             Button button=new Button(CompanyName);
             button.setPrefWidth(150);
             button.setPrefHeight(60);
-            button.setOnAction(actionEvent -> selectedCompanyButton(actionEvent));
+            button.setOnAction(this::selectedCompanyButton);
             companylistPane.getChildren().add(button);
 
         }
@@ -276,7 +272,7 @@ public class AdminController implements Initializable {
 
             if(companyButton.getText().equals(CompanyName)){
                 SelectedCompany=companyList;
-                goooo.setText(SelectedCompany.getCompanyName()+"\n"+companyList.toString());
+                goooo.setText("\n"+companyList);
 
             }
         }
