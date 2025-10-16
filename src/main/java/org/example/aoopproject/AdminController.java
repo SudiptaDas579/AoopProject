@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.stream.Collectors;
 
 public class AdminController implements Initializable {
 
@@ -65,15 +66,6 @@ public class AdminController implements Initializable {
         File file = new File("src/main/java/org/example/aoopproject/files/CompanyList.txt");
 
         BusFileHandler busFileHandler = new BusFileHandler();
-        busFileHandler.start();
-
-        try {
-            busFileHandler.join();
-        } catch (InterruptedException e) {
-
-            throw new RuntimeException(e);
-        }
-
         companyLists = busFileHandler.getCompanyLists(file);
 
         CompanyButton();
@@ -171,13 +163,6 @@ public class AdminController implements Initializable {
 
             File file = new File("src/main/java/org/example/aoopproject/files/CompanyList.txt");
             BusFileHandler busFileHandler = new BusFileHandler();
-            busFileHandler.start();
-            try {
-                busFileHandler.join();
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-
             busFileHandler.updateInFile(file, companyLists);
 
             CompanyButton();
@@ -314,10 +299,16 @@ public class AdminController implements Initializable {
                     System.out.println("fuuuuuu");
 
                     CompanyList.getBusInfo().add(busInformation);
-                    goooo.setText(CompanyList.toString());
+                    goooo.setText("Company: " + SelectedCompany.getCompanyName() +
+                            "\nStops: " + SelectedCompany.busStoppageName() +
+                            "\nFares: " + SelectedCompany.fareListName() +
+                            "\nBuses:\n" + SelectedCompany.getBusInfo().stream()
+                            .map(BusInformation::toString)
+                            .collect(Collectors.joining("\n\n")));
+
                     busInfoShow.setText("Bus Information Added successfully!");
 
-                    //SelectedCompany=CompanyList;
+
 
 
                 }
@@ -326,14 +317,6 @@ public class AdminController implements Initializable {
 
 
             BusFileHandler busFileHandler = new BusFileHandler();
-            busFileHandler.start();
-            try {
-                busFileHandler.join();
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-
-
 
             busFileHandler.updateInFile(file,companyLists);
 

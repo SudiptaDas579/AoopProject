@@ -3,80 +3,56 @@ package org.example.aoopproject;
 import java.io.*;
 import java.util.HashSet;
 
-public class BusFileHandler extends Thread {
+public class BusFileHandler {
 
-    public HashSet<CompanyList>companyLists= new HashSet <CompanyList>();
+    public HashSet<CompanyList> companyLists = new HashSet<>();
 
-    static class AppendableObjectOutputStream extends ObjectOutputStream {
-        public AppendableObjectOutputStream(OutputStream out) throws IOException {
-            super(out);
-        }
-        @Override
-        protected void writeStreamHeader() throws IOException {
-            reset();
-        }
-    }
+    public HashSet<CompanyList> getCompanyLists(File file) {
+        companyLists.clear();
 
+        try {
+            if (!file.exists()) {
+                file.createNewFile();
+                return companyLists;
+            }
 
-    @Override
-    public void run() {
+            try (FileInputStream fis = new FileInputStream(file);
+                 ObjectInputStream ois = new ObjectInputStream(fis)) {
 
-        File file = new File("src/main/java/org/example/aoopproject/files/CompanyList.txt");
-        companyLists=getCompanyLists(file);
-    }
-
-    public HashSet<CompanyList> getCompanyLists(File file)  {
-
-
-        try{
-
-            FileInputStream fileInputStream=new FileInputStream(file);
-            ObjectInputStream objectInputStream=new ObjectInputStream(fileInputStream);
-
-            while (true) {
-                try {
-                    CompanyList company = (CompanyList) objectInputStream.readObject();
-                    companyLists.add(company);
-                } catch (EOFException e) {
-                    break; // end of file reached
+                while (true) {
+                    try {
+                        CompanyList company = (CompanyList) ois.readObject();
+                        companyLists.add(company);
+                    } catch (EOFException e) {
+                        break;
+                    }
                 }
             }
-        }
-        catch (FileNotFoundException e) {
-            System.out.println("File not found: " + file.getName());
-        }
-        catch (IOException | ClassNotFoundException e) {
+        } catch (IOException | ClassNotFoundException e) {
             System.out.println("Error reading file: " + e.getMessage());
         }
-
 
         return companyLists;
     }
 
-    public synchronized void updateInFile(File file,HashSet <CompanyList>hashSet){
+    public synchronized void updateInFile(File file, HashSet<CompanyList> hashSet) {
         try {
-            FileOutputStream fileOutputStream = new FileOutputStream(file, true);
-            ObjectOutputStream outputStream = file.length() == 0
-                    ? new ObjectOutputStream(fileOutputStream)
-                    : new BusFileHandler.AppendableObjectOutputStream(fileOutputStream);
-
-            for (CompanyList A : hashSet) {
-                outputStream.writeObject(A);
-                System.out.println("Company lists written in file");
-                outputStream.flush();
+            if (!file.exists()) {
+                file.createNewFile();
             }
 
+            try (FileOutputStream fos = new FileOutputStream(file, false);
+                 ObjectOutputStream oos = new ObjectOutputStream(fos)) {
 
-            outputStream.close();
+                for (CompanyList company : hashSet) {
+                    oos.writeObject(company);
+                }
+                oos.flush();
+                System.out.println("Company lists written to file successfully.");
+            }
 
-
-        } catch (FileNotFoundException e) {
-            System.out.println("Error file not found");
         } catch (IOException e) {
-            System.out.println("Error read/writing file");
-
+            System.out.println("Error writing file: " + e.getMessage());
         }
     }
-
-
 }
