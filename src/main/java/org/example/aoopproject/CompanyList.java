@@ -3,7 +3,6 @@ package org.example.aoopproject;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Objects;
 
 public class CompanyList implements Serializable {
     private String companyName;
@@ -80,13 +79,16 @@ public class CompanyList implements Serializable {
 
     @Override
     public boolean equals(Object o) {
+        if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CompanyList CompanyList = (CompanyList) o;
-        return Objects.equals(companyName, CompanyList.companyName) && Objects.equals(busStopages, CompanyList.busStopages);
+        CompanyList that = (CompanyList) o;
+        return companyName != null && that.companyName != null &&
+                companyName.equalsIgnoreCase(that.companyName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(companyName, busStopages);
+        return companyName == null ? 0 : companyName.toLowerCase().hashCode();
     }
+
 }

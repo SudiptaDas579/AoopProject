@@ -1,19 +1,18 @@
 package org.example.aoopproject;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 public class BusInformation implements Serializable {
     private String busNo;
     private String driverName;
     private String driverLicense;
-    private Integer phoneNumber;
+    private String phoneNumber;
     private String capacity;
 
 
 
 
-    public BusInformation(String busNo, String driverName, String driverLicense, Integer phoneNumber, String capacity) {
+    public BusInformation(String busNo, String driverName, String driverLicense, String phoneNumber, String capacity) {
         this.busNo = busNo;
         this.driverName = driverName;
         this.driverLicense = driverLicense;
@@ -45,11 +44,11 @@ public class BusInformation implements Serializable {
         this.driverLicense = driverLicense;
     }
 
-    public Integer getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(Integer phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
@@ -61,17 +60,7 @@ public class BusInformation implements Serializable {
         this.capacity = capacity;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        BusInformation that = (BusInformation) o;
-        return Objects.equals(busNo, that.busNo);
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(busNo);
-    }
 
     @Override
     public String toString() {

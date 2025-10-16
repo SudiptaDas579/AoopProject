@@ -306,7 +306,7 @@ public class AdminController implements Initializable {
         }
         else{
 
-            BusInformation busInformation=new BusInformation(busPlateNumber.getText(),driverName.getText(),driverLicense.getText(),Integer.parseInt(phoneNumber.getText()),seatCapacity.getText());
+            BusInformation busInformation=new BusInformation(busPlateNumber.getText(),driverName.getText(),driverLicense.getText(),phoneNumber.getText(),seatCapacity.getText());
             for (CompanyList CompanyList : companyLists) {
                 if (CompanyList.equals(SelectedCompany))
 
