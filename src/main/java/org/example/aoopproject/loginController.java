@@ -1,6 +1,5 @@
 package org.example.aoopproject;
 
-import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -19,7 +18,6 @@ import java.net.URL;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.ResourceBundle;
-import java.util.Timer;
 
 public class loginController implements Initializable{
     @FXML
@@ -201,7 +199,7 @@ public class loginController implements Initializable{
                         status.setLayoutX(210);
                         status.setLayoutY(340);
 
-                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("homepage.fxml"));
+                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AdminView.fxml"));
                         stage =(Stage) ((Node)e.getSource()).getScene().getWindow();
                         scene = new Scene(fxmlLoader.load());
                         stage.setScene(scene);

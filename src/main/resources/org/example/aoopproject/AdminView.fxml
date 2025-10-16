@@ -20,13 +20,13 @@
       </ImageView>
       <Pane layoutX="6.0" layoutY="7.2" prefHeight="684.0" prefWidth="240.0" styleClass="translucent-pane" stylesheets="@Admin.css" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="7.0">
          <children>
-            <Button layoutX="10.0" layoutY="231.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="220.0" styleClass="translucent-pane" stylesheets="@button.css" text="list of the bus company" />
+            <Button layoutX="10.0" layoutY="231.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="220.0" styleClass="glass-button" stylesheets="@button.css" text="list of the bus company" />
          </children></Pane>
       <Pane fx:id="busInfo" layoutX="572.0" layoutY="7.0" prefHeight="684.0" prefWidth="315.0" styleClass="translucent-pane" stylesheets="@Admin.css" visible="false">
          <children>
             <Button fx:id="addNewInformation" layoutX="213.0" layoutY="645.0" mnemonicParsing="false" onAction="#addNewBus" text="Add New Bus" />
             <TextArea fx:id="goooo" layoutX="27.0" layoutY="59.0" prefHeight="572.0" prefWidth="262.0" />
-            <Label layoutX="92.0" layoutY="14.0" text="Bus Information:">
+            <Label layoutX="92.0" layoutY="14.0" text="Bus Information:" textFill="#1e06f2">
                <font>
                   <Font size="18.0" />
                </font>
@@ -35,23 +35,38 @@
       </Pane>
       <Pane fx:id="addingTheCompany" layoutX="572.0" layoutY="281.0" prefHeight="409.0" prefWidth="315.0" styleClass="translucent-pane" stylesheets="@Admin.css" visible="false">
          <children>
-            <Label layoutX="95.0" layoutY="21.0" styleClass="button" stylesheets="@button.css" text="On Add New Service" textFill="#d0e41f" />
+            <Label layoutX="95.0" layoutY="21.0" stylesheets="@button.css" text="On Add New Service" textFill="#310de1">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
             <TextField fx:id="EnterCompanyName" layoutX="145.0" layoutY="78.0" />
             <TextField fx:id="BusStopages" alignment="CENTER" layoutX="145.0" layoutY="130.0" promptText="Jamuna,NotunBazar" />
             <TextField fx:id="EnterFareLists" layoutX="145.0" layoutY="186.0" />
-            <Label layoutX="22.0" layoutY="82.0" text="Enter company Name:" textFill="#c7d923" />
-            <Label layoutX="53.0" layoutY="134.0" text="Bus Stopeges :" textFill="#d9ef0f" />
-            <Label layoutX="36.0" layoutY="190.0" text="Enter the Fairlist:" textFill="#d6ec12" />
+            <Label layoutX="22.0" layoutY="82.0" text="Enter company Name:" textFill="#310de1">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <Label layoutX="53.0" layoutY="134.0" text="Bus Stopeges :" textFill="#310de1">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <Label layoutX="36.0" layoutY="190.0" text="Enter the Fairlist:" textFill="#310de1">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
             <Button layoutX="186.0" layoutY="345.0" mnemonicParsing="false" onAction="#addTheCompany" text="Add The Company" />
-            <Label fx:id="companyInfoShow" layoutX="81.0" layoutY="267.0" prefHeight="17.0" prefWidth="0.0" textFill="#dcd62b" />
+            <Label fx:id="companyInfoShow" layoutX="81.0" layoutY="267.0" prefHeight="17.0" prefWidth="0.0" textFill="#310de1">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
          </children>
       </Pane>
       <Pane fx:id="companyPane" layoutX="264.0" layoutY="8.0" prefHeight="684.0" prefWidth="614.0" styleClass="translucent-pane" stylesheets="@Admin.css" AnchorPane.bottomAnchor="8.0" AnchorPane.topAnchor="8.0">
          <children>
             <Button fx:id="AddService" layoutX="441.0" layoutY="635.0" mnemonicParsing="false" onAction="#addNewService" prefHeight="39.0" prefWidth="159.0" styleClass="glass-button" stylesheets="@button.css" text="Add New Service" AnchorPane.rightAnchor="14.399999999999977" />
-            <Label fx:id="BusCompanies" layoutX="226.0" layoutY="27.0" text="Bus Companies" textFill="#eb1a29" AnchorPane.rightAnchor="226.25937499999998" AnchorPane.topAnchor="27.0">
+            <Label fx:id="BusCompanies" layoutX="226.0" layoutY="27.0" text="Bus Companies" textFill="#0a1fa6" AnchorPane.rightAnchor="226.25937499999998" AnchorPane.topAnchor="27.0">
                <font>
-                  <Font size="24.0" />
+                  <Font name="System Bold" size="24.0" />
                </font>
             </Label>
             <VBox fx:id="companylistPane" layoutX="226.0" layoutY="79.0" prefHeight="492.0" prefWidth="207.0" AnchorPane.rightAnchor="181.39999999999998" AnchorPane.topAnchor="79.0" />
@@ -59,29 +74,29 @@
       </Pane>
       <Pane fx:id="addNewBus" layoutX="572.0" layoutY="281.0" prefHeight="410.0" prefWidth="315.0" styleClass="translucent-pane" stylesheets="@Admin.css" visible="false">
          <children>
-            <Label layoutX="78.0" layoutY="46.0" text="Add New Bus Information" textFill="#dbef23">
+            <Label layoutX="78.0" layoutY="46.0" text="Add New Bus Information" textFill="#0c44ef">
                <font>
-                  <Font size="14.0" />
+                  <Font name="System Bold" size="14.0" />
                </font></Label>
-            <Label layoutX="14.0" layoutY="102.0" prefHeight="20.0" prefWidth="125.0" text="Bus Plate  Number ;" textFill="#bed417">
+            <Label layoutX="14.0" layoutY="102.0" prefHeight="20.0" prefWidth="125.0" text="Bus Plate  Number ;" textFill="#0c44ef">
                <font>
-                  <Font size="13.0" />
+                  <Font name="System Bold" size="14.0" />
                </font></Label>
-            <Label layoutX="21.0" layoutY="131.0" text="Driver Name :" textFill="#ddef17">
+            <Label layoutX="21.0" layoutY="131.0" text="Driver Name :" textFill="#0c44ef">
                <font>
-                  <Font size="13.0" />
+                  <Font name="System Bold" size="14.0" />
                </font></Label>
-            <Label layoutX="21.0" layoutY="165.0" text="Driver licence :" textFill="#ddef17">
+            <Label layoutX="21.0" layoutY="165.0" text="Driver licence :" textFill="#0c44ef">
                <font>
-                  <Font size="13.0" />
+                  <Font name="System Bold" size="14.0" />
                </font></Label>
-            <Label layoutX="16.0" layoutY="196.0" text="Phone Number :" textFill="#ddef17">
+            <Label layoutX="16.0" layoutY="196.0" text="Phone Number :" textFill="#0c44ef">
                <font>
-                  <Font size="13.0" />
+                  <Font name="System Bold" size="14.0" />
                </font></Label>
-            <Label layoutX="21.0" layoutY="233.0" text="Seat capacity :" textFill="#ddef17">
+            <Label layoutX="21.0" layoutY="233.0" text="Seat capacity :" textFill="#0c44ef">
                <font>
-                  <Font size="13.0" />
+                  <Font name="System Bold" size="14.0" />
                </font></Label>
             <TextField fx:id="busPlateNumber" layoutX="128.0" layoutY="98.0">
                <font>
@@ -104,9 +119,9 @@
                   <Font size="13.0" />
                </font></TextField>
             <Button layoutX="179.0" layoutY="361.0" mnemonicParsing="false" onAction="#addTheNewBus" text="Add The New Bus" />
-            <Label fx:id="busInfoShow" layoutX="88.0" layoutY="305.0">
+            <Label fx:id="busInfoShow" layoutX="88.0" layoutY="305.0" textFill="#1122e1">
                <font>
-                  <Font size="13.0" />
+                  <Font name="System Bold" size="13.0" />
                </font></Label>
          </children>
       </Pane>
