@@ -18,7 +18,7 @@
             <Image url="@../../../pictures/Company.png" />
          </image>
       </ImageView>
-      <Pane layoutX="6.0" layoutY="7.2" prefHeight="684.0" prefWidth="240.0" styleClass="translucent-pane" stylesheets="@Admin.css" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="7.0">
+      <Pane layoutX="8.0" layoutY="7.2" prefHeight="684.0" prefWidth="232.0" styleClass="translucent-pane" stylesheets="@Admin.css" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="8.0" AnchorPane.topAnchor="7.0">
          <children>
             <Button layoutX="10.0" layoutY="231.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="220.0" styleClass="translucent-pane" stylesheets="@button.css" text="list of the bus company" />
          </children></Pane>
@@ -36,7 +36,7 @@
          <children>
             <Label layoutX="95.0" layoutY="21.0" styleClass="button" stylesheets="@button.css" text="On Add New Service" textFill="#d0e41f" />
             <TextField fx:id="EnterCompanyName" layoutX="145.0" layoutY="78.0" />
-            <TextField fx:id="BusStopages" alignment="CENTER" layoutX="145.0" layoutY="130.0" promptText="Jamuna,NotunBazar" />
+            <TextField fx:id="BusStopages" alignment="CENTER" layoutX="145.0" layoutY="130.0" promptText="Jamuna-NotunBazar" />
             <TextField fx:id="EnterFareLists" layoutX="145.0" layoutY="186.0" />
             <Label layoutX="22.0" layoutY="82.0" text="Enter company Name:" textFill="#c7d923" />
             <Label layoutX="53.0" layoutY="134.0" text="Bus Stopeges :" textFill="#d9ef0f" />
