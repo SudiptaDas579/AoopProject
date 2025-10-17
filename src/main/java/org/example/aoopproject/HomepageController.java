@@ -29,6 +29,7 @@ import java.net.Socket;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.YearMonth;
+import java.util.Objects;
 
 
 public class HomepageController {
@@ -46,13 +47,20 @@ public class HomepageController {
     public Stage stage;
     public Scene scene;
 
+    @FXML
+    public ImageView homePageBG;
+
 
     private YearMonth currentMonth;
+
     private final String KEY = "73757b7eff9dec4fad51fca5465b14cd";
 
 
     @FXML
     public void initialize() {
+
+        Image home=new Image(Objects.requireNonNull(getClass().getResourceAsStream("pictures/OrangeGradient.png")));
+        homePageBG.setImage(home);
 //        currentMonth = YearMonth.now();
 //        drawCalendar();
 //        loadWeather("Dhaka");
@@ -350,6 +358,7 @@ public class HomepageController {
         stage =(Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
+
     }
 
 }
