@@ -17,12 +17,17 @@
     <children>
       <ImageView fitHeight="700.0" fitWidth="900.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
-            <Image url="@../../../pictures/HomePageOrange.png" />
+            <Image url="@../../../pictures/OrangeGradient.png" />
          </image>
       </ImageView>
       <Pane fx:id="sceneView" layoutX="263.0" prefHeight="700.0" prefWidth="637.0">
          <children>
             <Button layoutX="395.0" layoutY="641.0" mnemonicParsing="false" onAction="#handleEmergency" prefHeight="48.0" prefWidth="231.0" style="-fx-background-color: #f21111;" text="Emergency" textFill="#232121" />
+            <Button layoutX="524.0" layoutY="14.0" mnemonicParsing="false" onAction="#logOut" styleClass="glass-button" stylesheets="@button.css" text="Log Out">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
          </children></Pane>
         <VBox fx:id="weatherVBox" alignment="CENTER" layoutX="775.0" layoutY="131.0" prefHeight="129.0" prefWidth="100.0" styleClass="translucent-pane" stylesheets="@Admin.css">
             <children>

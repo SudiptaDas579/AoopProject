@@ -53,9 +53,9 @@ public class HomepageController {
 
     @FXML
     public void initialize() {
-        currentMonth = YearMonth.now();
-        drawCalendar();
-        loadWeather("Dhaka");
+//        currentMonth = YearMonth.now();
+//        drawCalendar();
+//        loadWeather("Dhaka");
         //updateBackgroundBasedOnTime();
     }
 
@@ -343,6 +343,13 @@ public class HomepageController {
         scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
 
+    }
+    @FXML
+    public void logOut(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("login.fxml"));
+        stage =(Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(fxmlLoader.load());
+        stage.setScene(scene);
     }
 
 }
