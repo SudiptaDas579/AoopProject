@@ -48,7 +48,7 @@ public class HomepageController {
     public Scene scene;
 
     @FXML
-    public ImageView homePageBG;
+    public AnchorPane HomePagePane;
 
 
     private YearMonth currentMonth;
@@ -58,13 +58,23 @@ public class HomepageController {
 
     @FXML
     public void initialize() {
-
-        Image home=new Image(Objects.requireNonNull(getClass().getResourceAsStream("pictures/OrangeGradient.png")));
-        homePageBG.setImage(home);
+        setBG();
 //        currentMonth = YearMonth.now();
 //        drawCalendar();
 //        loadWeather("Dhaka");
         //updateBackgroundBasedOnTime();
+    }
+
+    public void setBG(){
+        Image view = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pictures/Company.png")));
+        BackgroundImage viewBG = new BackgroundImage(
+                view,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundPosition.CENTER,
+                new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, true)
+        );
+        HomePagePane.setBackground(new Background(viewBG));
     }
 
     @FXML private void newsBtn(ActionEvent event) {
@@ -167,7 +177,7 @@ public class HomepageController {
 
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    private static final String IP = "localhost";
+    private static final String IP = "localhost";  //jeba 192.168.0.100
     private static final int PORT = 5000;
 
     @FXML

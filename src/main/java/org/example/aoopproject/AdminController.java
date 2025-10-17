@@ -3,18 +3,20 @@ package org.example.aoopproject;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
@@ -46,6 +48,9 @@ public class AdminController implements Initializable {
     public Label busInfoShow;
     public Button AddService;
     public Button addNewInformation;
+    public AnchorPane AdminPane;
+    public Stage stage;
+    public Scene scene;
 
 
 
@@ -60,6 +65,7 @@ public class AdminController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        setBG();
 
         final String apiKey = "AIzaSyCqbKdjkod9FVs371m7I4Vv3B7opV2xfWI";
 
@@ -131,6 +137,25 @@ public class AdminController implements Initializable {
 
     }
 
+    public void setBG(){
+        Image view = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pictures/Company.png")));
+        BackgroundImage viewBG = new BackgroundImage(
+                view,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundPosition.CENTER,
+                new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, true)
+        );
+        AdminPane.setBackground(new Background(viewBG));
+    }
+
+    public void logOut(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("login.fxml"));
+        stage =(Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(fxmlLoader.load());
+        stage.setScene(scene);
+
+    }
 
 
     @FXML

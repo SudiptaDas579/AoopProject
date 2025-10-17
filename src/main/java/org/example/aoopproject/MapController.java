@@ -6,12 +6,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.layout.*;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class MapController implements Initializable {
@@ -21,15 +24,29 @@ public class MapController implements Initializable {
 
     public Stage stage;
     public Scene scene;
+    public AnchorPane mapPane;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        setBG();
         WebEngine webEngine = webView.getEngine();
         webEngine.setJavaScriptEnabled(true);
 
         String mapUrl = getClass().getResource("/org/example/aoopproject/Map.html").toExternalForm();
         webEngine.load(mapUrl);
         System.out.println("Map loaded with directions + autocomplete features.");
+    }
+
+    public void setBG(){
+        Image view = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pictures/Company.png")));
+        BackgroundImage viewBG = new BackgroundImage(
+                view,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundPosition.CENTER,
+                new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, true)
+        );
+        mapPane.setBackground(new Background(viewBG));
     }
 
 

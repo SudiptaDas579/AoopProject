@@ -32,10 +32,23 @@ tasks.withType<JavaCompile> {
 application {
     mainModule.set("org.example.aoopproject")
     mainClass.set("org.example.aoopproject.HelloApplication")
+    val javafxModules = listOf(
+        "javafx.controls",
+        "javafx.fxml",
+        "javafx.web",
+        "javafx.swing",
+        "javafx.media"
+    )
+    val modulesArg = javafxModules.joinToString(",")
 
-    // ✅ Fix ControlsFX access to internal JavaFX event classes
     applicationDefaultJvmArgs = listOf(
-        "--add-exports=javafx.base/com.sun.javafx.event=org.controlsfx.controls"
+        "--add-modules", modulesArg,
+        "--add-opens", "javafx.graphics/com.sun.javafx.tk=ALL-UNNAMED",
+        "--add-opens", "javafx.web/com.sun.webkit=ALL-UNNAMED",
+        "--add-opens", "javafx.web/com.sun.javafx.scene.web=ALL-UNNAMED",
+        "--add-opens", "javafx.controls/javafx.scene.control=ALL-UNNAMED",
+        "--add-opens", "javafx.base/com.sun.javafx.runtime=ALL-UNNAMED",
+        "-Dfile.encoding=UTF-8"
     )
 }
 
@@ -45,7 +58,6 @@ javafx {
 }
 
 dependencies {
-    // ✅ Use latest available ControlsFX (still 11.2.1 in Maven Central)
     implementation("org.controlsfx:controlsfx:11.2.1")
 
     implementation("com.dlsc.formsfx:formsfx-core:11.6.0") {
