@@ -22,7 +22,7 @@
       </Pane>
       <Pane layoutX="273.0" layoutY="15.0" prefHeight="670.0" prefWidth="614.0" visible="false">
          <children>
-            <WebView prefHeight="670.0" prefWidth="614.0" />
+            <WebView fx:id="newsWeb" prefHeight="670.0" prefWidth="614.0" />
             <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="Back" />
          </children>
       </Pane>
