@@ -337,7 +337,7 @@ public class HomepageController {
     @FXML
     public void newsPortalSwitch(ActionEvent event) throws IOException {
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("homepage.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("NewsPortal.fxml"));
         stage =(Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
