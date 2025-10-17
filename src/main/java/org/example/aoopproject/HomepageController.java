@@ -291,7 +291,7 @@ public class HomepageController {
     @FXML
     public void eventHolidaySwitch(ActionEvent event) throws IOException {
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("homepage.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("EventsHolidays.fxml"));
         stage =(Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
