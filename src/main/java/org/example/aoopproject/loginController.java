@@ -66,7 +66,7 @@ public class loginController implements Initializable{
 
 
     public void setBG(){
-        Image view = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pictures/resized.png")));
+        Image view = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pictures/Login.png")));
         BackgroundImage viewBG = new BackgroundImage(
                 view,
                 BackgroundRepeat.NO_REPEAT,
