@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.time.LocalDate;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -22,11 +21,7 @@ public class EventFileHandler {
             try (FileOutputStream fos = new FileOutputStream(file, false);
                  ObjectOutputStream oos = new ObjectOutputStream(fos)) {
 
-                for (CompanyList company : hashSet) {
-                    oos.writeObject(company);
-                }
-                oos.flush();
-                System.out.println("Company lists written to file successfully.");
+               System.out.println("Company lists written to file successfully.");
             }
 
         } catch (IOException e) {
