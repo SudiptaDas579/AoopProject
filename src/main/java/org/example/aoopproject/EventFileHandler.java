@@ -4,7 +4,6 @@ import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class EventFileHandler {
@@ -54,7 +53,7 @@ public class EventFileHandler {
                 while (true) {
                     try {
                         String line = br.readLine();
-                        if (line == null) {
+                        if (line !=null) {
                             String[] temp =line.split(":");
 
                             ArrayList<String> eventList= new ArrayList<>();
