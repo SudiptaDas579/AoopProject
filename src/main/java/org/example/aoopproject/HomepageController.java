@@ -9,12 +9,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -27,7 +25,6 @@ import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.Socket;
 import java.net.URL;
-import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.Objects;
 
@@ -46,12 +43,15 @@ public class HomepageController {
 
     @FXML
     public AnchorPane HomePagePane;
+    @FXML
+    public ImageView dotView;
 
 
     private YearMonth currentMonth;
 
     private final String KEY = "73757b7eff9dec4fad51fca5465b14cd";
 
+    public ContextMenu menu=new ContextMenu();
 
     @FXML
     public void initialize() {
@@ -59,6 +59,39 @@ public class HomepageController {
 //        currentMonth = YearMonth.now();
 //        drawCalendar();
 //        loadWeather("Dhaka");
+        OutButton();
+
+        MenuItem item1 = new MenuItem("Language");
+        MenuItem item2 = new MenuItem("Change Theme");
+        MenuItem item3 = new MenuItem("log Out");
+
+        menu.getItems().addAll(item1,item2,item3);
+
+        item1.setOnAction(e -> {
+           switchLanguage(e);
+
+        });
+        item2.setOnAction(e -> {
+            switchTheme(e);
+        });
+        item3.setOnAction(event -> {
+            try {
+                logOut(event);
+            }
+            catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        dotView.setOnMouseClicked(e -> {
+            if (e.getButton() == MouseButton.PRIMARY) {
+            menu.hide();
+
+            menu.show(HomePagePane, e.getScreenX()-150, e.getScreenY()+18);
+
+
+       }
+        });
+
     }
 
     public void setBG(){
@@ -71,6 +104,20 @@ public class HomepageController {
                 new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, true)
         );
         HomePagePane.setBackground(new Background(viewBG));
+    }
+
+    public void OutButton(){
+
+        Image view = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pictures/dots.png")));
+        dotView.setImage(view);
+    }
+
+
+    public void switchLanguage(ActionEvent e){
+
+    }
+    public void switchTheme(ActionEvent e){
+
     }
 
     @FXML private void newsBtn(ActionEvent event) {
@@ -103,6 +150,7 @@ public class HomepageController {
             e.printStackTrace();
             cityLabel.setText("Error loading weather");
         }
+
     }
 
 

@@ -1,0 +1,21 @@
+/* Style for the context menu popup */
+.context-menu {
+    -fx-background-color: linear-gradient(to bottom, #FFA500, #FFB84D); /* orange gradient */
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-border-color: #FF8C00;
+    -fx-border-width: 2px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 5, 0.5, 0, 1);
+}
+
+/* Style for menu items */
+.context-menu .menu-item {
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 8 20 8 20;
+}
+
+/* Hover effect on menu items */
+.context-menu .menu-item:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.2);
+}

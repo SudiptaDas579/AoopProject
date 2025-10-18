@@ -90,17 +90,17 @@ public class AdminController implements Initializable {
                 return;
             }
 
-            PlaceSuggestionTask task = new PlaceSuggestionTask(input, apiKey);
+//            //PlaceSuggestionTask task = new PlaceSuggestionTask(input, apiKey);
+//
+//            task.setOnSucceeded(e -> {
+//                List<String> suggestions = task.getValue();
+//                Platform.runLater(() -> {
+//                    suggestionListView.getItems().setAll(suggestions);
+//                    suggestionListView.setVisible(!suggestions.isEmpty());
+//                });
+//            });
 
-            task.setOnSucceeded(e -> {
-                List<String> suggestions = task.getValue();
-                Platform.runLater(() -> {
-                    suggestionListView.getItems().setAll(suggestions);
-                    suggestionListView.setVisible(!suggestions.isEmpty());
-                });
-            });
-
-            executor.submit(task);
+            //executor.submit(task);
         });
 
         suggestionListView.setFocusTraversable(false);
