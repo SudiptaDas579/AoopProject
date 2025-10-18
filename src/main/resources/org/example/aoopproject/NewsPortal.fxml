@@ -15,30 +15,30 @@
             <Image url="@../../../pictures/HomePageOrange.png" />
          </image>
       </ImageView>
-      <Pane layoutX="273.0" layoutY="15.0" prefHeight="670.0" prefWidth="614.0" visible="false">
+      <Pane fx:id="newsPane" layoutX="273.0" layoutY="15.0" prefHeight="670.0" prefWidth="614.0" visible="false">
          <children>
             <WebView fx:id="newsWeb" prefHeight="670.0" prefWidth="614.0" />
-            <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="Back" />
+            <Button fx:id="backButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="Back" />
          </children>
       </Pane>
-      <Pane layoutX="286.0" layoutY="7.0" prefHeight="686.0" prefWidth="600.0" styleClass="translucent-pane" stylesheets="@Admin.css">
+      <Pane fx:id="newsListPane" layoutX="286.0" layoutY="7.0" prefHeight="686.0" prefWidth="600.0" styleClass="translucent-pane" stylesheets="@Admin.css">
          <children>
-            <ImageView fitHeight="106.0" fitWidth="146.0" layoutX="47.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="prothomAloImg" fitHeight="106.0" fitWidth="146.0" layoutX="47.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../pictures/prothom-alo.com.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="50.0" fitWidth="162.0" layoutX="298.0" layoutY="24.0" pickOnBounds="true">
+            <ImageView fx:id="dailyStarImg" fitHeight="50.0" fitWidth="162.0" layoutX="298.0" layoutY="24.0" pickOnBounds="true">
                <image>
                   <Image url="@../../../pictures/thedailystar.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="53.0" fitWidth="146.0" layoutX="47.0" layoutY="87.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="dhakaTribuneImg" fitHeight="53.0" fitWidth="146.0" layoutX="47.0" layoutY="87.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../pictures/dhakatribune.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="45.0" fitWidth="167.0" layoutX="296.0" layoutY="89.0" pickOnBounds="true">
+            <ImageView fx:id="kalerKanthoImg" fitHeight="45.0" fitWidth="167.0" layoutX="296.0" layoutY="89.0" pickOnBounds="true">
                <image>
                   <Image url="@../../../pictures/kalerkantho.jpg" />
                </image>

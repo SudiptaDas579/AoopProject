@@ -5,16 +5,63 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class NewsPortalController {
 
-@FXML
-public Stage stage;
+    @FXML
+    private WebView newsWeb;
+    @FXML
+    private Pane newsListPane;
+    @FXML
+    private Pane newsPane;
+    @FXML
+    private Button backButton;
 
-public Scene scene;
+    private Scene scene;
+    private Stage stage;
+
+
+    @FXML
+    private ImageView prothomAloImg, dailyStarImg, dhakaTribuneImg, kalerKanthoImg;
+
+    private WebEngine webEngine;
+
+    @FXML
+    public void initialize() {
+        webEngine = newsWeb.getEngine();
+        webEngine.setJavaScriptEnabled(true);
+        webEngine.loadContent("<meta charset='UTF-8'>");
+
+        newsPane.setVisible(false);
+
+        // img click
+        prothomAloImg.setOnMouseClicked(event -> openWebsite("https://www.prothomalo.com"));
+        dailyStarImg.setOnMouseClicked(event -> openWebsite("https://www.thedailystar.net"));
+        dhakaTribuneImg.setOnMouseClicked(event -> openWebsite("https://www.dhakatribune.com"));
+        kalerKanthoImg.setOnMouseClicked(event -> openWebsite("https://www.kalerkantho.com"));
+
+
+        backButton.setOnAction(event -> {
+            newsPane.setVisible(false);
+            newsListPane.setVisible(true);
+            newsWeb.getEngine().load(null);
+        });
+    }
+
+    private void openWebsite(String url) {
+        newsListPane.setVisible(false);
+        newsPane.setVisible(true);
+        webEngine.load(url);
+    }
+
 
 
     @FXML
