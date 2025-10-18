@@ -10,7 +10,7 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         // Start with the loading.fxml
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("loading.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("AdminView.fxml"));
         Scene scene = new Scene(loader.load());
         stage.setScene(scene);
         stage.setTitle("Loading...");

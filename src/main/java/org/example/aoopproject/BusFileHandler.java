@@ -10,49 +10,60 @@ public class BusFileHandler {
     public HashSet<CompanyList> getCompanyLists(File file) {
         companyLists.clear();
 
-        try {
-            if (!file.exists()) {
+        if (!file.exists()) {
+            try {
                 file.createNewFile();
-                return companyLists;
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
+            return companyLists;
+        }
+        try {
+            FileInputStream fis = new FileInputStream(file);
+            ObjectInputStream ois = new ObjectInputStream(fis);
 
-            try (FileInputStream fis = new FileInputStream(file);
-                 ObjectInputStream ois = new ObjectInputStream(fis)) {
-
-                while (true) {
-                    try {
-                        CompanyList company = (CompanyList) ois.readObject();
-                        companyLists.add(company);
-                    } catch (EOFException e) {
-                        break;
-                    }
+            while (true) {
+                try {
+                    CompanyList company = (CompanyList) ois.readObject();
+                    companyLists.add(company);
+                } catch (EOFException e) {
+                    break;
                 }
             }
-        } catch (IOException | ClassNotFoundException e) {
-            System.out.println("Error reading file: " + e.getMessage());
-        }
 
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         return companyLists;
     }
 
     public synchronized void updateInFile(File file, HashSet<CompanyList> hashSet) {
-        try {
-            if (!file.exists()) {
+
+        if (!file.exists()) {
+            try {
                 file.createNewFile();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
+        }
 
-            try (FileOutputStream fos = new FileOutputStream(file, false);
-                 ObjectOutputStream oos = new ObjectOutputStream(fos)) {
 
-                for (CompanyList company : hashSet) {
-                    oos.writeObject(company);
-                }
-                oos.flush();
-                System.out.println("Company lists written to file successfully.");
+        try {
+            FileOutputStream fos = new FileOutputStream(file, false);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+
+            for (CompanyList company : hashSet) {
+                oos.writeObject(company);
             }
-
-        } catch (IOException e) {
-            System.out.println("Error writing file: " + e.getMessage());
+            oos.flush();
+            System.out.println("Company lists written to file successfully.");
+        } catch (IOException e){
+                System.out.println("Error writing file: " + e.getMessage());
         }
     }
 }
+

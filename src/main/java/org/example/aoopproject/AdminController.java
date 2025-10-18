@@ -62,6 +62,8 @@ public class AdminController implements Initializable {
 
     public CompanyList SelectedCompany;
 
+    private GooglePlacesService placesService;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -76,65 +78,9 @@ public class AdminController implements Initializable {
 
         CompanyButton();
 
-        suggestionListView = new ListView<>();
-        suggestionListView.setVisible(false);
-        suggestionListView.setPrefHeight(100);
-        suggestionListView.setPrefWidth(BusStopages.getPrefWidth());
-        ((Pane) BusStopages.getParent()).getChildren().add(suggestionListView);
+        placesService = new GooglePlacesService();
 
-
-        BusStopages.addEventHandler(KeyEvent.KEY_RELEASED, event -> {
-            String input = BusStopages.getText().trim();
-            if (input.length() < 2) {
-                suggestionListView.setVisible(false);
-                return;
-            }
-
-//            //PlaceSuggestionTask task = new PlaceSuggestionTask(input, apiKey);
-//
-//            task.setOnSucceeded(e -> {
-//                List<String> suggestions = task.getValue();
-//                Platform.runLater(() -> {
-//                    suggestionListView.getItems().setAll(suggestions);
-//                    suggestionListView.setVisible(!suggestions.isEmpty());
-//                });
-//            });
-
-            //executor.submit(task);
-        });
-
-        suggestionListView.setFocusTraversable(false);
-
-        suggestionListView.setOnMouseClicked(e -> {
-            String selected = suggestionListView.getSelectionModel().getSelectedItem();
-            if (selected == null) return;
-
-            String currentText = BusStopages.getText();
-            if (currentText == null) currentText = "";
-
-            int lastDash = currentText.lastIndexOf('-');
-            String newText;
-            if (lastDash == -1) {
-                newText = selected + "-";
-            } else {
-                String prefix = currentText.substring(0, lastDash + 1);
-                newText = prefix + selected + "-";
-            }
-
-            BusStopages.setText(newText);
-
-
-            suggestionListView.setVisible(false);
-            suggestionListView.getSelectionModel().clearSelection();
-
-            Platform.runLater(() -> {
-                BusStopages.requestFocus();
-                BusStopages.end();
-            });
-        });
-
-
-
+        new BusStopagesAutoComplete(BusStopages, placesService);
     }
 
     public void setBG(){

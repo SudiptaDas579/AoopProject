@@ -9,6 +9,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
+import java.io.File;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.YearMonth;
@@ -22,12 +23,17 @@ public class EventHolidaysController implements Initializable {
     private Label monthLabel;
 
     private YearMonth currentMonth;
-    private Map<LocalDate, List<String>> events = new HashMap<>();
+    private HashMap<LocalDate, ArrayList<String>> events = new HashMap<>();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         currentMonth = YearMonth.now();
         drawCalendar();
+
+        File file = new File("src/main/java/org/example/aoopproject/files/events.txt");
+        EventFileHandler eventFileHandler = new EventFileHandler();
+
+        events = eventFileHandler.getEvents(file);
     }
 
 
@@ -141,6 +147,10 @@ public class EventHolidaysController implements Initializable {
 
         dialog.showAndWait();
         drawCalendar();
+
+        File file = new File("src/main/java/org/example/aoopproject/files/events.txt");
+        EventFileHandler eventFileHandler = new EventFileHandler();
+        eventFileHandler.updateInFile(file,events);
     }
 
 
