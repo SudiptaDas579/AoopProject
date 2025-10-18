@@ -41,6 +41,7 @@ javafx {
 }
 
 dependencies {
+    implementation ("com.sun.mail:jakarta.mail:2.0.1")
     implementation("org.controlsfx:controlsfx:11.2.1")
     implementation("com.dlsc.formsfx:formsfx-core:11.6.0") { exclude(group = "org.openjfx") }
     implementation("net.synedra:validatorfx:0.6.1") { exclude(group = "org.openjfx") }

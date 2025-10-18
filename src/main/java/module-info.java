@@ -15,6 +15,7 @@ module org.example.aoopproject {
     requires jdk.jsobject;
     requires com.google.gson;
     requires javafx.base;
+    requires jakarta.mail;
 
 
     opens org.example.aoopproject to javafx.fxml;

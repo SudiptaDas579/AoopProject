@@ -1,5 +1,6 @@
 package org.example.aoopproject;
 
+import jakarta.mail.MessagingException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,9 +17,7 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class registerController implements Initializable{
     @FXML
@@ -45,7 +44,8 @@ public class registerController implements Initializable{
     private HashSet<General> generalHashSet;
     private HashSet<Student> studentHashSet;
     private HashSet<Authority> authorityHashSet;
-
+    private String generatedOtp;
+    private long otpGeneratedTime;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -125,7 +125,7 @@ public class registerController implements Initializable{
 
                         status.setLayoutX(170);
                         status.setLayoutY(350);
-                    } else {
+                    } else if (sendAndVerifyOTP(emailAddress.getText())){
                         studentHashSet.add(s);
                         DatabaseFile db = new DatabaseFile("temp");
                         db.start();
@@ -134,6 +134,8 @@ public class registerController implements Initializable{
                         status.setText("Account Registered successfully");
                         status.setLayoutY(350);
                         status.setLayoutX(120);
+                    } else {
+                        status.setText("Registration cancelled or failed OTP");
                     }
                 }
             } else if (comboBox.getValue().equals("General")) {
@@ -157,7 +159,7 @@ public class registerController implements Initializable{
 
                         status.setLayoutX(170);
                         status.setLayoutY(400);
-                    } else {
+                    } else if (sendAndVerifyOTP(emailAddress.getText())) {
                         generalHashSet.add(g);
                         DatabaseFile db = new DatabaseFile("temp");
                         db.start();
@@ -166,6 +168,8 @@ public class registerController implements Initializable{
                         status.setText("Account Registered successfully");
                         status.setLayoutY(400);
                         status.setLayoutX(120);
+                    } else {
+                        status.setText("Registration cancelled or failed OTP");
                     }
                 }
             } else if (comboBox.getValue().equals("Authority")) {
@@ -187,7 +191,7 @@ public class registerController implements Initializable{
                         status.setText("Account already exists");
                         status.setLayoutY(490);
                         status.setLayoutX(170);
-                    } else {
+                    } else if (sendAndVerifyOTP(emailAddress.getText())) {
                         authorityHashSet.add(a);
                         DatabaseFile db = new DatabaseFile("temp");
                         db.start();
@@ -196,9 +200,47 @@ public class registerController implements Initializable{
                         status.setText("Account Registered successfully");
                         status.setLayoutY(490);
                         status.setLayoutX(120);
+                    } else {
+                        status.setText("Registration cancelled or failed OTP");
                     }
                 }
             }
+        }
+    }
+
+    public class OTPGenerator {
+        public static String generateOTP() {
+            Random random = new Random();
+            return String.valueOf(100000 + random.nextInt(900000));
+        }
+    }
+
+    private boolean sendAndVerifyOTP(String recipientEmail) {
+        try {
+            generatedOtp = OTPGenerator.generateOTP();
+            otpGeneratedTime = System.currentTimeMillis();
+            Mail.sendEmail(recipientEmail, generatedOtp);
+
+            TextInputDialog dialog = new TextInputDialog();
+            dialog.setTitle("OTP Verification");
+            dialog.setHeaderText("OTP sent to: " + recipientEmail);
+            dialog.setContentText("Enter the OTP:");
+
+            Optional<String> result = dialog.showAndWait();
+            if (result.isEmpty()) return false;
+
+            String enteredOtp = result.get();
+            if (System.currentTimeMillis() - otpGeneratedTime > 300000) {
+                status.setText("OTP expired! Please try again.");
+                return false;
+            }
+
+            return enteredOtp.equals(generatedOtp);
+
+        } catch (MessagingException e) {
+            e.printStackTrace();
+            status.setText("Failed to send OTP. Check email configuration.");
+            return false;
         }
     }
 
