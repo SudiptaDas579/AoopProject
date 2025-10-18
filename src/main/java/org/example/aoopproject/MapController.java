@@ -41,7 +41,7 @@ public class MapController implements Initializable {
     }
 
     public void setBG(){
-        Image view = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pictures/HomePage.png")));
+        Image view = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pictures/lightHome.png")));
         BackgroundImage viewBG = new BackgroundImage(
                 view,
                 BackgroundRepeat.NO_REPEAT,
@@ -60,7 +60,7 @@ public class MapController implements Initializable {
         stage =(Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
-
+        ThemeManager.setScene(scene);
     }
 
 
@@ -71,6 +71,7 @@ public class MapController implements Initializable {
         stage =(Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
+        ThemeManager.setScene(scene);
 
     }
 
@@ -81,7 +82,7 @@ public class MapController implements Initializable {
         stage =(Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
-
+        ThemeManager.setScene(scene);
     }
     @FXML
     public void eventHolidaySwitch(ActionEvent event) throws IOException {
@@ -90,7 +91,7 @@ public class MapController implements Initializable {
         stage =(Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
-
+        ThemeManager.setScene(scene);
     }
     @FXML
     public void logOut(ActionEvent event) throws IOException {

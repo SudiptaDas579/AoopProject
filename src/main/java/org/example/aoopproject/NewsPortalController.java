@@ -24,6 +24,7 @@ public Scene scene;
         stage =(Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
+        ThemeManager.setScene(scene);
 
     }
 
@@ -35,6 +36,8 @@ public Scene scene;
         stage =(Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
+        ThemeManager.setScene(scene);
+
 
     }
 
@@ -45,6 +48,7 @@ public Scene scene;
         stage =(Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
+        ThemeManager.setScene(scene);
 
     }
     @FXML
@@ -54,6 +58,8 @@ public Scene scene;
         stage =(Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
+        ThemeManager.setScene(scene);
+
 
     }
     @FXML
@@ -62,6 +68,8 @@ public Scene scene;
         stage =(Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
+        ThemeManager.setScene(scene);
+
 
     }
 

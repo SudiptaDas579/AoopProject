@@ -118,6 +118,7 @@ public class loginController implements Initializable{
                         stage =(Stage) ((Node)e.getSource()).getScene().getWindow();
                         scene = new Scene(fxmlLoader.load());
                         stage.setScene(scene);
+                        ThemeManager.setScene(scene);
 
                     } else {
                         for (Student s1 : studentHashSet) {
@@ -161,6 +162,7 @@ public class loginController implements Initializable{
                         stage =(Stage) ((Node)e.getSource()).getScene().getWindow();
                         scene = new Scene(fxmlLoader.load());
                         stage.setScene(scene);
+                        ThemeManager.setScene(scene);
 
                     } else {
                         for (General g1 : generalHashSet) {
@@ -203,7 +205,7 @@ public class loginController implements Initializable{
                         stage =(Stage) ((Node)e.getSource()).getScene().getWindow();
                         scene = new Scene(fxmlLoader.load());
                         stage.setScene(scene);
-
+                        ThemeManager.setScene(scene);
                     } else {
                         for (Authority a1 : authorityHashSet) {
                             if (a1.getEmail().equals(emailAddress.getText())) {

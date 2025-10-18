@@ -85,7 +85,7 @@ public class AdminController implements Initializable  {
     }
 
     public void setBG(){
-        Image view = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pictures/HomePage.png")));
+        Image view = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pictures/lightHome.png")));
         BackgroundImage viewBG = new BackgroundImage(
                 view,
                 BackgroundRepeat.NO_REPEAT,

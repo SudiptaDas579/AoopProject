@@ -56,6 +56,8 @@ public class HomepageController {
 
     @FXML
     public void initialize() {
+
+
         setBG();
 //        currentMonth = YearMonth.now();
 //        drawCalendar();
@@ -93,10 +95,11 @@ public class HomepageController {
        }
         });
 
+
     }
 
     public void setBG(){
-        Image view = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pictures/HomePage.png")));
+        Image view = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pictures/lightHome.png")));
         BackgroundImage viewBG = new BackgroundImage(
                 view,
                 BackgroundRepeat.NO_REPEAT,
@@ -118,8 +121,13 @@ public class HomepageController {
 
     }
     public void switchTheme(ActionEvent e){
-
+        if(scene == null){
+            scene = HomePagePane.getScene(); // fallback
+        }
+        ThemeManager.setScene(scene);
+        ThemeManager.toggleTheme();
     }
+
 
     @FXML private void newsBtn(ActionEvent event) {
         FXMLLoader loader = new FXMLLoader();
@@ -315,6 +323,8 @@ public class HomepageController {
         scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
 
+        ThemeManager.setScene(scene);
+
     }
 
 
@@ -325,6 +335,7 @@ public class HomepageController {
         stage =(Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
+        ThemeManager.setScene(scene);
 
     }
 
@@ -335,6 +346,7 @@ public class HomepageController {
         stage =(Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
+        ThemeManager.setScene(scene);
 
     }
     @FXML
@@ -344,6 +356,7 @@ public class HomepageController {
         stage =(Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
+        ThemeManager.setScene(scene);
 
     }
     @FXML
@@ -352,6 +365,7 @@ public class HomepageController {
         stage =(Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
+
 
     }
 

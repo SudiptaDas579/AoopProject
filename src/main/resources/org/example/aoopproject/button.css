@@ -1,77 +1,77 @@
-.glass-button {
-    -fx-background-color:
-            linear-gradient(
-                    to bottom right,
-                    rgba(255, 240, 190, 0.7),
-                    rgba(255, 210, 120, 0.5)
-            ),
-            linear-gradient(
-                    to top left,
-                    rgba(255, 255, 255, 0.25),
-                    rgba(255, 255, 255, 0)
-            );
-    -fx-background-radius: 15;
-    -fx-border-radius: 15;
+/*.glass-button {*/
+/*    -fx-background-color:*/
+/*            linear-gradient(*/
+/*                    to bottom right,*/
+/*                    rgba(255, 240, 190, 0.7),*/
+/*                    rgba(255, 210, 120, 0.5)*/
+/*            ),*/
+/*            linear-gradient(*/
+/*                    to top left,*/
+/*                    rgba(255, 255, 255, 0.25),*/
+/*                    rgba(255, 255, 255, 0)*/
+/*            );*/
+/*    -fx-background-radius: 15;*/
+/*    -fx-border-radius: 15;*/
 
-    /* Soft golden edge */
-    -fx-border-color:
-            linear-gradient(
-                    to bottom right,
-                    rgba(255, 230, 160, 0.9),
-                    rgba(255, 180, 80, 0.7)
-            );
-    -fx-border-width: 1.8;
-    -fx-border-style: solid;
+/*    !* Soft golden edge *!*/
+/*    -fx-border-color:*/
+/*            linear-gradient(*/
+/*                    to bottom right,*/
+/*                    rgba(255, 230, 160, 0.9),*/
+/*                    rgba(255, 180, 80, 0.7)*/
+/*            );*/
+/*    -fx-border-width: 1.8;*/
+/*    -fx-border-style: solid;*/
 
-    -fx-text-fill: rgba(90, 60, 10, 0.85);
-    -fx-font-weight: bold;
-    -fx-font-size: 14px;
+/*    -fx-text-fill: rgba(90, 60, 10, 0.85);*/
+/*    -fx-font-weight: bold;*/
+/*    -fx-font-size: 14px;*/
 
-    -fx-padding: 8 18;
-    -fx-cursor: hand;
-    -fx-background-insets: 0, 1;
+/*    -fx-padding: 8 18;*/
+/*    -fx-cursor: hand;*/
+/*    -fx-background-insets: 0, 1;*/
 
-    /* Inner light and outer soft glow */
-    -fx-effect:
-            innershadow(gaussian, rgba(255, 255, 230, 0.25), 4, 0.3, 0, 1),
-            dropshadow(gaussian, rgba(255, 220, 130, 0.4), 8, 0.4, 0, 3);
-    -fx-transition: all 0.25s ease-in-out;
-}
+/*    !* Inner light and outer soft glow *!*/
+/*    -fx-effect:*/
+/*            innershadow(gaussian, rgba(255, 255, 230, 0.25), 4, 0.3, 0, 1),*/
+/*            dropshadow(gaussian, rgba(255, 220, 130, 0.4), 8, 0.4, 0, 3);*/
+/*    -fx-transition: all 0.25s ease-in-out;*/
+/*}*/
 
-/* Hover effect — brighter, glossier */
-.glass-button:hover {
-    -fx-background-color:
-            linear-gradient(
-                    to bottom right,
-                    rgba(255, 250, 210, 0.85),
-                    rgba(255, 220, 140, 0.65)
-            ),
-            linear-gradient(
-                    to top left,
-                    rgba(255, 255, 255, 0.3),
-                    rgba(255, 255, 255, 0.05)
-            );
-    -fx-text-fill: rgba(70, 45, 5, 0.9);
+/*!* Hover effect — brighter, glossier *!*/
+/*.glass-button:hover {*/
+/*    -fx-background-color:*/
+/*            linear-gradient(*/
+/*                    to bottom right,*/
+/*                    rgba(255, 250, 210, 0.85),*/
+/*                    rgba(255, 220, 140, 0.65)*/
+/*            ),*/
+/*            linear-gradient(*/
+/*                    to top left,*/
+/*                    rgba(255, 255, 255, 0.3),*/
+/*                    rgba(255, 255, 255, 0.05)*/
+/*            );*/
+/*    -fx-text-fill: rgba(70, 45, 5, 0.9);*/
 
-    -fx-effect:
-            innershadow(gaussian, rgba(255, 255, 240, 0.25), 6, 0.5, 0, 0),
-            dropshadow(gaussian, rgba(255, 230, 150, 0.55), 10, 0.6, 0, 4);
+/*    -fx-effect:*/
+/*            innershadow(gaussian, rgba(255, 255, 240, 0.25), 6, 0.5, 0, 0),*/
+/*            dropshadow(gaussian, rgba(255, 230, 150, 0.55), 10, 0.6, 0, 4);*/
 
-    -fx-scale-x: 1.04;
-    -fx-scale-y: 1.04;
-}
+/*    -fx-scale-x: 1.04;*/
+/*    -fx-scale-y: 1.04;*/
+/*}*/
 
-/* Pressed effect — slightly deeper and smaller */
-.glass-button:pressed {
-    -fx-background-color:
-            linear-gradient(
-                    to bottom right,
-                    rgba(255, 235, 160, 0.75),
-                    rgba(255, 195, 100, 0.6)
-            );
-    -fx-effect:
-            innershadow(gaussian, rgba(255, 200, 100, 0.4), 6, 0.6, 0, 1),
-            dropshadow(gaussian, rgba(255, 180, 80, 0.4), 5, 0.5, 0, 2);
-    -fx-scale-x: 0.97;
-    -fx-scale-y: 0.97;
-}
+/*!* Pressed effect — slightly deeper and smaller *!*/
+/*.glass-button:pressed {*/
+/*    -fx-background-color:*/
+/*            linear-gradient(*/
+/*                    to bottom right,*/
+/*                    rgba(255, 235, 160, 0.75),*/
+/*                    rgba(255, 195, 100, 0.6)*/
+/*            );*/
+/*    -fx-effect:*/
+/*            innershadow(gaussian, rgba(255, 200, 100, 0.4), 6, 0.6, 0, 1),*/
+/*            dropshadow(gaussian, rgba(255, 180, 80, 0.4), 5, 0.5, 0, 2);*/
+/*    -fx-scale-x: 0.97;*/
+/*    -fx-scale-y: 0.97;*/
+/*}*/
