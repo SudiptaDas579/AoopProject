@@ -32,9 +32,12 @@ public class MapController implements Initializable {
         WebEngine webEngine = webView.getEngine();
         webEngine.setJavaScriptEnabled(true);
 
-        String mapUrl = getClass().getResource("/org/example/aoopproject/Map.html").toExternalForm();
+        webEngine.setOnAlert(event -> System.out.println("JS Alert: " + event.getData()));
+
+        String mapUrl = Objects.requireNonNull(getClass().getResource("/org/example/aoopproject/Map.html")).toExternalForm();
         webEngine.load(mapUrl);
-        System.out.println("Map loaded with directions + autocomplete features.");
+
+        System.out.println("Map loaded with Google Maps v3.57 and transit features.");
     }
 
     public void setBG(){

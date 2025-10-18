@@ -13,7 +13,7 @@
       </ImageView>
       <Pane fx:id="sceneView" layoutX="273.0" layoutY="8.0" prefHeight="686.0" prefWidth="619.0" styleClass="translucent-pane" stylesheets="@Admin.css">
          <children>
-              <WebView fx:id="webView" prefHeight="686.0" prefWidth="619.0" visible="false" />
+            <WebView fx:id="webView" prefHeight="686.0" prefWidth="619.0" />
             <Button layoutX="507.0" layoutY="14.0" mnemonicParsing="false" onAction="#logOut" styleClass="glass-button" stylesheets="@button.css" text="Log Out">
                <font>
                   <Font name="System Bold" size="14.0" />
