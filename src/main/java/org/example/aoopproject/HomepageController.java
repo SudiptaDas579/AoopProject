@@ -59,9 +59,8 @@ public class HomepageController {
 
 
         setBG();
-//        currentMonth = YearMonth.now();
-//        drawCalendar();
-//        loadWeather("Dhaka");
+
+        loadWeather("Dhaka");
         OutButton();
 
         MenuItem item1 = new MenuItem("Language");
@@ -350,6 +349,7 @@ public class HomepageController {
 
     }
     @FXML
+
     public void eventHolidaySwitch(ActionEvent event) throws IOException {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("EventsHolidays.fxml"));
@@ -357,6 +357,7 @@ public class HomepageController {
         scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
         ThemeManager.setScene(scene);
+
 
     }
     @FXML

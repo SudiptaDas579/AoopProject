@@ -39,10 +39,7 @@ public class EventHolidaysController implements Initializable {
         currentMonth = YearMonth.now();
         drawCalendar();
 
-        File file = new File("src/main/java/org/example/aoopproject/files/events.txt");
-        EventFileHandler eventFileHandler = new EventFileHandler();
 
-        events = eventFileHandler.getEvents(file);
     }
 
 

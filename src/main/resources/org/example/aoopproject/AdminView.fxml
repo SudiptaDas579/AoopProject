@@ -4,6 +4,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
@@ -14,11 +16,16 @@
       <Pane layoutX="6.0" layoutY="7.2" prefHeight="684.0" prefWidth="240.0" styleClass="translucent-pane" stylesheets="@Admin.css" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="7.0">
          <children>
             <Button layoutX="10.0" layoutY="231.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="220.0" styleClass="glass-button" stylesheets="@button.css" text="list of the bus company" />
-            <Button layoutX="108.0" layoutY="47.0" mnemonicParsing="false" onAction="#logOut" styleClass="glass-button" stylesheets="@button.css" text="Log Out">
+            <Button layoutX="109.0" layoutY="620.0" mnemonicParsing="false" onAction="#logOut" styleClass="glass-button" stylesheets="@button.css" text="Log Out">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="13.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../pictures/LOGO.png" />
+               </image>
+            </ImageView>
          </children></Pane>
       <Pane fx:id="busInfo" layoutX="572.0" layoutY="7.0" prefHeight="684.0" prefWidth="315.0" styleClass="translucent-pane" stylesheets="@Admin.css" visible="false">
          <children>
@@ -61,7 +68,7 @@
       </Pane>
       <Pane fx:id="companyPane" layoutX="264.0" layoutY="8.0" prefHeight="684.0" prefWidth="614.0" styleClass="translucent-pane" stylesheets="@Admin.css" AnchorPane.bottomAnchor="8.0" AnchorPane.topAnchor="8.0">
          <children>
-            <Button fx:id="AddService" layoutX="441.0" layoutY="635.0" mnemonicParsing="false" onAction="#addNewService" prefHeight="39.0" prefWidth="159.0" styleClass="glass-button" stylesheets="@button.css" text="Add New Service" AnchorPane.rightAnchor="14.399999999999977" />
+            <Button fx:id="AddService" layoutX="123.0" layoutY="618.0" mnemonicParsing="false" onAction="#addNewService" prefHeight="39.0" prefWidth="207.0" styleClass="glass-button" stylesheets="@button.css" text="Add New Service" AnchorPane.rightAnchor="284.4" />
             <Label fx:id="BusCompanies" layoutX="226.0" layoutY="27.0" text="Bus Companies" textFill="#0a1fa6" AnchorPane.rightAnchor="226.25937499999998" AnchorPane.topAnchor="27.0">
                <font>
                   <Font name="System Bold" size="24.0" />
@@ -123,5 +130,6 @@
                </font></Label>
          </children>
       </Pane>
+      <ImageView fx:id="dotView" fitHeight="50.0" fitWidth="50.0" layoutX="853.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>
