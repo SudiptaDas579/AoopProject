@@ -2,8 +2,10 @@ package org.example.aoopproject;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import jakarta.mail.MessagingException;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -243,31 +245,31 @@ public class HomepageController {
 
         yesBtn.setStyle("-fx-text-fill: red; -fx-font-weight: bold;");
 
+        final Timeline[] timeline = new Timeline[1];
         final int[] seconds = {10};
-        Timeline timeline = new Timeline();
 
-        KeyFrame keyFrame = new KeyFrame(Duration.seconds(1), event -> {
-            seconds[0]--;
-            yesBtn.setText("Yes, I am (" + seconds[0] + ")");
-            if (seconds[0] <= 0) {
-                timeline.stop();
-                stageDanger.close();
-                openWorkInProgress();
-            }
-        });
-
-        timeline.getKeyFrames().add(keyFrame);
-        timeline.setCycleCount(10);
-        timeline.play();
+        timeline[0] = new Timeline(
+                new KeyFrame(Duration.seconds(1), e -> {
+                    seconds[0]--;
+                    yesBtn.setText("Yes, I am (" + seconds[0] + ")");
+                    if (seconds[0] <= 0) {
+                        timeline[0].stop();  // safe reference
+                        stageDanger.close();
+                        triggerEmergencyAlert();
+                    }
+                })
+        );
+        timeline[0].setCycleCount(10);
+        timeline[0].play();
 
         yesBtn.setOnAction(e -> {
-            timeline.stop();
+            timeline[0].stop();  // safe reference
             stageDanger.close();
-            openWorkInProgress();
+            triggerEmergencyAlert();
         });
 
         noBtn.setOnAction(e -> {
-            timeline.stop();
+            timeline[0].stop();
             stageDanger.close();
             openAreYouSureWindow();
         });
@@ -277,19 +279,49 @@ public class HomepageController {
         stageDanger.setScene(new Scene(layout, 300, 150));
         stageDanger.show();
     }
+    private void triggerEmergencyAlert() {
+        new Thread(() -> {
+            try {
+                Mail.sendEmergencyAlert(
+                        "graceepidice@gmail.com",
+                        "EMERGENCY! User pressed the emergency button.\n" +
+                                "Location: Dhaka, Bangladesh.\n"
+                );
 
-    private void openWorkInProgress() {
-        Stage stage5 = new Stage();
-        stage5.setTitle("Work in Progress");
-        stage5.initModality(Modality.APPLICATION_MODAL);
+                Platform.runLater(() -> {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Rescue Alert Sent");
+                    alert.setHeaderText("Help is on the way!");
+                    alert.setContentText("An emergency alert has been sent to rescue authorities.");
+                    alert.show();
+                });
 
-        Label label = new Label("Work in Progress!!!");
-        VBox layout = new VBox(20, label);
-        layout.setStyle("-fx-padding: 20; -fx-alignment: center;");
+                notifyAdminServer("Emergency Triggered! User pressed YES button.");
 
-        stage5.setScene(new Scene(layout, 250, 120));
-        stage5.show();
+            } catch (MessagingException ex) {
+                ex.printStackTrace();
+                Platform.runLater(() -> {
+                    Alert error = new Alert(Alert.AlertType.ERROR);
+                    error.setTitle("Email Error");
+                    error.setHeaderText("Failed to send emergency alert!");
+                    error.setContentText("Please check your internet connection or email settings.");
+                    error.show();
+                });
+            }
+        }).start();
     }
+
+    private void notifyAdminServer(String message) {
+        new Thread(() -> {
+            try (Socket socket = new Socket(IP, PORT);
+                 PrintWriter out = new PrintWriter(socket.getOutputStream(), true)) {
+                out.println(message);
+            } catch (IOException ex) {
+                System.err.println("Failed to contact server: " + ex.getMessage());
+            }
+        }).start();
+    }
+
 
     private void startChat() {
         openChat("User", 580);
@@ -366,8 +398,6 @@ public class HomepageController {
                         chatArea.appendText("Unable to connect Server.\n"));
             }
         }).start();
-
-
     }
 
     @FXML
