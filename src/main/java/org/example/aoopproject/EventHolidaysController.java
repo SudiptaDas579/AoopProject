@@ -1,15 +1,21 @@
 package org.example.aoopproject;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.YearMonth;
@@ -21,6 +27,9 @@ public class EventHolidaysController implements Initializable {
     private GridPane calendarGrid;
     @FXML
     private Label monthLabel;
+    public Stage stage;
+    public Scene scene;
+
 
     private YearMonth currentMonth;
     private HashMap<LocalDate, ArrayList<String>> events = new HashMap<>();
@@ -165,6 +174,60 @@ public class EventHolidaysController implements Initializable {
         currentMonth = currentMonth.plusMonths(1);
         drawCalendar();
     }
+    @FXML
+    public void homePageSwitch(ActionEvent event) throws IOException {
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("homepage.fxml"));
+        stage =(Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(fxmlLoader.load());
+        stage.setScene(scene);
+
+        ThemeManager.setScene(scene);
+
+    }
+
+
+    @FXML
+    public void newsPortalSwitch(ActionEvent event) throws IOException {
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("NewsPortal.fxml"));
+        stage =(Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(fxmlLoader.load());
+        stage.setScene(scene);
+        ThemeManager.setScene(scene);
+
+    }
+
+    @FXML
+    public void mapSwitch(ActionEvent event) throws IOException {
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MapView.fxml"));
+        stage =(Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(fxmlLoader.load());
+        stage.setScene(scene);
+        ThemeManager.setScene(scene);
+
+    }
+    @FXML
+    public void eventHolidaySwitch(ActionEvent event) throws IOException {
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("EventsHolidays.fxml"));
+        stage =(Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(fxmlLoader.load());
+        stage.setScene(scene);
+        ThemeManager.setScene(scene);
+
+    }
+    @FXML
+    public void logOut(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("login.fxml"));
+        stage =(Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(fxmlLoader.load());
+        stage.setScene(scene);
+
+
+    }
+
 
 
 }
