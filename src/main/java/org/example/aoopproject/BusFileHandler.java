@@ -31,11 +31,7 @@ public class BusFileHandler {
                 }
             }
 
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
+        } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
         return companyLists;
@@ -62,8 +58,7 @@ public class BusFileHandler {
             oos.flush();
             System.out.println("Company lists written to file successfully.");
         } catch (IOException e){
-                System.out.println("Error writing file: " + e.getMessage());
+            System.out.println("Error writing file: " + e.getMessage());
         }
     }
 }
-

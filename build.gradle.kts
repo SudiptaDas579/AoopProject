@@ -81,18 +81,6 @@ tasks.withType<JavaExec>().configureEach {
     )
 }
 
-tasks.register<Exec>("runChatServer") {
-    group = "application"
-    description = "Run the chat server in a background process"
-    commandLine(
-        "java",
-        "--add-modules=javafx.controls,javafx.fxml,javafx.web",
-        "-Dfile.encoding=UTF-8",
-        "-Dprism.order=sw",
-        "-cp", sourceSets["main"].runtimeClasspath.asPath,
-        "org.example.aoopproject.server.ChatServer"
-    )
-}
 
 
 
