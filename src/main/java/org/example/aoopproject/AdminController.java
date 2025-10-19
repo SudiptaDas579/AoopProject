@@ -183,10 +183,10 @@ public class AdminController implements Initializable  {
         BusCompanies.setLayoutX(61);
         BusCompanies.setLayoutY(25);
 
-        AddService.setLayoutX(143);
-        AddService.setLayoutY(629);
+        AddService.setLayoutX(50);
+        AddService.setLayoutY(600);
 
-        companylistPane.setLayoutX(60);
+        companylistPane.setLayoutX(40);
         companylistPane.setLayoutY(84);
 
         addingTheCompany.setVisible(true);
@@ -205,10 +205,10 @@ public class AdminController implements Initializable  {
         BusCompanies.setLayoutX(61);
         BusCompanies.setLayoutY(25);
 
-        AddService.setLayoutX(143);
+        AddService.setLayoutX(50);
         AddService.setLayoutY(629);
 
-        companylistPane.setLayoutX(60);
+        companylistPane.setLayoutX(40);
         companylistPane.setLayoutY(84);
 
         addingTheCompany.setVisible(false);
