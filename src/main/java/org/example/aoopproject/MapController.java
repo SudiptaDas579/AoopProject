@@ -17,6 +17,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -35,6 +36,8 @@ public class MapController implements Initializable {
 
     public HashSet<CompanyList> companies = new HashSet<>();
 
+    GooglePlacesService placesService;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setBG();
@@ -50,30 +53,11 @@ public class MapController implements Initializable {
         VBox root = new VBox(10);
         root.setStyle("-fx-padding: 20;");
 
-        PlacesAutoSuggest fromSuggest = new PlacesAutoSuggest(origin, API);
+        placesService = new GooglePlacesService();
 
-        origin.setOnAction(event -> {
-            PlacesAutoSuggest.PlaceResult place = fromSuggest.getSelectedPlace();
-            if (place != null) {
-                System.out.println("Selected place:");
-                System.out.println(place);
-            } else {
-                System.out.println("No place selected yet.");
-            }
-        });
+        new MapAutoSuggestion(origin,placesService);
 
-        PlacesAutoSuggest toSuggest = new PlacesAutoSuggest(destination, API);
-
-        destination.setOnAction(event -> {
-            PlacesAutoSuggest.PlaceResult place = toSuggest.getSelectedPlace();
-            if (place != null) {
-                System.out.println("Selected place:");
-                System.out.println(place);
-            } else {
-                System.out.println("No place selected yet.");
-            }
-        });
-
+        new MapAutoSuggestion(destination,placesService);
 
         webEngine.setOnAlert(event -> System.out.println("JS Alert: " + event.getData()));
 
