@@ -22,10 +22,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * PlacesAutoSuggest using Google Places Autocomplete API.
- * Supports multiple English suggestions, Dhaka-first → BD fallback, 300ms debounce.
- */
+
 public class PlacesAutoSuggest {
 
     private final TextField textField;
