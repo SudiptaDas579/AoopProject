@@ -13,7 +13,6 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -34,12 +33,7 @@ public class registerController implements Initializable{
     public Label studentIDLabel;
     public TextField studentID;
     public ComboBox<String> comboBox;
-    public Label company;
-    public TextField CompanyName;
-    public Label driving;
-    public TextField DrivingLicense;
-    public Label bus;
-    public TextField BusNumber;
+
     public Button register;
     private HashSet<General> generalHashSet;
     private HashSet<Student> studentHashSet;
@@ -173,7 +167,7 @@ public class registerController implements Initializable{
                     }
                 }
             } else if (comboBox.getValue().equals("Authority")) {
-                if (userName.getText().isEmpty() || emailAddress.getText().isEmpty() || password.getText().isEmpty() || CompanyName.getText().isEmpty() || DrivingLicense.getText().isEmpty() || BusNumber.getText().isEmpty()) {
+                if (userName.getText().isEmpty() || emailAddress.getText().isEmpty() || password.getText().isEmpty()) {
                     status.setText("Please fill all the fields");
                     status.setLayoutX(160);
                     status.setLayoutY(490);
@@ -186,7 +180,7 @@ public class registerController implements Initializable{
                     status.setLayoutY(490);
                     status.setText("Password length should be at least 8 characters");
                 } else {
-                    Authority a = new Authority(userName.getText(), emailAddress.getText(), password.getText(), CompanyName.getText(), DrivingLicense.getText(), BusNumber.getText());
+                    Authority a = new Authority(userName.getText(), emailAddress.getText(), password.getText());
                     if (authorityHashSet.contains(a)) {
                         status.setText("Account already exists");
                         status.setLayoutY(490);
@@ -254,12 +248,6 @@ public class registerController implements Initializable{
                 NID.setVisible(true);
                 studentID.setVisible(false);
                 studentIDLabel.setVisible(false);
-                bus.setVisible(false);
-                company.setVisible(false);
-                driving.setVisible(false);
-                CompanyName.setVisible(false);
-                DrivingLicense.setVisible(false);
-                BusNumber.setVisible(false);
                 status.setLayoutY(390);
                 register.setLayoutY(450);
             } else if ((comboBox.getValue()).equals("Student")) {
@@ -271,12 +259,6 @@ public class registerController implements Initializable{
                 studentIDLabel.setVisible(true);
                 NID.setVisible(false);
                 NIDlabel.setVisible(false);
-                bus.setVisible(false);
-                company.setVisible(false);
-                driving.setVisible(false);
-                CompanyName.setVisible(false);
-                DrivingLicense.setVisible(false);
-                BusNumber.setVisible(false);
                 status.setLayoutY(390);
                 register.setLayoutY(450);
             } else if ((comboBox.getValue()).equals("Authority")) {
@@ -284,18 +266,12 @@ public class registerController implements Initializable{
                 emailAddress.setText(null);
                 password.setText(null);
                 userName.setText(null);
-                bus.setVisible(true);
-                company.setVisible(true);
-                driving.setVisible(true);
-                CompanyName.setVisible(true);
-                DrivingLicense.setVisible(true);
-                BusNumber.setVisible(true);
                 NIDlabel.setVisible(false);
                 NID.setVisible(false);
                 studentID.setVisible(false);
                 studentIDLabel.setVisible(false);
-                status.setLayoutY(490);
-                register.setLayoutY(520);
+                status.setLayoutY(390);
+                register.setLayoutY(450);
             }
         }
 }
