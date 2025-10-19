@@ -14,8 +14,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.YearMonth;
@@ -32,11 +31,13 @@ public class EventHolidaysController implements Initializable {
 
 
     private YearMonth currentMonth;
-    private HashMap<LocalDate, ArrayList<String>> events = new HashMap<>();
+    private HashMap<LocalDate, List<String>> events = new HashMap<>();
+    private final File eventFile = new File("events.txt");
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         currentMonth = YearMonth.now();
+        loadEventsFromFile();
         drawCalendar();
 
 
@@ -152,11 +153,43 @@ public class EventHolidaysController implements Initializable {
         });
 
         dialog.showAndWait();
+        saveEventsToFile();
         drawCalendar();
 
-        File file = new File("src/main/java/org/example/aoopproject/files/events.txt");
-        EventFileHandler eventFileHandler = new EventFileHandler();
-        eventFileHandler.updateInFile(file,events);
+    }
+
+    //File part
+    private void saveEventsToFile() {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(eventFile))) {
+            for (Map.Entry<LocalDate, List<String>> entry : events.entrySet()) {
+                LocalDate date = entry.getKey();
+                for (String event : entry.getValue()) {
+                    writer.write(date + "|" + event);
+                    writer.newLine();
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadEventsFromFile() {
+        events.clear();
+        if (!eventFile.exists()) return;
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(eventFile))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split("\\|", 2);
+                if (parts.length == 2) {
+                    LocalDate date = LocalDate.parse(parts[0]);
+                    String event = parts[1];
+                    events.computeIfAbsent(date, k -> new ArrayList<>()).add(event);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 

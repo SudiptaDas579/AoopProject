@@ -18,16 +18,13 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.Socket;
 import java.net.URL;
+import java.time.LocalDate;
 import java.time.YearMonth;
-import java.util.Objects;
-
+import java.util.*;
 
 
 public class HomepageController {
@@ -51,6 +48,8 @@ public class HomepageController {
     private YearMonth currentMonth;
 
     private final String KEY = "73757b7eff9dec4fad51fca5465b14cd";
+    @FXML
+    private Pane upcomingEventsPane;
 
     public ContextMenu menu=new ContextMenu();
 
@@ -59,8 +58,9 @@ public class HomepageController {
 
 
         setBG();
+        loadUpcomingEvents();
 
-        loadWeather("Dhaka");
+        //loadWeather("Dhaka");
         OutButton();
 
         MenuItem item1 = new MenuItem("Language");
@@ -159,6 +159,62 @@ public class HomepageController {
             cityLabel.setText("Error loading weather");
         }
 
+    }
+
+
+    //file read from events.txt
+    private void loadUpcomingEvents() {
+        upcomingEventsPane.getChildren().clear();
+        Map<LocalDate, List<String>> events = new HashMap<>();
+
+        File eventFile = new File("events.txt");
+        if (!eventFile.exists()) {
+            Label noEventLabel = new Label("No upcoming events.");
+            noEventLabel.setLayoutX(10);
+            noEventLabel.setLayoutY(10);
+            upcomingEventsPane.getChildren().add(noEventLabel);
+            return;
+        }
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(eventFile))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split("\\|", 2);
+                if (parts.length == 2) {
+                    LocalDate date = LocalDate.parse(parts[0]);
+                    String event = parts[1];
+                    events.computeIfAbsent(date, k -> new ArrayList<>()).add(event);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Filter and sort events
+        LocalDate today = LocalDate.now();
+        List<Map.Entry<LocalDate, List<String>>> upcoming = events.entrySet().stream()
+                .filter(e -> !e.getKey().isBefore(today))
+                .sorted(Map.Entry.comparingByKey())
+                .limit(5)
+                .toList();
+
+        double y = 10;
+        for (Map.Entry<LocalDate, List<String>> entry : upcoming) {
+            for (String event : entry.getValue()) {
+                Label label = new Label(entry.getKey() + ": " + event);
+                label.setLayoutX(10);
+                label.setLayoutY(y);
+                upcomingEventsPane.getChildren().add(label);
+                y += 25; // spacing between events
+            }
+        }
+
+        if (upcomingEventsPane.getChildren().isEmpty()) {
+            Label noEventLabel = new Label("No upcoming events.");
+            noEventLabel.setLayoutX(10);
+            noEventLabel.setLayoutY(10);
+            upcomingEventsPane.getChildren().add(noEventLabel);
+        }
     }
 
 
