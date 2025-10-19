@@ -6,14 +6,17 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -26,11 +29,51 @@ public class MapController implements Initializable {
     public Scene scene;
     public AnchorPane mapPane;
 
+    @FXML
+    public TextField origin;
+    public TextField destination;
+
+    public HashSet<CompanyList> companies = new HashSet<>();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setBG();
+
+        File file = new File("src/main/java/org/example/aoopproject/files/CompanyList.txt");
+        BusFileHandler busFileHandler = new BusFileHandler();
+        companies=busFileHandler.getCompanyLists(file);
+
         WebEngine webEngine = webView.getEngine();
         webEngine.setJavaScriptEnabled(true);
+
+        String API = "AIzaSyCqbKdjkod9FVs371m7I4Vv3B7opV2xfWI";
+        VBox root = new VBox(10);
+        root.setStyle("-fx-padding: 20;");
+
+        PlacesAutoSuggest fromSuggest = new PlacesAutoSuggest(origin, API);
+
+        origin.setOnAction(event -> {
+            PlacesAutoSuggest.PlaceResult place = fromSuggest.getSelectedPlace();
+            if (place != null) {
+                System.out.println("Selected place:");
+                System.out.println(place);
+            } else {
+                System.out.println("No place selected yet.");
+            }
+        });
+
+        PlacesAutoSuggest toSuggest = new PlacesAutoSuggest(destination, API);
+
+        destination.setOnAction(event -> {
+            PlacesAutoSuggest.PlaceResult place = toSuggest.getSelectedPlace();
+            if (place != null) {
+                System.out.println("Selected place:");
+                System.out.println(place);
+            } else {
+                System.out.println("No place selected yet.");
+            }
+        });
+
 
         webEngine.setOnAlert(event -> System.out.println("JS Alert: " + event.getData()));
 
@@ -50,6 +93,13 @@ public class MapController implements Initializable {
                 new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, true)
         );
         mapPane.setBackground(new Background(viewBG));
+    }
+    @FXML
+    public void busMode(){
+
+    }
+    public void metroMode(){
+
     }
 
 

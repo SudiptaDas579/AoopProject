@@ -6,12 +6,13 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="537.0" prefWidth="672.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.aoopproject.EventHolidaysController">
-    <VBox layoutX="7.0" layoutY="4.0" prefHeight="537.0" prefWidth="672.0">
+<AnchorPane prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.aoopproject.EventHolidaysController">
+    <VBox layoutX="283.0" prefHeight="700.0" prefWidth="618.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <children>
             <HBox alignment="CENTER" prefHeight="21.0" prefWidth="672.0" spacing="20.0">
                 <children>
@@ -46,5 +47,18 @@
             </GridPane>
         </children>
     </VBox>
+   <Pane prefHeight="700.0" prefWidth="263.0" styleClass="translucent-pane" stylesheets="@Admin.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <children>
+         <Button fx:id="homePage" layoutY="204.0" mnemonicParsing="false" onAction="#homePageSwitch" prefHeight="48.0" prefWidth="263.0" styleClass="glass-button" stylesheets="@button.css" text="Home page" />
+         <Button fx:id="newsPortal" layoutY="264.0" mnemonicParsing="false" onAction="#newsPortalSwitch" prefHeight="48.0" prefWidth="263.0" styleClass="glass-button" stylesheets="@button.css" text="News Portal" />
+         <Button fx:id="map" layoutY="326.0" mnemonicParsing="false" onAction="#mapSwitch" prefHeight="48.0" prefWidth="263.0" styleClass="glass-button" stylesheets="@button.css" text="Map" />
+         <Button fx:id="eventHolidays" layoutY="387.0" mnemonicParsing="false" onAction="#eventHolidaySwitch" prefHeight="48.0" prefWidth="263.0" styleClass="glass-button" stylesheets="@button.css" text="Event &amp; Holidays" />
+         <Button layoutX="82.0" layoutY="586.0" mnemonicParsing="false" onAction="#logOut" styleClass="glass-button" stylesheets="@button.css" text="Log Out">
+            <font>
+               <Font name="System Bold" size="14.0" />
+            </font>
+         </Button>
+      </children>
+   </Pane>
 
 </AnchorPane>

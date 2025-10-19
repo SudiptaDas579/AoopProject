@@ -17,6 +17,9 @@ module org.example.aoopproject {
     requires javafx.base;
     requires jakarta.mail;
 
+    requires com.gluonhq.maps;
+    requires java.net.http;
+
 
     opens org.example.aoopproject to javafx.fxml;
     exports org.example.aoopproject;

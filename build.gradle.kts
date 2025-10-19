@@ -61,6 +61,8 @@ dependencies {
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:$junitVersion")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junitVersion")
+
+    implementation("com.gluonhq:maps:2.0.0-ea+6")
 }
 
 tasks.withType<Test> {
