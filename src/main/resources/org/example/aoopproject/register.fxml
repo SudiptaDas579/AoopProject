@@ -61,45 +61,6 @@
                <effect>
                   <ColorAdjust brightness="-1.0" contrast="-1.0" saturation="1.0" />
                </effect></Label>
-            <Label fx:id="company" layoutX="104.0" layoutY="321.0" text="Company Name :" textAlignment="CENTER" visible="false">
-               <effect>
-                  <ColorAdjust brightness="-1.0" contrast="-1.0" saturation="1.0" />
-               </effect>
-               <font>
-                  <Font name="System Bold" size="20.0" />
-               </font>
-            </Label>
-            <Label fx:id="driving" layoutX="114.0" layoutY="380.0" text="Driving License :" textAlignment="CENTER" visible="false">
-               <effect>
-                  <ColorAdjust brightness="-1.0" contrast="-1.0" saturation="1.0" />
-               </effect>
-               <font>
-                  <Font name="System Bold" size="20.0" />
-               </font>
-            </Label>
-            <Label fx:id="bus" layoutX="137.0" layoutY="444.0" text="Bus Number :" textAlignment="CENTER" visible="false">
-               <effect>
-                  <ColorAdjust brightness="-1.0" contrast="-1.0" saturation="1.0" />
-               </effect>
-               <font>
-                  <Font name="System Bold" size="20.0" />
-               </font>
-            </Label>
-            <TextField fx:id="CompanyName" layoutX="304.0" layoutY="316.0" prefHeight="40.0" prefWidth="260.0" visible="false">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </TextField>
-            <TextField fx:id="DrivingLicense" layoutX="304.0" layoutY="380.0" prefHeight="40.0" prefWidth="260.0" visible="false">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </TextField>
-            <TextField fx:id="BusNumber" layoutX="304.0" layoutY="439.0" prefHeight="40.0" prefWidth="260.0" visible="false">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </TextField>
             <Label fx:id="loginPage" layoutX="144.0" layoutY="599.0" text="Already Have An Account?" textAlignment="CENTER">
                <effect>
                   <ColorAdjust brightness="-1.0" contrast="-1.0" saturation="1.0" />
