@@ -17,7 +17,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -33,10 +32,13 @@ public class MapController implements Initializable {
     @FXML
     public TextField origin;
     public TextField destination;
+    public Pane InfoShow;
 
     public HashSet<CompanyList> companies = new HashSet<>();
 
     GooglePlacesService placesService;
+    StopLocationCache stopCache;
+    BusSearchService busSearchService;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -44,20 +46,17 @@ public class MapController implements Initializable {
 
         File file = new File("src/main/java/org/example/aoopproject/files/CompanyList.txt");
         BusFileHandler busFileHandler = new BusFileHandler();
-        companies=busFileHandler.getCompanyLists(file);
+        companies = busFileHandler.getCompanyLists(file);
 
         WebEngine webEngine = webView.getEngine();
         webEngine.setJavaScriptEnabled(true);
 
-        String API = "AIzaSyCqbKdjkod9FVs371m7I4Vv3B7opV2xfWI";
-        VBox root = new VBox(10);
-        root.setStyle("-fx-padding: 20;");
-
         placesService = new GooglePlacesService();
+        stopCache = new StopLocationCache();
+        busSearchService = new BusSearchService(companies, stopCache, placesService, InfoShow);
 
-        new MapAutoSuggestion(origin,placesService);
-
-        new MapAutoSuggestion(destination,placesService);
+        new MapAutoSuggestion(origin, placesService);
+        new MapAutoSuggestion(destination, placesService);
 
         webEngine.setOnAlert(event -> System.out.println("JS Alert: " + event.getData()));
 
@@ -65,6 +64,13 @@ public class MapController implements Initializable {
         webEngine.load(mapUrl);
 
         System.out.println("Map loaded with Google Maps v3.57 and transit features.");
+    }
+
+    @FXML
+    public void searchButtonClicked(ActionEvent event) {
+        String originStop = busSearchService.resolveNearestStop(origin.getText());
+        String destStop = busSearchService.resolveNearestStop(destination.getText());
+        busSearchService.searchRoute(originStop, destStop);
     }
 
     public void setBG(){
@@ -78,61 +84,48 @@ public class MapController implements Initializable {
         );
         mapPane.setBackground(new Background(viewBG));
     }
-    @FXML
-    public void busMode(){
-
-    }
-    public void metroMode(){
-
-    }
-
 
     @FXML
     public void homePageSwitch(ActionEvent event) throws IOException {
-
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("homepage.fxml"));
-        stage =(Stage) ((Node)event.getSource()).getScene().getWindow();
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
         ThemeManager.setScene(scene);
     }
 
-
     @FXML
     public void newsPortalSwitch(ActionEvent event) throws IOException {
-
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("homepage.fxml"));
-        stage =(Stage) ((Node)event.getSource()).getScene().getWindow();
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
         ThemeManager.setScene(scene);
-
     }
 
     @FXML
     public void mapSwitch(ActionEvent event) throws IOException {
-
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MapView.fxml"));
-        stage =(Stage) ((Node)event.getSource()).getScene().getWindow();
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
         ThemeManager.setScene(scene);
     }
+
     @FXML
     public void eventHolidaySwitch(ActionEvent event) throws IOException {
-
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("homepage.fxml"));
-        stage =(Stage) ((Node)event.getSource()).getScene().getWindow();
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
         ThemeManager.setScene(scene);
     }
+
     @FXML
     public void logOut(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("login.fxml"));
-        stage =(Stage) ((Node)event.getSource()).getScene().getWindow();
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
-
     }
 }
