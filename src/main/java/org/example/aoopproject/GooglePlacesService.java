@@ -66,4 +66,43 @@ public class GooglePlacesService {
 
         return suggestions;
     }
+
+    public LatLng getLatLngForPlace(String input) {
+        if (input == null || input.isBlank()) return null;
+        try {
+            List<String> suggestions = getSuggestions(input);
+            if (suggestions.isEmpty()) return null;
+            String place = suggestions.get(0); // take first match
+
+            // Make a Google Place Details API call to get lat/lng
+            String encoded = URLEncoder.encode(place, StandardCharsets.UTF_8);
+            String urlStr = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json"
+                    + "?input=" + encoded
+                    + "&inputtype=textquery"
+                    + "&fields=geometry"
+                    + "&key=" + API_KEY;
+
+            URL url = new URL(urlStr);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()))) {
+                StringBuilder response = new StringBuilder();
+                String line;
+                while ((line = br.readLine()) != null) response.append(line);
+
+                JSONObject json = new JSONObject(response.toString());
+                JSONArray candidates = json.optJSONArray("candidates");
+                if (candidates != null && candidates.length() > 0) {
+                    JSONObject loc = candidates.getJSONObject(0).getJSONObject("geometry").getJSONObject("location");
+                    return new LatLng(loc.getDouble("lat"), loc.getDouble("lng"));
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }

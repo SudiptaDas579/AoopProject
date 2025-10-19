@@ -6,7 +6,6 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.web.WebView?>
@@ -41,17 +40,17 @@
                   <Font size="20.0" />
                </font>
             </Label>
-            <Button layoutX="175.0" layoutY="185.0" mnemonicParsing="false" onAction="#busMode" prefHeight="31.0" prefWidth="61.0" text="Bus">
+            <Button layoutX="175.0" layoutY="185.0" mnemonicParsing="false" onAction="#searchButtonClicked" prefHeight="31.0" prefWidth="61.0" text="Bus">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
-            <Button layoutX="317.0" layoutY="185.0" mnemonicParsing="false" onAction="#metroMode" text="Metro">
+            <Button layoutX="317.0" layoutY="185.0" mnemonicParsing="false" text="Metro">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
-            <FlowPane fx:id="InfoShow" layoutX="124.0" layoutY="438.0" prefHeight="200.0" prefWidth="392.0" />
+            <Pane fx:id="InfoShow" layoutX="106.0" layoutY="450.0" prefHeight="200.0" prefWidth="427.0" />
          </children>
       </Pane>
       <Pane layoutX="7.0" layoutY="7.0" prefHeight="686.0" prefWidth="256.0" styleClass="translucent-pane" stylesheets="@Admin.css">
