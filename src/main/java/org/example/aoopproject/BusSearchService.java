@@ -100,15 +100,15 @@ public class BusSearchService {
                     companyBtn.setPrefWidth(infoPane.getPrefWidth() - 50);
                     companyBtn.setPrefHeight(30);
 
-                    companyBtn.setOnAction(e -> {
-                        // Compute fare
-                        int totalFare = calculateFare(company, originStop, destStop);
-                        int halfFare = totalFare / 2;
+                    // Capture company and fare in final variables for lambda
+                    final CompanyList currentCompany = company;
+                    final int totalFare = calculateFare(currentCompany, originStop, destStop);
+                    final int halfFare = totalFare / 2;
 
-                        // Show pop-up info
+                    companyBtn.setOnAction(e -> {
                         Platform.runLater(() -> {
                             infoPane.getChildren().clear();
-                            Label infoLabel = new Label("Company: " + company.getCompanyName() +
+                            Label infoLabel = new Label("Company: " + currentCompany.getCompanyName() +
                                     "\nFull Fare: " + totalFare + " tk" +
                                     "\nHalf Fare: " + halfFare + " tk");
                             infoLabel.setLayoutX(10);
@@ -117,7 +117,7 @@ public class BusSearchService {
 
                             // Optional: show bus numbers as buttons
                             double busYOffset = 70;
-                            for (BusInformation bus : company.getBusInfo()) {
+                            for (BusInformation bus : currentCompany.getBusInfo()) {
                                 Button busBtn = new Button(bus.getBusNo());
                                 busBtn.setLayoutX(10);
                                 busBtn.setLayoutY(busYOffset);
@@ -140,10 +140,10 @@ public class BusSearchService {
         });
     }
 
-    // Calculate total fare using segment fares
+    // Calculate total fare using segment fares stored as Strings
     private int calculateFare(CompanyList company, String origin, String dest) {
         Map<Integer, String> stops = company.getBusStopages();
-        Map<Integer, String> fares = company.getFareList(); // Integer -> String now
+        Map<Integer, String> fares = company.getFareList(); // Integer -> String
 
         // Find indices
         int originIndex = stops.entrySet().stream()
@@ -157,7 +157,6 @@ public class BusSearchService {
 
         if (originIndex == -1 || destIndex == -1) return 0;
 
-        // Ensure correct direction
         int start = Math.min(originIndex, destIndex);
         int end = Math.max(originIndex, destIndex);
 
@@ -167,10 +166,9 @@ public class BusSearchService {
             try {
                 sumFare += Integer.parseInt(fareStr);
             } catch (NumberFormatException e) {
-                // If not a number, ignore or treat as 0
+                // If parsing fails, treat as 0
             }
         }
         return sumFare;
     }
-
 }

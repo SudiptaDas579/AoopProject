@@ -5,40 +5,22 @@ import java.util.HashSet;
 
 public class BusFileHandler {
 
-    public HashSet<CompanyList> companyLists = new HashSet<>();
-
     public HashSet<CompanyList> getCompanyLists(File file) {
-        companyLists.clear();
-
-        if (!file.exists()) {
-            try {
-                file.createNewFile();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            return companyLists;
+        if (!file.exists() || file.length() == 0) {
+            // Return empty set if file doesn’t exist or is empty
+            return new HashSet<>();
         }
-        try {
-            FileInputStream fis = new FileInputStream(file);
-            ObjectInputStream ois = new ObjectInputStream(fis);
 
-            while (true) {
-                try {
-                    CompanyList company = (CompanyList) ois.readObject();
-                    companyLists.add(company);
-                } catch (EOFException e) {
-                    break;
-                }
-            }
-
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
+            // Read entire HashSet at once
+            return (HashSet<CompanyList>) ois.readObject();
         } catch (IOException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
+            return new HashSet<>();
         }
-        return companyLists;
     }
 
     public synchronized void updateInFile(File file, HashSet<CompanyList> hashSet) {
-
         if (!file.exists()) {
             try {
                 file.createNewFile();
@@ -47,17 +29,12 @@ public class BusFileHandler {
             }
         }
 
-
-        try {
-            FileOutputStream fos = new FileOutputStream(file, false);
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
-
-            for (CompanyList company : hashSet) {
-                oos.writeObject(company);
-            }
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file))) {
+            // Write entire HashSet at once
+            oos.writeObject(hashSet);
             oos.flush();
             System.out.println("Company lists written to file successfully.");
-        } catch (IOException e){
+        } catch (IOException e) {
             System.out.println("Error writing file: " + e.getMessage());
         }
     }
