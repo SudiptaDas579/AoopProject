@@ -4,6 +4,8 @@ import javafx.application.Platform;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -113,6 +115,7 @@ public class BusSearchService {
                                     "\nHalf Fare: " + halfFare + " tk");
                             infoLabel.setLayoutX(10);
                             infoLabel.setLayoutY(10);
+                            infoLabel.setFont(Font.font("Arial", FontWeight.BOLD, 20));
                             infoPane.getChildren().add(infoLabel);
 
                             // Optional: show bus numbers as buttons
@@ -120,12 +123,15 @@ public class BusSearchService {
                             for (BusInformation bus : currentCompany.getBusInfo()) {
                                 Button busBtn = new Button(bus.getBusNo());
                                 busBtn.setLayoutX(10);
-                                busBtn.setLayoutY(busYOffset);
+                                busBtn.setLayoutY(120);
                                 busBtn.setPrefWidth(100);
                                 busBtn.setPrefHeight(25);
                                 busBtn.setOnAction(ev -> {
-                                    // Show bus details popup
-                                    System.out.println("Bus info: " + bus);
+                                    Label label = new Label(bus.toString());
+                                    label.setLayoutX(10);
+                                    label.setLayoutY(150);
+                                    label.setFont(Font.font("Arial", FontWeight.BOLD, 20));
+                                    infoPane.getChildren().add(label);
                                 });
                                 infoPane.getChildren().add(busBtn);
                                 busYOffset += 35;

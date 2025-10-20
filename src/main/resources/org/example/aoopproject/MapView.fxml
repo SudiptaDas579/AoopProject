@@ -43,7 +43,7 @@
                   <Font size="15.0" />
                </font>
             </Button>
-            <Pane fx:id="InfoShow" layoutX="106.0" layoutY="450.0" prefHeight="200.0" prefWidth="427.0" visible="false" />
+            <Pane fx:id="InfoShow" layoutX="64.0" layoutY="268.0" prefHeight="370.0" prefWidth="446.0" visible="false" />
          </children>
       </Pane>
       <Pane layoutX="7.0" layoutY="7.0" prefHeight="686.0" prefWidth="256.0" styleClass="translucent-pane" stylesheets="@Admin.css">
