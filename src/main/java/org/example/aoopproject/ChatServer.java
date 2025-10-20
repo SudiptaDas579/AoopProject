@@ -81,7 +81,7 @@ public class ChatServer extends Application {
 
     private void openChatWindow(ClientHandler handler) {
         Stage chatStage = new Stage();
-        chatStage.setTitle("User");
+        chatStage.setTitle("Admin");
         chatStage.setX(200 + connectedClients.size() * 30);
         chatStage.setY(150 + connectedClients.size() * 30);
 
