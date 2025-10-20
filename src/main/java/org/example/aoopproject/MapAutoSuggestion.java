@@ -13,17 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/**
- * Single-field autocomplete for places (Dhaka-first search behavior is handled by placesService).
- *
- * Behavior summary:
- * - Minimum 2 characters required to fetch suggestions (no auto-show when empty)
- * - Select replaces the full text and closes the popup
- * - If the field is focused again and its current text equals one of the last suggestions -> clear it
- * - After clearing, do NOT re-open suggestions automatically
- * - If popup is already open and user backspaces to <2 chars, keep showing the old suggestions (do not hide)
- * - ESC is ignored (no special handling)
- */
+
 public class MapAutoSuggestion {
 
     private final TextField textField;
@@ -172,28 +162,19 @@ public class MapAutoSuggestion {
         // Close popup.
         popup.hide();
 
-        // Do NOT automatically re-open suggestions.
-        // lastSuggestions remains set (so focus-again will clear because value matches one of lastSuggestions).
-
-        // Put caret at end and regain focus after a short platform run to avoid UI focus issues.
         Platform.runLater(() -> {
             textField.requestFocus();
             textField.positionCaret(textField.getText().length());
         });
     }
 
-    /**
-     * Explicitly hides the popup and clears tracked suggestions.
-     * Useful if your controller wants to dismiss suggestions programmatically.
-     */
+
     public void hide() {
         if (popup.isShowing()) popup.hide();
         lastSuggestions.clear();
     }
 
-    /**
-     * Convenience to check whether popup is currently visible.
-     */
+
     public boolean isShowing() {
         return popup.isShowing();
     }

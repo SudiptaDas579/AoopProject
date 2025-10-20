@@ -1,11 +1,14 @@
 package org.example.aoopproject;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
@@ -17,8 +20,10 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class MapController implements Initializable {
 
@@ -48,8 +53,6 @@ public class MapController implements Initializable {
         BusFileHandler busFileHandler = new BusFileHandler();
         companies = busFileHandler.getCompanyLists(file);
 
-        WebEngine webEngine = webView.getEngine();
-        webEngine.setJavaScriptEnabled(true);
 
         placesService = new GooglePlacesService();
         stopCache = new StopLocationCache();
@@ -58,20 +61,31 @@ public class MapController implements Initializable {
         new MapAutoSuggestion(origin, placesService);
         new MapAutoSuggestion(destination, placesService);
 
-        webEngine.setOnAlert(event -> System.out.println("JS Alert: " + event.getData()));
-
-        String mapUrl = Objects.requireNonNull(getClass().getResource("/org/example/aoopproject/Map.html")).toExternalForm();
-        webEngine.load(mapUrl);
-
-        System.out.println("Map loaded with Google Maps v3.57 and transit features.");
+//        WebEngine webEngine = webView.getEngine();
+//        webEngine.setJavaScriptEnabled(true);
+//        webEngine.setOnAlert(event -> System.out.println("JS Alert: " + event.getData()));
+//
+//        String mapUrl = Objects.requireNonNull(getClass().getResource("/org/example/aoopproject/Map.html")).toExternalForm();
+//        webEngine.load(mapUrl);
+//
+//        System.out.println("Map loaded with Google Maps v3.57 and transit features.");
     }
 
     @FXML
     public void searchButtonClicked(ActionEvent event) {
+        // Show the InfoShow pane when Bus button is clicked
+        InfoShow.setVisible(true);
+
+        // Resolve nearest stops
         String originStop = busSearchService.resolveNearestStop(origin.getText());
         String destStop = busSearchService.resolveNearestStop(destination.getText());
+
+        // Perform search and display company buttons
         busSearchService.searchRoute(originStop, destStop);
     }
+
+
+
 
     public void setBG(){
         Image view = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pictures/lightHome.png")));

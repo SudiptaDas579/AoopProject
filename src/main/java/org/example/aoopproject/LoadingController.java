@@ -23,15 +23,15 @@ public class LoadingController {
 
     @FXML
     public void initialize() {
-        // Wait for 8 seconds, then move to login page
-        PauseTransition delay = new PauseTransition(Duration.seconds(8.57));
+
+        PauseTransition delay = new PauseTransition(Duration.seconds(10.7));
         delay.setOnFinished(event -> switchToLogin());
         delay.play();
 
         setBG();
     }
     public void setBG(){
-        Image view = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pictures/loading.gif")));
+        Image view = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pictures/loadingSharp.gif")));
 
         loadingView.setImage(view);
 
