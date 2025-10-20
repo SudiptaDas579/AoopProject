@@ -47,12 +47,7 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Button layoutX="130.0" layoutY="173.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="61.0" text="Bus">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Button>
-                  <Button layoutX="272.0" layoutY="173.0" mnemonicParsing="false" text="Metro">
+                  <Button layoutX="130.0" layoutY="173.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="111.0" text="Search">
                      <font>
                         <Font size="15.0" />
                      </font>

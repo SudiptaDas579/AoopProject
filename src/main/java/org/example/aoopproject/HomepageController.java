@@ -62,7 +62,7 @@ public class HomepageController {
         setBG();
         loadUpcomingEvents();
 
-        //loadWeather("Dhaka");
+        loadWeather("Dhaka");
         OutButton();
 
         MenuItem item1 = new MenuItem("Language");
