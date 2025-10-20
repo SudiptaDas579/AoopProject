@@ -26,11 +26,10 @@
                   <Image url="@../../../pictures/LOGO.png" />
                </image>
             </ImageView>
-            <Button layoutX="10.0" layoutY="276.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="220.0" styleClass="glass-button" stylesheets="@button.css" text="Metro" />
          </children></Pane>
       <Pane fx:id="busInfo" layoutX="572.0" layoutY="7.0" prefHeight="684.0" prefWidth="315.0" styleClass="translucent-pane" stylesheets="@Admin.css" visible="false">
          <children>
-            <Button fx:id="addNewInformation" layoutX="213.0" layoutY="645.0" mnemonicParsing="false" onAction="#addNewBus" styleClass="glass-button" stylesheets="@button.css" text="Add New Bus" />
+            <Button fx:id="addNewInformation" layoutX="114.0" layoutY="631.0" mnemonicParsing="false" onAction="#addNewBus" styleClass="glass-button" stylesheets="@button.css" text="Add New Bus" />
             <TextArea fx:id="goooo" layoutX="27.0" layoutY="59.0" prefHeight="572.0" prefWidth="262.0" />
             <Label layoutX="83.0" layoutY="14.0" text="Bus Information:" textFill="#532009">
                <font>
@@ -60,7 +59,7 @@
                <font>
                   <Font name="System Bold" size="14.0" />
                </font></Label>
-            <Button layoutX="158.0" layoutY="363.0" mnemonicParsing="false" onAction="#addTheCompany" styleClass="glass-button" stylesheets="@button.css" text="Add The Company" />
+            <Button layoutX="111.0" layoutY="355.0" mnemonicParsing="false" onAction="#addTheCompany" styleClass="glass-button" stylesheets="@button.css" text="Add The Company" />
             <Label fx:id="companyInfoShow" layoutX="81.0" layoutY="319.0" prefHeight="17.0" prefWidth="0.0" textFill="#532009">
                <font>
                   <Font name="System Bold" size="12.0" />
@@ -124,7 +123,7 @@
                <font>
                   <Font size="13.0" />
                </font></TextField>
-            <Button layoutX="191.0" layoutY="369.0" mnemonicParsing="false" onAction="#addTheNewBus" styleClass="glass-button" stylesheets="@button.css" text="Add The New Bus" />
+            <Button layoutX="142.0" layoutY="371.0" mnemonicParsing="false" onAction="#addTheNewBus" styleClass="glass-button" stylesheets="@button.css" text="Add The New Bus" />
             <Label fx:id="busInfoShow" layoutX="82.0" layoutY="344.0" prefHeight="19.0" prefWidth="6.0" textFill="#1122e1">
                <font>
                   <Font name="System Bold" size="13.0" />

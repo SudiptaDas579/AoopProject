@@ -241,8 +241,8 @@ public class AdminController implements Initializable  {
 
         BusCompanies.setLayoutX(61);
         BusCompanies.setLayoutY(25);
+        AddService.setLayoutY(600);
 
-        AddService.setLayoutX(143);
         AddService.setLayoutY(629);
 
         companylistPane.setLayoutX(60);
