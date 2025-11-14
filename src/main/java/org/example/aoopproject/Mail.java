@@ -36,7 +36,7 @@ public class Mail {
     }
     public static void sendEmergencyAlert(String recipientEmail, String location) throws MessagingException {
         String senderEmail = "mislam2420710@bscse.uiu.ac.bd";
-        String senderPassword = "jkfy igqt aqez dadt";
+        String senderPassword = "";
 
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
